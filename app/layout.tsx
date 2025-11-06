@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 
 export const metadata: Metadata = {
   title: "Rezidence U sv. Anny | Moderní bydlení v Kutné Hoře",
@@ -18,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body className="antialiased">
-        <AnnouncementBanner />
         <Header />
         {children}
         <Footer />
