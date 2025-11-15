@@ -754,7 +754,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                 </div>
               </div>
 
-              <div className="flex justify-center pt-4">
+              <div className="pt-4">
                 <Link href="/kontakt">
                   <button className="px-8 py-4 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-lg">
                     Kontaktovat
