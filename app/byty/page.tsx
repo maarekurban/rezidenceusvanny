@@ -633,16 +633,10 @@ export default function BytyPage() {
               </a>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex justify-center">
               <Link href="/kontakt">
                 <button className="px-8 py-4 bg-white text-gold-primary font-semibold rounded-2xl hover:bg-grey-100 transition-all duration-300 hover:scale-105 shadow-lg">
                   Kontaktní formulář
-                </button>
-              </Link>
-
-              <Link href="/o-projektu">
-                <button className="px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-gold-primary font-semibold rounded-2xl transition-all duration-300">
-                  Více o projektu
                 </button>
               </Link>
             </div>
