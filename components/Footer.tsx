@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from './Container';
 
 export const Footer: React.FC = () => {
@@ -9,9 +10,15 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold text-gradient mb-4">
-              Rezidence U sv. Anny
-            </h3>
+            <div className="mb-4">
+              <Image
+                src="/images/logo-rezidence.png"
+                alt="Rezidence U sv. Anny"
+                width={180}
+                height={60}
+                className="h-12 w-auto"
+              />
+            </div>
             <p className="text-gray-300 mb-4">
               Moderní bydlení v historickém městě Kutná Hora
             </p>
@@ -78,18 +85,24 @@ export const Footer: React.FC = () => {
           <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} Rezidence U sv. Anny. Všechna práva vyhrazena.
           </p>
-          <div className="flex items-center space-x-4 mt-4 md:mt-0">
+          <div className="flex items-center gap-3 mt-4 md:mt-0">
             <p className="text-sm text-gray-400">
-              Prodej zajišťuje:{' '}
-              <a
-                href="https://www.anomia.cz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gold-primary hover:underline"
-              >
-                ANOMIA
-              </a>
+              Prodej zajišťuje:
             </p>
+            <a
+              href="https://www.anomia.cz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-80 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/images/anomia-logo-white.png"
+                alt="ANOMIA Real Estate"
+                width={120}
+                height={40}
+                className="h-8 w-auto"
+              />
+            </a>
           </div>
         </div>
       </Container>

@@ -9,7 +9,6 @@ import { Container } from './Container';
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -22,14 +21,7 @@ export const Header: React.FC = () => {
 
   const navigation = [
     { name: 'Úvod', href: '/' },
-    { 
-      name: 'O projektu', 
-      href: '/o-projektu',
-      submenu: [
-        { name: 'O rezidenci', href: '/o-projektu' },
-        { name: 'Důležité informace', href: '/dulezite-informace' },
-      ]
-    },
+    { name: 'Důležité informace', href: '/dulezite-informace' },
     { name: 'Byty', href: '/byty' },
     { name: 'Rodinné domy', href: '/rodinne-domy' },
     { name: 'Kontakt', href: '/kontakt' },
@@ -60,75 +52,22 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-10">
             {navigation.map((item) => {
-              const isActive = pathname === item.href || (item.submenu && item.submenu.some(sub => pathname === sub.href));
+              const isActive = pathname === item.href;
               
               return (
-                <div
+                <Link
                   key={item.name}
-                  className="relative"
-                  onMouseEnter={() => item.submenu && setOpenDropdown(item.name)}
-                  onMouseLeave={() => setOpenDropdown(null)}
+                  href={item.href}
+                  className={`font-semibold transition-all duration-300 text-[15px] ${
+                    isActive
+                      ? 'px-4 py-2 bg-gold-primary text-white rounded-lg'
+                      : isScrolled
+                      ? 'text-dark hover:text-gold-primary'
+                      : 'text-white hover:text-gold-primary'
+                  }`}
                 >
-                  {item.submenu ? (
-                    <>
-                      <button
-                        className={`font-semibold transition-all duration-300 flex items-center gap-1.5 text-[15px] ${
-                          isActive
-                            ? 'px-4 py-2 bg-gold-primary text-white rounded-lg'
-                            : isScrolled
-                            ? 'text-dark hover:text-gold-primary'
-                            : 'text-white hover:text-gold-primary'
-                        }`}
-                      >
-                        {item.name}
-                        <svg
-                          className={`w-4 h-4 transition-transform duration-300 ${
-                            openDropdown === item.name ? 'rotate-180' : ''
-                          }`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-                      
-                      {/* Dropdown Menu */}
-                      {openDropdown === item.name && (
-                        <div className="absolute top-full left-0 pt-2 w-60">
-                          <div className="bg-white rounded-xl shadow-2xl py-2 border border-gold-primary/20 animate-in fade-in slide-in-from-top-2 duration-200">
-                            {item.submenu.map((subItem) => (
-                              <Link
-                                key={subItem.name}
-                                href={subItem.href}
-                                className={`block px-5 py-3 transition-all duration-200 font-medium text-[15px] ${
-                                  pathname === subItem.href
-                                    ? 'text-gold-primary'
-                                    : 'text-dark hover:text-gold-primary'
-                                }`}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`font-semibold transition-all duration-300 text-[15px] ${
-                        isActive
-                          ? 'px-4 py-2 bg-gold-primary text-white rounded-lg'
-                          : isScrolled
-                          ? 'text-dark hover:text-gold-primary'
-                          : 'text-white hover:text-gold-primary'
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </div>
+                  {item.name}
+                </Link>
               );
             })}
             
@@ -207,68 +146,21 @@ export const Header: React.FC = () => {
           <div className="lg:hidden pb-6 bg-white/98 backdrop-blur-md rounded-b-2xl shadow-2xl border-b border-gold-primary/20">
             <div className="flex flex-col space-y-1 pt-4">
               {navigation.map((item) => {
-                const isActive = pathname === item.href || (item.submenu && item.submenu.some(sub => pathname === sub.href));
+                const isActive = pathname === item.href;
                 
                 return (
-                  <div key={item.name}>
-                    {item.submenu ? (
-                      <>
-                        <button
-                          onClick={() => setOpenDropdown(openDropdown === item.name ? null : item.name)}
-                          className={`w-full text-left transition-all duration-300 font-semibold px-5 py-3 flex items-center justify-between rounded-lg ${
-                            isActive 
-                              ? 'text-gold-primary bg-gold-primary/5' 
-                              : 'text-dark hover:text-gold-primary hover:bg-light-grey'
-                          }`}
-                        >
-                          {item.name}
-                          <svg
-                            className={`w-4 h-4 transition-transform duration-300 ${
-                              openDropdown === item.name ? 'rotate-180' : ''
-                            }`}
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </button>
-                        {openDropdown === item.name && (
-                          <div className="bg-light-grey/50 ml-4 mr-4 rounded-xl mt-1 mb-1 overflow-hidden">
-                            {item.submenu.map((subItem) => (
-                              <Link
-                                key={subItem.name}
-                                href={subItem.href}
-                                className={`block transition-all duration-200 font-medium px-5 py-3 ${
-                                  pathname === subItem.href
-                                    ? 'text-gold-primary bg-gold-primary/10'
-                                    : 'text-grey-700 hover:text-gold-primary hover:bg-white/50'
-                                }`}
-                                onClick={() => {
-                                  setMobileMenuOpen(false);
-                                  setOpenDropdown(null);
-                                }}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className={`block transition-all duration-300 font-semibold px-5 py-3 rounded-lg ${
-                          isActive 
-                            ? 'text-gold-primary bg-gold-primary/5' 
-                            : 'text-dark hover:text-gold-primary hover:bg-light-grey'
-                        }`}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
-                    )}
-                  </div>
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`block transition-all duration-300 font-semibold px-5 py-3 rounded-lg ${
+                      isActive 
+                        ? 'text-gold-primary bg-gold-primary/5' 
+                        : 'text-dark hover:text-gold-primary hover:bg-light-grey'
+                    }`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
                 );
               })}
               

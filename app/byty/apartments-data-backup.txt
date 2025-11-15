@@ -1,0 +1,3 @@
+// Backup původních dat před aktualizací
+// Tento soubor slouží pouze pro zálohu, nebude použit v aplikaci
+
