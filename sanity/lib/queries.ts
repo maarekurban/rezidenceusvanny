@@ -53,7 +53,7 @@ export const availableApartmentsQuery = groq`
 
 // Documents queries
 export const documentsQuery = groq`
-  *[_type == "document"] | order(order asc) {
+  *[_type == "pdfDocument"] | order(order asc) {
     _id,
     title,
     description,
@@ -63,7 +63,7 @@ export const documentsQuery = groq`
 `
 
 export const documentsByCategoryQuery = groq`
-  *[_type == "document" && category == $category] | order(order asc) {
+  *[_type == "pdfDocument" && category == $category] | order(order asc) {
     _id,
     title,
     description,
