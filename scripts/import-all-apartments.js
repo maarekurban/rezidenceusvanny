@@ -15,8 +15,8 @@ const client = createClient({
   useCdn: false,
 })
 
-// Načtení všech bytů z app/byty/page.tsx
-const apartmentsFilePath = path.join(__dirname, '..', 'app', 'byty', 'page.tsx')
+// Načtení všech bytů z app/byty/[slug]/page.tsx
+const apartmentsFilePath = path.join(__dirname, '..', 'app', 'byty', '[slug]', 'page.tsx')
 const fileContent = fs.readFileSync(apartmentsFilePath, 'utf8')
 
 // Extrakce apartments array
@@ -86,6 +86,7 @@ async function importAllApartments() {
 
         // Příprava místností (jen pokud existují)
         const rooms = apt.rooms && apt.rooms.length > 0 ? apt.rooms.map((room, idx) => ({
+          _type: 'object',
           _key: `room-${idx}`,
           number: String(room.number || idx + 1),
           name: String(room.name || ''),
@@ -94,6 +95,7 @@ async function importAllApartments() {
 
         // Příprava venkovních prostorů (jen pokud existují)
         const outdoorSpaces = apt.outdoorSpaces && apt.outdoorSpaces.length > 0 ? apt.outdoorSpaces.map((space, idx) => ({
+          _type: 'object',
           _key: `outdoor-${idx}`,
           type: space.type.toLowerCase() === 'balkon' ? 'balcony' : 
                 space.type.toLowerCase() === 'terasa' ? 'terrace' : 'garden',
