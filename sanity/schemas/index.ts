@@ -5,7 +5,7 @@ import siteSettings from './siteSettings'
 import homepageComplete from './homepage-complete'
 import apartmentsPageComplete from './apartments-page-complete'
 import importantInfoPageComplete from './important-info-page-complete'
-import contactPage from './contactPage'
+import contactPageComplete from './contact-page-complete'
 
 export const schemaTypes = [
   // Byty a dokumenty
@@ -16,7 +16,7 @@ export const schemaTypes = [
   homepageComplete,
   apartmentsPageComplete,
   importantInfoPageComplete,
-  contactPage,
+  contactPageComplete,
   page,
   
   // Nastavení
