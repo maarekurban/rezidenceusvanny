@@ -97,6 +97,14 @@ export default defineType({
       rows: 2,
     }),
     defineField({
+      name: 'stagesBackgroundImage',
+      title: 'Etapy - Background obrázek',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'stages',
       title: 'Etapy výstavby',
       type: 'array',
@@ -165,16 +173,47 @@ export default defineType({
     
     // === PROČ SI KOUPIT BYT (SERVICES) ===
     defineField({
+      name: 'whyBuyBadge',
+      title: 'Why Buy - Badge text',
+      type: 'string',
+      initialValue: 'HLAVNÍ VÝHODY PROJEKTU',
+    }),
+    defineField({
+      name: 'whyBuyTitle',
+      title: 'Why Buy - Nadpis řádek 1',
+      type: 'string',
+    }),
+    defineField({
+      name: 'whyBuyTitleLine2',
+      title: 'Why Buy - Nadpis řádek 2',
+      type: 'string',
+    }),
+    defineField({
+      name: 'whyBuyTitleHighlight',
+      title: 'Why Buy - Nadpis - zvýrazněná část',
+      type: 'string',
+    }),
+    defineField({
+      name: 'whyBuyBackgroundImage',
+      title: 'Why Buy - Background obrázek',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'servicesBadge',
       title: 'Výhody - Badge text',
       type: 'string',
       initialValue: 'HLAVNÍ VÝHODY PROJEKTU',
+      hidden: true,
     }),
     defineField({
       name: 'servicesTitle',
       title: 'Výhody - Nadpis',
       type: 'text',
       rows: 2,
+      hidden: true,
     }),
     defineField({
       name: 'services',

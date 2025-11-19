@@ -22,22 +22,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPageData = async () => {
       try {
-        const data = await client.fetch(`*[_type == "homepageComplete"][0]{
-          ...,
-          heroBackgroundImage,
-          heroImage,
-          aboutImage,
-          qualityImages[]{
-            ...,
-            asset->
-          },
-          mapBackgroundImage,
-          galleryImages[]{
-            ...,
-            asset->
-          },
-          contactFormBackgroundImage
-        }`)
+        const data = await client.fetch(`*[_type == "homepageComplete"][0]`)
         setPageData(data)
       } catch (error) {
         console.error('Chyba při načítání dat ze Sanity:', error)
@@ -244,7 +229,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/DSC02932.jpg"
+            src={pageData?.stagesBackgroundImage ? urlFor(pageData.stagesBackgroundImage).url() : "/images/DSC02932.jpg"}
             alt="Rezidence pozadí"
             fill
             className="object-cover"
@@ -468,7 +453,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/zobrazeni_domu.png"
+            src={pageData?.whyBuyBackgroundImage ? urlFor(pageData.whyBuyBackgroundImage).url() : "/images/zobrazeni_domu.png"}
             alt="Rezidence pozadí"
             fill
             className="object-cover"
