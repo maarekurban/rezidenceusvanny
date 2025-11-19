@@ -142,72 +142,49 @@ export default function DuleziteInformacePage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <span className="inline-block px-4 py-2 bg-gold-primary/10 text-gold-primary text-xs font-semibold uppercase tracking-[0.2em] rounded-full mb-6">
-                Financování
+                {pageData?.financingBadge || "Financování"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-                Financování <span className="text-gradient">bytů</span>
+                {pageData?.financingTitle || "Financování"} <span className="text-gradient">{pageData?.financingTitleHighlight || "bytů"}</span>
               </h2>
             </div>
 
             <div className="prose prose-lg max-w-none">
               <p className="text-grey-700 leading-relaxed mb-6">
-                Při koupi bytu v naší rezidenci vám rádi pomůžeme s vyřízením hypotéky. Spolupracujeme s renomovanými 
-                bankovními institucemi, které nabízejí výhodné podmínky pro financování nemovitostí.
+                {pageData?.financingIntro || "Při koupi bytu v naší rezidenci vám rádi pomůžeme s vyřízením hypotéky. Spolupracujeme s renomovanými bankovními institucemi, které nabízejí výhodné podmínky pro financování nemovitostí."}
               </p>
 
               <div className="grid md:grid-cols-2 gap-8 my-12">
-                <div className="bg-light-grey rounded-2xl p-6">
-                  <div className="w-12 h-12 bg-gold-primary rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-dark mb-3">Výhodné úrokové sazby</h3>
-                  <p className="text-grey-600 leading-relaxed">
-                    Díky spolupráci s našimi bankovními partnery můžeme nabídnout velmi konkurenceschopné úrokové sazby.
-                  </p>
-                </div>
-
-                <div className="bg-light-grey rounded-2xl p-6">
-                  <div className="w-12 h-12 bg-gold-primary rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-dark mb-3">Komplexní asistence</h3>
-                  <p className="text-grey-600 leading-relaxed">
-                    Pomůžeme vám s celým procesem vyřízení hypotéky od A do Z včetně vyhodnocení vaší bonity.
-                  </p>
-                </div>
-
-                <div className="bg-light-grey rounded-2xl p-6">
-                  <div className="w-12 h-12 bg-gold-primary rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-dark mb-3">Partnerské banky</h3>
-                  <p className="text-grey-600 leading-relaxed">
-                    Spolupracujeme s předními finančními institucemi jako Komerční banka a Hypoteční banka.
-                  </p>
-                </div>
-
-                <div className="bg-light-grey rounded-2xl p-6">
-                  <div className="w-12 h-12 bg-gold-primary rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-dark mb-3">Rychlé vyřízení</h3>
-                  <p className="text-grey-600 leading-relaxed">
-                    Díky naší dlouholeté spolupráci s bankami dokážeme urychlit proces schvalování hypotéky.
-                  </p>
-                </div>
+                {(pageData?.financingCards || [
+                  {title: "Výhodné úrokové sazby", description: "Díky spolupráci s našimi bankovními partnery můžeme nabídnout velmi konkurenceschopné úrokové sazby."},
+                  {title: "Komplexní asistence", description: "Pomůžeme vám s celým procesem vyřízení hypotéky od A do Z včetně vyhodnocení vaší bonity."},
+                  {title: "Partnerské banky", description: "Spolupracujeme s předními finančními institucemi jako Komerční banka a Hypoteční banka."},
+                  {title: "Rychlé vyřízení", description: "Díky naší dlouholeté spolupráci s bankami dokážeme urychlit proces schvalování hypotéky."}
+                ]).map((card: any, index: number) => {
+                  const icons = [
+                    "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1",
+                    "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+                    "M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z",
+                    "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ];
+                  return (
+                    <div key={index} className="bg-light-grey rounded-2xl p-6">
+                      <div className="w-12 h-12 bg-gold-primary rounded-xl flex items-center justify-center mb-4">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d={icons[index]} />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-dark mb-3">{card.title}</h3>
+                      <p className="text-grey-600 leading-relaxed">
+                        {card.description}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
 
               <p className="text-grey-700 leading-relaxed">
-                Pokud máte zájem o více informací ohledně financování, neváhejte nás kontaktovat. 
-                Rádi vám poskytneme nezávaznou konzultaci a pomůžeme najít nejvhodnější řešení pro váš rozpočet.
+                {pageData?.financingOutro || "Pokud máte zájem o více informací ohledně financování, neváhejte nás kontaktovat. Rádi vám poskytneme nezávaznou konzultaci a pomůžeme najít nejvhodnější řešení pro váš rozpočet."}
               </p>
             </div>
           </div>
@@ -218,7 +195,7 @@ export default function DuleziteInformacePage() {
       <section className="py-16 md:py-24 relative bg-dark">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/BD-1-16_vizualizace-01-min.jpg"
+            src={pageData?.documentsBackgroundImage ? urlFor(pageData.documentsBackgroundImage).url() : "/images/BD-1-16_vizualizace-01-min.jpg"}
             alt="Pozadí"
             fill
             className="object-cover"
@@ -229,116 +206,48 @@ export default function DuleziteInformacePage() {
         <Container className="relative z-10">
           <div className="text-center mb-12">
             <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-full mb-6">
-              Dokumentace
+              {pageData?.documentsBadge || "Dokumentace"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 leading-[1.15] tracking-tight">
-              Užitečné <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">dokumenty</span>
+              {pageData?.documentsTitle || "Užitečné"} <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">{pageData?.documentsTitleHighlight || "dokumenty"}</span>
             </h2>
             <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-              Ke stažení najdete všechny důležité dokumenty týkající se projektu
+              {pageData?.documentsDescription || "Ke stažení najdete všechny důležité dokumenty týkající se projektu"}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* PENB A1 */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-dark mb-6">PENB A1</h3>
-              <a 
-                href="/dokumentace/PENB_A1.pdf" 
-                download
-                className="text-gold-primary hover:text-gold-secondary font-semibold text-sm flex items-center gap-2 transition-colors"
-              >
-                Stáhnout PDF
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </a>
-            </div>
-
-            {/* PENB A2 */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-dark mb-6">PENB A2</h3>
-              <a 
-                href="/dokumentace/PENB_A2.pdf" 
-                download
-                className="text-gold-primary hover:text-gold-secondary font-semibold text-sm flex items-center gap-2 transition-colors"
-              >
-                Stáhnout PDF
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </a>
-            </div>
-
-            {/* PENB B1 */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-dark mb-6">PENB B1</h3>
-              <a 
-                href="/dokumentace/PENB_B1.pdf" 
-                download
-                className="text-gold-primary hover:text-gold-secondary font-semibold text-sm flex items-center gap-2 transition-colors"
-              >
-                Stáhnout PDF
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </a>
-            </div>
-
-            {/* Standard provedení a vybavení */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-dark mb-6">Standard provedení a vybavení - III. etapa</h3>
-              <a 
-                href="/dokumentace/Standard provedení a vybavení - III. etapa.pdf" 
-                download
-                className="text-gold-primary hover:text-gold-secondary font-semibold text-sm flex items-center gap-2 transition-colors"
-              >
-                Stáhnout PDF
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </a>
-            </div>
-
-            {/* Zásady pro provádění klientských změn */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="w-12 h-12 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-dark mb-6">Zásady pro provádění klientských změn</h3>
-              <a 
-                href="/dokumentace/Zásady pro provádění klientských změn.pdf" 
-                download
-                className="text-gold-primary hover:text-gold-secondary font-semibold text-sm flex items-center gap-2 transition-colors"
-              >
-                Stáhnout PDF
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-              </a>
-            </div>
+            {(pageData?.documents || []).map((doc: any, index: number) => {
+              const icons = [
+                "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+                "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+                "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+                "M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z",
+                "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ];
+              return (
+                <div key={index} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-12 h-12 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4">
+                    <svg className="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d={icons[index % icons.length]} />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-dark mb-6">{doc.title}</h3>
+                  <a 
+                    href={doc.file?.asset?.url || "#"} 
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold-primary hover:text-gold-secondary font-semibold text-sm flex items-center gap-2 transition-colors"
+                  >
+                    Stáhnout PDF
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                  </a>
+                </div>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -349,19 +258,19 @@ export default function DuleziteInformacePage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-full mb-6">
-                Kontaktujte nás
+                {pageData?.contactBadge || "Kontaktujte nás"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 leading-[1.15] tracking-tight">
-                Máte zájem o byt ve III. etapě?
+                {pageData?.contactTitle || "Máte zájem o byt ve III. etapě?"}
               </h2>
               <p className="text-lg md:text-xl text-white/90 mb-4 leading-relaxed font-light">
-                Vyplňte kontaktní formulář a my se vám ozveme do 24 hodin
+                {pageData?.contactDescription || "Vyplňte kontaktní formulář a my se vám ozveme do 24 hodin"}
               </p>
               <div className="flex items-center justify-center gap-2 text-white/90">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="font-medium">info@rezidenceusvanny.cz</span>
+                <span className="font-medium">{pageData?.contactEmail || "info@rezidenceusvanny.cz"}</span>
               </div>
             </div>
 
