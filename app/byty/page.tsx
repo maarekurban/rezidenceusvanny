@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { useState, useEffect } from 'react'
 import { client } from '@/sanity/lib/client'
+import { urlFor } from '@/sanity/lib/image'
 
 // Helper function to generate apartment slug
 const generateApartmentSlug = (building: string, number: string): string => {
@@ -86,6 +87,10 @@ export default function BytyPage() {
   // State for apartments from Sanity
   const [apartments, setApartments] = useState(apartmentsFallback)
   const [loading, setLoading] = useState(true)
+  
+  // State for page content from Sanity
+  const [pageData, setPageData] = useState<any>(null)
+  const [pageLoading, setPageLoading] = useState(true)
 
   const [selectedDisposition, setSelectedDisposition] = useState<string>('all')
   const [selectedFloor, setSelectedFloor] = useState<string>('all')
@@ -144,6 +149,38 @@ export default function BytyPage() {
     }
     
     fetchApartments()
+  }, [])
+  
+  // Fetch page content from Sanity
+  useEffect(() => {
+    async function fetchPageContent() {
+      try {
+        const data = await client.fetch(`
+          *[_type == "apartmentsPageComplete" && _id == "apartments-page-complete-singleton"][0] {
+            heroBadge,
+            heroTitle,
+            heroTitleHighlight,
+            heroDescription,
+            heroImage,
+            statDispositions,
+            statDispositionsLabel,
+            statArea,
+            statAreaLabel,
+            statEnergyClass,
+            statEnergyClassLabel,
+            filterLabel
+          }
+        `, {}, { cache: 'no-store' })
+        
+        setPageData(data)
+        setPageLoading(false)
+      } catch (error) {
+        console.error('Error fetching page content:', error)
+        setPageLoading(false)
+      }
+    }
+    
+    fetchPageContent()
   }, [])
   
   // Calculate min and max prices
@@ -236,7 +273,7 @@ export default function BytyPage() {
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src="/images/DSC02841.jpg"
+            src={pageData?.heroImage ? urlFor(pageData.heroImage).url() : "/images/DSC02841.jpg"}
             alt="Byty III. etapy"
             fill
             className="object-cover"
@@ -247,17 +284,16 @@ export default function BytyPage() {
 
         <Container className="relative z-10 py-32">
           <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-full mb-6">
-            III. Etapa v prodeji
+            {pageData?.heroBadge || "III. Etapa v prodeji"}
           </span>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-            Dostupné byty<br />
-            <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">III. etapa</span>
+            {pageData?.heroTitle || "Dostupné byty"}<br />
+            <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">{pageData?.heroTitleHighlight || "III. etapa"}</span>
           </h1>
 
           <p className="text-lg md:text-xl text-white/90 font-light mb-8 leading-relaxed">
-            Vyberte si z {totalAvailableCount} dostupných bytů s dispozicemi 1+kk až 5+kk.
-            Moderní bydlení v energetické třídě B.
+            {pageData?.heroDescription ? pageData.heroDescription.replace('{count}', totalAvailableCount.toString()) : `Vyberte si z ${totalAvailableCount} dostupných bytů s dispozicemi 1+kk až 5+kk. Moderní bydlení v energetické třídě B.`}
           </p>
 
           {/* Quick Stats */}
@@ -268,18 +304,18 @@ export default function BytyPage() {
             </div>
 
             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gold-primary mb-1">1-5+kk</div>
-              <div className="text-xs text-grey-600 font-medium">Dispozice</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gold-primary mb-1">{pageData?.statDispositions || "1-5+kk"}</div>
+              <div className="text-xs text-grey-600 font-medium">{pageData?.statDispositionsLabel || "Dispozice"}</div>
             </div>
 
             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gold-primary mb-1">32-115</div>
-              <div className="text-xs text-grey-600 font-medium">m² plocha</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gold-primary mb-1">{pageData?.statArea || "32-115"}</div>
+              <div className="text-xs text-grey-600 font-medium">{pageData?.statAreaLabel || "m² plocha"}</div>
             </div>
 
             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gold-primary mb-1">B</div>
-              <div className="text-xs text-grey-600 font-medium">Energ. třída</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-gold-primary mb-1">{pageData?.statEnergyClass || "B"}</div>
+              <div className="text-xs text-grey-600 font-medium">{pageData?.statEnergyClassLabel || "Energ. třída"}</div>
             </div>
           </div>
         </Container>
@@ -289,7 +325,7 @@ export default function BytyPage() {
       <section className="py-8 bg-gradient-to-br from-gold-primary to-gold-secondary sticky top-0 z-30 shadow-sm">
         <Container>
           <div className="flex flex-wrap gap-3 items-center">
-            <span className="text-sm font-semibold text-white uppercase tracking-wide">Filtrovat:</span>
+            <span className="text-sm font-semibold text-white uppercase tracking-wide">{pageData?.filterLabel || "Filtrovat:"}</span>
 
             {/* Disposition Filter */}
             <select
