@@ -603,7 +603,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
             Podobné <span className="text-gradient">byty</span>
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {apartments
+            {apartmentsFallback
               .filter(apt => 
                 apt.id !== apartment.id && 
                 apt.disposition === apartment.disposition &&
