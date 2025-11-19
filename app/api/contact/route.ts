@@ -73,8 +73,9 @@ export async function POST(request: Request) {
 
     // Odeslání emailu přes Resend
     await resend.emails.send({
-      from: 'Rezidence U sv. Anny <onboarding@resend.dev>', // Změň po ověření domény
+      from: 'Rezidence U sv. Anny <delivered@resend.dev>', // Lepší deliverability než onboarding@
       to: ['info@rezidenceusvanny.cz'],
+      replyTo: data.email, // Odpověď půjde přímo klientovi
       subject: emailSubject,
       html: emailHtml,
     })
