@@ -15,6 +15,11 @@ const generateApartmentSlug = (building: string, number: string): string => {
   return `${buildingSlug}-${numberSlug}`
 }
 
+// Format number to max 2 decimal places
+const formatNumber = (num: number): number => {
+  return Math.round(num * 100) / 100
+}
+
 // Fallback apartments data
 const apartmentsFallback = [
   { id: 1, number: '1.01', building: 'BD-B1', disposition: '2+kk', size: 47.1, balcony: 39.08, floor: 1, price: 4544640, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 40.04 },
@@ -310,7 +315,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
             </div>
 
             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gold-primary mb-1">{apartment.size}</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gold-primary mb-1">{formatNumber(apartment.size)}</div>
               <div className="text-xs text-grey-600 font-medium">m² plocha</div>
             </div>
 
@@ -342,7 +347,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                 </div>
                 <div>
                   <div className="text-sm text-grey-600 mb-1">Celková plocha</div>
-                  <div className="text-lg font-bold text-dark">{apartment.size} m²</div>
+                  <div className="text-lg font-bold text-dark">{formatNumber(apartment.size)} m²</div>
                 </div>
                 <div>
                   <div className="text-sm text-grey-600 mb-1">Dostupnost</div>
@@ -372,7 +377,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                         <span className="text-sm font-mono text-grey-500">{room.number}</span>
                         <span className="text-sm text-dark">{room.name}</span>
                       </div>
-                      <span className="text-sm font-semibold text-dark">{room.area} m²</span>
+                      <span className="text-sm font-semibold text-dark">{formatNumber(room.area)} m²</span>
                     </div>
                   ))}
                 </div>
@@ -387,7 +392,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                   {apartment.outdoorSpaces.map((space, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-grey-200">
                       <span className="text-sm text-dark">{space.type}</span>
-                      <span className="text-sm font-semibold text-dark">{space.area} m²</span>
+                      <span className="text-sm font-semibold text-dark">{formatNumber(space.area)} m²</span>
                     </div>
                   ))}
                 </div>
@@ -399,13 +404,13 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-grey-600">Podlahová plocha</span>
-                  <span className="font-semibold text-dark">{apartment.floorArea || apartment.size} m²</span>
+                  <span className="font-semibold text-dark">{formatNumber(apartment.floorArea || apartment.size)} m²</span>
                 </div>
                 {apartment.outdoorSpaces && apartment.outdoorSpaces.length > 0 && (
                   <div className="flex justify-between">
                     <span className="text-grey-600">Venkovní prostory</span>
                     <span className="font-semibold text-dark">
-                      {apartment.outdoorSpaces.reduce((sum, space) => sum + space.area, 0).toFixed(2)} m²
+                      {formatNumber(apartment.outdoorSpaces.reduce((sum, space) => sum + space.area, 0))} m²
                     </span>
                   </div>
                 )}
@@ -415,7 +420,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                     {(() => {
                       const floorArea = apartment.floorArea || apartment.size
                       const outdoorTotal = apartment.outdoorSpaces?.reduce((sum, space) => sum + space.area, 0) || 0
-                      return (floorArea + outdoorTotal).toFixed(2)
+                      return formatNumber(floorArea + outdoorTotal)
                     })()} m²
                   </span>
                 </div>
@@ -628,7 +633,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                       </div>
                       <div>
                         <div className="text-xs text-grey-600 mb-1">Rozloha</div>
-                        <div className="text-base font-semibold text-dark">{apt.size} m²</div>
+                        <div className="text-base font-semibold text-dark">{formatNumber(apt.size)} m²</div>
                       </div>
                     </div>
 

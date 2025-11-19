@@ -19,6 +19,11 @@ const getTotalOutdoorArea = (spaces?: { type: string; area: number }[]) => {
   return spaces.reduce((sum, space) => sum + space.area, 0)
 }
 
+// Format number to max 2 decimal places
+const formatNumber = (num: number): number => {
+  return Math.round(num * 100) / 100
+}
+
 // Fallback apartments data (will be replaced by Sanity data)
 const apartmentsFallback = [
   { id: 1, number: '1.01', building: 'BD-B1', disposition: '2+kk', size: 47.1, balcony: 39.08, floor: 1, price: 4544640, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 40.04 },
@@ -491,11 +496,11 @@ export default function BytyPage() {
                             <span className="text-base font-semibold text-gold-primary">{apt.disposition}</span>
                           </td>
                           <td className="px-6 py-4">
-                            <span className="text-base text-grey-800">{apt.size} m²</span>
+                            <span className="text-base text-grey-800">{formatNumber(apt.size)} m²</span>
                           </td>
                           <td className="px-6 py-4">
                             <span className="text-base text-grey-800">
-                              {apt.balcony > 0 ? `${apt.balcony} m²` : '—'}
+                              {apt.balcony > 0 ? `${formatNumber(apt.balcony)} m²` : '—'}
                             </span>
                           </td>
                           <td className="px-6 py-4">
@@ -548,12 +553,12 @@ export default function BytyPage() {
                       </div>
                       <div>
                         <div className="text-xs text-grey-600 mb-1">Rozloha</div>
-                        <div className="text-base font-semibold text-dark">{apt.size} m²</div>
+                        <div className="text-base font-semibold text-dark">{formatNumber(apt.size)} m²</div>
                       </div>
                       <div>
                         <div className="text-xs text-grey-600 mb-1">Balkon/Zahrádka</div>
                         <div className="text-base font-semibold text-dark">
-                          {apt.balcony > 0 ? `${apt.balcony} m²` : '—'}
+                          {apt.balcony > 0 ? `${formatNumber(apt.balcony)} m²` : '—'}
                         </div>
                       </div>
                     </div>
