@@ -166,14 +166,6 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'locationInBuilding',
-      title: 'Umístění v bytovém domě',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
       name: 'locationInArea',
       title: 'Umístění v areálu',
       type: 'image',
