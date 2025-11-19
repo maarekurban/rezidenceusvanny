@@ -3,6 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
+import { useState, useEffect } from 'react'
+import { client } from '@/sanity/lib/client'
+import { urlFor } from '@/sanity/lib/image'
 
 // Mock data for family houses
 const houses = [
@@ -93,13 +96,67 @@ const houses = [
 ]
 
 export default function RodinneDomyPage() {
+  // State for page content from Sanity
+  const [pageData, setPageData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  
+  // Fetch page content from Sanity
+  useEffect(() => {
+    async function fetchPageContent() {
+      try {
+        const data = await client.fetch(`
+          *[_type == "familyHousesPageComplete" && _id == "family-houses-page-complete-singleton"][0] {
+            heroBadge,
+            heroTitle,
+            heroTitleHighlight,
+            heroDescription,
+            heroImage,
+            statHousesCount,
+            statHousesLabel,
+            statDispositions,
+            statDispositionsLabel,
+            statArea,
+            statAreaLabel,
+            statPlot,
+            statPlotLabel,
+            soldOutTitle,
+            soldOutDescription1,
+            soldOutDescription2,
+            soldOutButtonText,
+            soldOutButtonLink,
+            galleryBadge,
+            galleryTitle,
+            galleryTitleHighlight,
+            galleryDescription,
+            galleryImages,
+            ctaBadge,
+            ctaTitle,
+            ctaTitleHighlight,
+            ctaDescription,
+            ctaImage,
+            ctaButtonText,
+            ctaButtonLink
+          }
+        `, {}, { cache: 'no-store' })
+        
+        setPageData(data)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching page content:', error)
+        setLoading(false)
+      }
+    }
+    
+    fetchPageContent()
+  }, [])
+  
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src="/images/RD-A_vizualizace-zahrada-trava-min.jpg"
+            src={pageData?.heroImage ? urlFor(pageData.heroImage).url() : "/images/RD-A_vizualizace-zahrada-trava-min.jpg"}
             alt="Rodinné domy"
             fill
             className="object-cover"
@@ -110,41 +167,40 @@ export default function RodinneDomyPage() {
 
         <Container className="relative z-10 py-32">
           <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-full mb-6">
-            Portfolio realizací
+            {pageData?.heroBadge || "Portfolio realizací"}
           </span>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-            Realizace<br />
+            {pageData?.heroTitle || "Realizace"}<br />
             <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">
-              rodinných domů
+              {pageData?.heroTitleHighlight || "rodinných domů"}
             </span>
           </h1>
 
           <p className="text-lg md:text-xl text-white/90 font-light mb-8 leading-relaxed">
-            14 moderních rodinných domů s pozemky až 613 m². Všechny domy jsou vyprodány
-            a obývány spokojenými majiteli.
+            {pageData?.heroDescription || "14 moderních rodinných domů s pozemky až 613 m². Všechny domy jsou vyprodány a obývány spokojenými majiteli."}
           </p>
 
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">14</div>
-                <div className="text-xs text-grey-600 font-medium">Rodinných domů</div>
+                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">{pageData?.statHousesCount || "14"}</div>
+                <div className="text-xs text-grey-600 font-medium">{pageData?.statHousesLabel || "Rodinných domů"}</div>
               </div>
 
               <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">4-5+kk</div>
-                <div className="text-xs text-grey-600 font-medium">Dispozice</div>
+                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">{pageData?.statDispositions || "4-5+kk"}</div>
+                <div className="text-xs text-grey-600 font-medium">{pageData?.statDispositionsLabel || "Dispozice"}</div>
               </div>
 
               <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">138-156</div>
-                <div className="text-xs text-grey-600 font-medium">m² plocha</div>
+                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">{pageData?.statArea || "138-156"}</div>
+                <div className="text-xs text-grey-600 font-medium">{pageData?.statAreaLabel || "m² plocha"}</div>
               </div>
 
               <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">400-613</div>
-                <div className="text-xs text-grey-600 font-medium">m² pozemek</div>
+                <div className="text-2xl md:text-3xl font-bold text-gold-primary mb-1">{pageData?.statPlot || "400-613"}</div>
+                <div className="text-xs text-grey-600 font-medium">{pageData?.statPlotLabel || "m² pozemek"}</div>
               </div>
             </div>
         </Container>
@@ -164,17 +220,17 @@ export default function RodinneDomyPage() {
               </div>
               <div className="flex-1 text-center md:text-left">
                 <h2 className="text-2xl md:text-3xl font-bold text-dark mb-3">
-                  Všechny rodinné domy jsou vyprodány
+                  {pageData?.soldOutTitle || "Všechny rodinné domy jsou vyprodány"}
                 </h2>
                 <p className="text-lg text-grey-700 leading-relaxed mb-4">
-                  Děkujeme za zájem! Rodinné domy z I. etapy jsou všechny prodány a obývány spokojenými majiteli.
+                  {pageData?.soldOutDescription1 || "Děkujeme za zájem! Rodinné domy z I. etapy jsou všechny prodány a obývány spokojenými majiteli."}
                 </p>
                 <p className="text-lg font-semibold text-dark mb-6">
-                  ✨ Aktuálně jsou k dispozici byty z III. etapy
+                  {pageData?.soldOutDescription2 || "✨ Aktuálně jsou k dispozici byty z III. etapy"}
                 </p>
-                <Link href="/byty">
+                <Link href={pageData?.soldOutButtonLink || "/byty"}>
                   <button className="px-8 py-4 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
-                    Prohlédnout dostupné byty →
+                    {pageData?.soldOutButtonText || "Prohlédnout dostupné byty →"}
                   </button>
                 </Link>
               </div>
@@ -188,22 +244,21 @@ export default function RodinneDomyPage() {
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em] mb-4 block">
-              Naše realizace
+              {pageData?.galleryBadge || "Naše realizace"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-              Galerie <span className="text-gradient">rodinných domů</span>
+              {pageData?.galleryTitle || "Galerie"} <span className="text-gradient">{pageData?.galleryTitleHighlight || "rodinných domů"}</span>
             </h2>
             <p className="text-lg text-grey-600 font-light leading-relaxed">
-              Prohlédněte si naši realizaci moderních rodinných domů s individuálním designem
-              a kvalitním provedením.
+              {pageData?.galleryDescription || "Prohlédněte si naši realizaci moderních rodinných domů s individuálním designem a kvalitním provedením."}
             </p>
           </div>
 
           {/* Masonry Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {houses.map((house, index) => (
+            {(pageData?.galleryImages || houses).map((item: any, index: number) => (
               <div
-                key={house.id}
+                key={index}
                 className={`group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
                   index === 0 ? 'md:col-span-2 md:row-span-2' : ''
                 }`}
@@ -211,8 +266,8 @@ export default function RodinneDomyPage() {
                 {/* Image */}
                 <div className={`relative ${index === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'}`}>
                   <Image
-                    src={house.image}
-                    alt={house.name}
+                    src={item.asset ? urlFor(item).url() : (item.image || houses[index]?.image || '/images/placeholder.jpg')}
+                    alt={`Rodinný dům ${index + 1}`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
@@ -230,7 +285,7 @@ export default function RodinneDomyPage() {
             {/* Left: Image */}
             <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src="/images/DSC02913.jpg"
+                src={pageData?.ctaImage ? urlFor(pageData.ctaImage).url() : "/images/DSC02913.jpg"}
                 alt="Byty III. etapy"
                 fill
                 className="object-cover"
@@ -240,19 +295,18 @@ export default function RodinneDomyPage() {
             {/* Right: Text */}
             <div>
               <span className="text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em] mb-4 block">
-                Aktuálně v prodeji
+                {pageData?.ctaBadge || "Aktuálně v prodeji"}
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-dark mb-6 leading-tight">
-                Byty III. etapy<br />
-                <span className="text-gradient">jsou k dispozici</span>
+                {pageData?.ctaTitle || "Byty III. etapy"}<br />
+                <span className="text-gradient">{pageData?.ctaTitleHighlight || "jsou k dispozici"}</span>
               </h2>
               <p className="text-lg text-grey-600 mb-8 leading-relaxed">
-                Máme k dispozici moderní byty s dispozicemi 1+kk až 5+kk v III. etapě projektu.
-                Využijte předprodejových cen.
+                {pageData?.ctaDescription || "Máme k dispozici moderní byty s dispozicemi 1+kk až 5+kk v III. etapě projektu. Využijte předprodejových cen."}
               </p>
-              <Link href="/byty">
+              <Link href={pageData?.ctaButtonLink || "/byty"}>
                 <button className="inline-flex items-center gap-3 px-8 py-4 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105">
-                  Zobrazit dostupné byty
+                  {pageData?.ctaButtonText || "Zobrazit dostupné byty"}
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
