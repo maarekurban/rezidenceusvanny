@@ -23,104 +23,105 @@ async function importHomepage() {
       _id: 'homepage-singleton',
       
       // Hero Section
-      heroTitle: 'Rezidence U sv. Anny',
-      heroSubtitle: 'Moderní bydlení v historickém centru Kutné Hory',
+      heroTitle: 'Moderní bydlení\nv srdci UNESCO',
+      heroSubtitle: 'Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře, kde se moderní architektura setkává s bohatou historií',
       
-      // About Section
-      aboutBadge: 'O projektu',
-      aboutTitle: 'Rezidence U sv. Anny',
-      aboutDescription: 'Moderní bytové domy v klidné části historického centra Kutné Hory. Projekt nabízí kvalitní bydlení s promyšleným dispozičním řešením a špičkovou energetickou třídou B.',
+      // About Section (UNESCO město)
+      aboutBadge: 'MĚSTO PAMÁTKY UNESCO',
+      aboutTitle: 'Nechte se uchvátit krásou Kutné Hory',
+      aboutDescription: 'Město zapsané na Seznam světového kulturního dědictví UNESCO ve středověku označované za stříbrnou pokladnici českého království s malebným historickým centrem, vinicemi a celou řadou kaváren, cukráren a restaurací.\n\nDíky připojení Kutnohorska do integrovaného dopravního systému Prahy se do hlavního města pohodlně dostanete přímo z Kutné Hory v pracovních dnech i o víkendu.',
       aboutStats: [
-        { number: '51', label: 'bytů' },
-        { number: '3', label: 'bytové domy' },
-        { number: 'B', label: 'energetická třída' },
+        { number: '131', label: 'Bytů' },
+        { number: '14', label: 'Rodinných domů' },
+        { number: 'B', label: 'Energetická třída' },
       ],
       
-      // Apartments Section
-      apartmentsBadge: 'Byty',
-      apartmentsTitle: 'Vyberte si váš nový domov',
-      apartmentsDescription: 'Nabízíme byty od dispozice 1+kk až po prostorné 5+kk s možností individuálních úprav.',
+      // Apartments Section (Kvalitní bydlení)
+      apartmentsBadge: 'Exkluzivita čtvrti',
+      apartmentsTitle: 'Kvalitní bydlení v UNESCO zóně',
+      apartmentsDescription: 'Hlavním cílem projektu Rezidence u sv. Anny je vytvoření moderního a dostupného domova ve městě, jehož historické centrum je zapsané na seznamu UNESCO. Umístění v klidné části města s dobrou dopravní dostupností do centra vytváří potenciál pro naplnění bytových potřeb i těch nejnáročnějších klientů.',
       
-      // Features Section
-      featuresBadge: 'Výhody bydlení',
-      featuresTitle: 'Proč si vybrat Rezidenci U sv. Anny',
-      featuresDescription: 'Moderní bydlení s historickým duchem v srdci UNESCO lokality.',
+      // Features Section (Proč si koupit byt)
+      featuresBadge: 'PROČ BYDLET V REZIDENCI',
+      featuresTitle: 'Proč si koupit byt\nv naší rezidenci?',
+      featuresDescription: 'Moderní byty s promyšleným dispozičním řešením v klidné části historického města',
       features: [
         {
-          title: 'UNESCO lokalita',
-          description: 'Bydlení v historickém městě zapsaném na Seznam světového kulturního dědictví UNESCO.',
+          title: 'Energetická třída B',
+          description: 'Nízké náklady na provoz díky špičkovým izolacím a moderním technologiím',
           icon: 'star',
         },
         {
-          title: 'Výborná dostupnost',
-          description: 'Díky integraci do PID systému se do Prahy dostanete pohodlně a rychle.',
-          icon: 'location',
+          title: 'Kvalitní provedení',
+          description: 'Použití prvotřídních materiálů a precizní řemeslné zpracování',
+          icon: 'check',
         },
         {
-          title: 'Moderní bydlení',
-          description: 'Nízkoenergetické byty s promyšleným dispozičním řešením a kvalitním vybavením.',
+          title: 'Moderní architektura',
+          description: 'Čisté linie a nadčasový design respektující okolní zástavbu',
           icon: 'home',
         },
         {
-          title: 'Kompletní občanská vybavenost',
-          description: 'Školy, školky, obchody a veškeré služby v dosahu pěší chůze.',
-          icon: 'check',
+          title: 'Výhled do zeleně',
+          description: 'Majority bytů nabízí výhled do parku nebo klidného okolí',
+          icon: 'location',
         },
       ],
       
-      // Location Section
-      locationBadge: 'Lokalita',
-      locationTitle: 'Život v historickém centru',
-      locationDescription: 'Kutná Hora je královské město s bohatou historií, které díky své blízkosti Prahy nabízí ideální kombinaci klidného bydlení a dostupnosti velkoměsta. Město je plné památek, kulturních akcí a nabízí kompletní občanskou vybavenost.',
+      // Location Section (Areál rezidenční čtvrti)
+      locationBadge: 'MĚSTO PAMÁTKY UNESCO',
+      locationTitle: 'Areál rezidenční čtvrti U sv. Anny',
+      locationDescription: 'Rezidenční čtvrť U sv. Anny se nachází v klidné části historického centra Kutné Hory. Lokalita nabízí ideální kombinaci dostupnosti městské vybavenosti a klidného bydlení v zeleni.',
       locationFeatures: [
         {
-          title: '60 minut do Prahy',
-          description: 'Pravidelné autobusové i vlakové spojení',
+          title: 'Pěší dostupnost centra',
+          description: '5 minut do historického centra města',
         },
         {
-          title: 'UNESCO památky',
-          description: 'Chrám sv. Barbory, Kostnice v Sedlci',
+          title: 'Dopravní spojení',
+          description: 'Autobusová a vlaková zastávka v docházkové vzdálenosti',
         },
         {
-          title: 'Kompletní vybavenost',
-          description: 'Školy, školky, obchody, restaurace',
+          title: 'Vybavenost',
+          description: 'Školky, školy, obchody, zdravotní péče v okolí',
         },
         {
-          title: 'Sport a kultura',
-          description: 'Aquapark, kino, galerie, muzea',
+          title: 'Zeleň a park',
+          description: 'Park sv. Anny přímo v sousedství projektu',
         },
       ],
       
       // Gallery Section
-      galleryTitle: 'Realizované byty z předchozích etap',
-      galleryDescription: 'Prohlédněte si reálné fotografie dokončených bytů z I. a II. etapy projektu.',
+      galleryBadge: 'DOKONČENÉ BYTY',
+      galleryTitle: 'Prohlédněte si naši práci',
+      galleryDescription: 'Fotografie z dokončených bytů I. a II. etapy. Standardy kvality jsou zachovány i pro III. etapu.',
       
       // Contact Section
-      contactBadge: 'Kontaktujte nás',
-      contactTitle: 'Máte zájem o více informací?',
-      contactDescription: 'Vyplňte kontaktní formulář a my se vám ozveme do 24 hodin. Rádi vám představíme projekt, provedeme vás areálem a odpovíme na všechny vaše dotazy.',
+      contactBadge: 'KONTAKTUJTE NÁS',
+      contactTitle: 'Máte zájem o byt?',
+      contactDescription: 'Vyplňte kontaktní formulář a my se vám ozveme do 24 hodin',
       contactEmail: 'info@rezidenceusvanny.cz',
       
-      // Video Section
-      videoBadge: 'Proč si vybrat tento projekt',
-      videoTitle: 'Proč bydlet v Rezidenci U sv. Anny',
+      // Video Section (YouTube - O Kutné Hoře)
+      videoBadge: 'MĚSTO PAMÁTKY UNESCO',
+      videoTitle: 'Nechte se uchvátit krásou Kutné Hory',
       videoUrl: 'https://www.youtube.com/embed/VVlxe2bvtlg',
       videoFeatures: [
         {
-          title: 'UNESCO lokalita',
-          description: 'Bydlení v historickém městě zapsaném na Seznam světového kulturního dědictví UNESCO',
+          title: 'UNESCO památky',
+          description: 'Chrám sv. Barbory, Kostnice v Sedlci, Vlašský dvůr',
         },
         {
-          title: 'Výborná dostupnost',
-          description: 'Díky integraci do PID systému se do Prahy dostanete pohodlně a rychle',
+          title: 'Historické centrum',
+          description: 'Malebné uličky, náměstí a památkové budovy',
         },
         {
-          title: 'Moderní bydlení',
-          description: 'Nízkoenergetické byty s promyšleným dispozičním řešením a kvalitním vybavením',
+          title: 'Kultura a sport',
+          description: 'Divadlo, kino, galerie, muzea, aquapark',
         },
         {
-          title: 'Kompletní občanská vybavenost',
-          description: 'Školy, školky, obchody a veškeré služby v dosahu pěší chůze',
+          title: 'Dopravní dostupnost',
+          description: '60 minut do Prahy vlakem nebo autobusem',
         },
       ],
     }
