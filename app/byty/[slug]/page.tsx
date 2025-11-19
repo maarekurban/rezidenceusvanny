@@ -388,7 +388,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
               <div>
                 <h3 className="text-lg font-bold text-dark mb-4">Venkovní prostory</h3>
                 <div className="space-y-2">
-                  {apartment.outdoorSpaces.map((space, index) => (
+                  {apartment.outdoorSpaces.map((space: any, index: number) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-grey-200">
                       <span className="text-sm text-dark">{space.type}</span>
                       <span className="text-sm font-semibold text-dark">{formatNumber(space.area)} m²</span>
@@ -564,7 +564,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
 
           {/* Thumbnail Grid */}
           <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
-            {galleryImages.map((image, index) => (
+            {galleryImages.map((image: string, index: number) => (
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
@@ -616,7 +616,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                 apt.status === 'available'
               )
               .slice(0, 3)
-              .map((apt) => (
+              .map((apt: any) => (
                 <Link key={apt.id} href={`/byty/${generateApartmentSlug(apt.building, apt.number)}`}>
                   <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-grey-200">
                     <div className="flex items-start justify-between mb-4">
