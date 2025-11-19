@@ -2,7 +2,7 @@ import apartment from './apartment'
 import pdfDocument from './document'
 import page from './page'
 import siteSettings from './siteSettings'
-import homepage from './homepage'
+import homepageComplete from './homepage-complete'
 import importantInfoPage from './importantInfoPage'
 import contactPage from './contactPage'
 import apartmentsPage from './apartmentsPage'
@@ -13,7 +13,7 @@ export const schemaTypes = [
   pdfDocument,
   
   // Stránky
-  homepage,
+  homepageComplete,
   apartmentsPage,
   importantInfoPage,
   contactPage,
