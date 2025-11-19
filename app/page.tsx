@@ -2,17 +2,52 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/Button';
 import { Container } from '@/components/Container';
 import { ParallaxSection } from '@/components/ParallaxSection';
+import { client } from '@/sanity/lib/client';
+import { urlFor } from '@/sanity/lib/image';
 
 export default function Home() {
+  const [pageData, setPageData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // Form submission state
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+
+  useEffect(() => {
+    const fetchPageData = async () => {
+      try {
+        const data = await client.fetch(`*[_type == "homepageComplete"][0]{
+          ...,
+          heroBackgroundImage,
+          heroImage,
+          aboutImage,
+          qualityImages[]{
+            ...,
+            asset->
+          },
+          mapBackgroundImage,
+          galleryImages[]{
+            ...,
+            asset->
+          },
+          contactFormBackgroundImage
+        }`)
+        setPageData(data)
+      } catch (error) {
+        console.error('Chyba při načítání dat ze Sanity:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPageData()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
