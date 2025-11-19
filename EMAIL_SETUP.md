@@ -141,3 +141,5 @@ Po nasazení na Vercel:
 
 ✅ **Vše je připraveno! Stačí jen vybrat službu a doplnit API klíč.**
 
+
+
