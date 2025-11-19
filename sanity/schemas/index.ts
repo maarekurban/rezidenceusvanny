@@ -4,7 +4,7 @@ import page from './page'
 import siteSettings from './siteSettings'
 import homepageComplete from './homepage-complete'
 import apartmentsPageComplete from './apartments-page-complete'
-import importantInfoPage from './importantInfoPage'
+import importantInfoPageComplete from './important-info-page-complete'
 import contactPage from './contactPage'
 
 export const schemaTypes = [
@@ -15,7 +15,7 @@ export const schemaTypes = [
   // Stránky
   homepageComplete,
   apartmentsPageComplete,
-  importantInfoPage,
+  importantInfoPageComplete,
   contactPage,
   page,
   
