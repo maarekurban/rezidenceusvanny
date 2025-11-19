@@ -1,14 +1,68 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
+import { client } from '@/sanity/lib/client'
+import { urlFor } from '@/sanity/lib/image'
 
 export default function DuleziteInformacePage() {
   // Form submission state
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+  
+  // State for page content from Sanity
+  const [pageData, setPageData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+  
+  // Fetch page content from Sanity
+  useEffect(() => {
+    async function fetchPageContent() {
+      try {
+        const data = await client.fetch(`
+          *[_type == "importantInfoPageComplete" && _id == "important-info-page-complete-singleton"][0] {
+            heroBadge,
+            heroTitle,
+            heroTitleHighlight,
+            heroDescription,
+            heroImage,
+            financingBadge,
+            financingTitle,
+            financingTitleHighlight,
+            financingIntro,
+            financingCards,
+            financingOutro,
+            documentsBadge,
+            documentsTitle,
+            documentsTitleHighlight,
+            documentsDescription,
+            documentsBackgroundImage,
+            documents[] {
+              title,
+              file {
+                asset-> {
+                  url
+                }
+              }
+            },
+            contactBadge,
+            contactTitle,
+            contactDescription,
+            contactEmail
+          }
+        `, {}, { cache: 'no-store' })
+        
+        setPageData(data)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching page content:', error)
+        setLoading(false)
+      }
+    }
+    
+    fetchPageContent()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -58,7 +112,7 @@ export default function DuleziteInformacePage() {
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src="/images/DSC02841.jpg"
+            src={pageData?.heroImage ? urlFor(pageData.heroImage).url() : "/images/DSC02841.jpg"}
             alt="Důležité informace"
             fill
             className="object-cover"
@@ -69,15 +123,15 @@ export default function DuleziteInformacePage() {
 
         <Container className="relative z-10 py-32">
           <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-full mb-6">
-            Informace pro kupující
+            {pageData?.heroBadge || "Informace pro kupující"}
           </span>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
-            Důležité <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">informace</span>
+            {pageData?.heroTitle || "Důležité"} <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">{pageData?.heroTitleHighlight || "informace"}</span>
           </h1>
 
           <p className="text-lg md:text-xl text-white/90 font-light leading-relaxed max-w-3xl">
-            Vše, co potřebujete vědět o financování, dokumentaci a procesu koupě bytu v naší rezidenci.
+            {pageData?.heroDescription || "Vše, co potřebujete vědět o financování, dokumentaci a procesu koupě bytu v naší rezidenci."}
           </p>
         </Container>
       </section>
