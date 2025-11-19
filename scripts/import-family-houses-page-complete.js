@@ -54,10 +54,13 @@ async function importFamilyHousesPage() {
       'images/DSC02745.jpg',
     ]
     
-    for (const imagePath of houseImages) {
-      const img = await uploadImage(imagePath)
+    for (let i = 0; i < houseImages.length; i++) {
+      const img = await uploadImage(houseImages[i])
       if (img) {
-        galleryImages.push(img)
+        galleryImages.push({
+          _key: `house${i + 1}`,
+          ...img,
+        })
       }
     }
 
