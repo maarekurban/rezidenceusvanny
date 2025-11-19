@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { notFound, useRouter } from 'next/navigation'
 import { useState, use, useEffect } from 'react'
+import { client } from '@/sanity/lib/client'
+import { urlForImage } from '@/sanity/lib/image'
 
 // Helper function to generate apartment slug
 const generateApartmentSlug = (building: string, number: string): string => {
@@ -13,8 +15,8 @@ const generateApartmentSlug = (building: string, number: string): string => {
   return `${buildingSlug}-${numberSlug}`
 }
 
-// Real apartment data from Excel (Byty rezidence import.xlsx)
-const apartments = [
+// Fallback apartments data
+const apartmentsFallback = [
   { id: 1, number: '1.01', building: 'BD-B1', disposition: '2+kk', size: 47.1, balcony: 39.08, floor: 1, price: 4544640, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 40.04 },
   { id: 2, number: '1.02', building: 'BD-B1', disposition: '2+kk', size: 55.55, balcony: 112.12, floor: 1, price: 5558060, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 1.02.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 5.27}, {'number': 2, 'name': 'Toaleta', 'area': 1.51}, {'number': 3, 'name': 'Koupelna', 'area': 2.96}, {'number': 4, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 30.14}, {'number': 5, 'name': 'Lo\u017enice', 'area': 12.56}], floorArea: 52.44, outdoorSpaces: [{'type': 'Terasa', 'area': 7.95}, {'type': 'Zahrada', 'area': 112.12}], usableArea: 44.57 },
   { id: 3, number: '1.03', building: 'BD-B1', disposition: '5+kk', size: 101.61, balcony: 139.3, floor: 1, price: 9766020, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 1.03.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.42}, {'number': 2, 'name': 'Toaleta', 'area': 1.63}, {'number': 3, 'name': 'Koupelna', 'area': 5.31}, {'number': 4, 'name': 'Pokoj', 'area': 10.93}, {'number': 5, 'name': 'Lo\u017enice', 'area': 14.32}, {'number': 6, 'name': 'Pokoj', 'area': 12.3}, {'number': 7, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.22}, {'number': 8, 'name': 'Pokoj', 'area': 11.54}], floorArea: 93.67, outdoorSpaces: [{'type': 'Terasa', 'area': 5.41}, {'type': 'Terasa', 'area': 7.95}, {'type': 'Zahrada', 'area': 139.3}], usableArea: 79.62 },
@@ -70,22 +72,104 @@ const apartments = [
 
 export default function ApartmentDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params)
-  const apartment = apartments.find(apt => 
-    generateApartmentSlug(apt.building, apt.number) === resolvedParams.slug
-  )
+  const [apartment, setApartment] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(0)
   const router = useRouter()
 
-  if (!apartment) {
-    notFound()
-  }
+  // Fetch apartment from Sanity
+  useEffect(() => {
+    async function fetchApartment() {
+      try {
+        // Parse slug to get building and number
+        const parts = resolvedParams.slug.split('-')
+        const buildingSlug = `${parts[0]}-${parts[1]}`.toUpperCase() // bd-b1 -> BD-B1
+        const number = `${parts[2]}.${parts[3]}` // 1-02 -> 1.02
+        
+        const data = await client.fetch(`
+          *[_type == "apartment" && building == $building && number == $number][0] {
+            _id,
+            number,
+            building,
+            floor,
+            disposition,
+            floorArea,
+            usableArea,
+            price,
+            status,
+            rooms[] {
+              number,
+              name,
+              area
+            },
+            outdoorSpaces[] {
+              type,
+              area
+            },
+            "floorPlanUrl": floorPlan.asset->url,
+            "heroImageUrl": heroImage.asset->url,
+            "locationInAreaUrl": locationInArea.asset->url
+          }
+        `, { building: buildingSlug, number }, { cache: 'no-store' })
+        
+        if (!data) {
+          notFound()
+        }
+        
+        // Transform to match original format
+        const transformed = {
+          id: data._id,
+          number: data.number,
+          building: data.building,
+          disposition: data.disposition,
+          size: data.floorArea,
+          floor: data.floor,
+          price: data.price,
+          status: data.status,
+          floorPlanPath: data.floorPlanUrl,
+          rooms: data.rooms || [],
+          floorArea: data.floorArea,
+          outdoorSpaces: data.outdoorSpaces || [],
+          usableArea: data.usableArea,
+          heroImageUrl: data.heroImageUrl,
+          locationInAreaUrl: data.locationInAreaUrl
+        }
+        
+        setApartment(transformed)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching apartment:', error)
+        // Fallback to hardcoded data
+        const fallbackApt = apartmentsFallback.find(apt => 
+          generateApartmentSlug(apt.building, apt.number) === resolvedParams.slug
+        )
+        if (fallbackApt) {
+          setApartment(fallbackApt)
+        }
+        setLoading(false)
+      }
+    }
+    
+    fetchApartment()
+  }, [resolvedParams.slug])
 
   // Redirect to homepage if apartment is sold
   useEffect(() => {
-    if (apartment.status === 'sold') {
+    if (apartment && apartment.status === 'sold') {
       router.push('/')
     }
-  }, [apartment.status, router])
+  }, [apartment, router])
+
+  if (loading || !apartment) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gold-primary mx-auto"></div>
+          <p className="mt-4 text-gray-600">Načítám byt...</p>
+        </div>
+      </div>
+    )
+  }
 
   // Use real rooms data from Excel or empty array for apartments without room data
   const rooms = apartment.rooms || []

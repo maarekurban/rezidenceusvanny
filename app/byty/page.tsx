@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { client } from '@/sanity/lib/client'
 
 // Helper function to generate apartment slug
 const generateApartmentSlug = (building: string, number: string): string => {
@@ -12,8 +13,14 @@ const generateApartmentSlug = (building: string, number: string): string => {
   return `${buildingSlug}-${numberSlug}`
 }
 
-// Real apartment data from Excel (Byty rezidence import.xlsx)
-const apartments = [
+// Calculate total outdoor space
+const getTotalOutdoorArea = (spaces?: { type: string; area: number }[]) => {
+  if (!spaces || spaces.length === 0) return 0
+  return spaces.reduce((sum, space) => sum + space.area, 0)
+}
+
+// Fallback apartments data (will be replaced by Sanity data)
+const apartmentsFallback = [
   { id: 1, number: '1.01', building: 'BD-B1', disposition: '2+kk', size: 47.1, balcony: 39.08, floor: 1, price: 4544640, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 40.04 },
   { id: 2, number: '1.02', building: 'BD-B1', disposition: '2+kk', size: 55.55, balcony: 112.12, floor: 1, price: 5558060, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 1.02.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 5.27}, {'number': 2, 'name': 'Toaleta', 'area': 1.51}, {'number': 3, 'name': 'Koupelna', 'area': 2.96}, {'number': 4, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 30.14}, {'number': 5, 'name': 'Lo\u017enice', 'area': 12.56}], floorArea: 52.44, outdoorSpaces: [{'type': 'Terasa', 'area': 7.95}, {'type': 'Zahrada', 'area': 112.12}], usableArea: 44.57 },
   { id: 3, number: '1.03', building: 'BD-B1', disposition: '5+kk', size: 101.61, balcony: 139.3, floor: 1, price: 9766020, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 1.03.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.42}, {'number': 2, 'name': 'Toaleta', 'area': 1.63}, {'number': 3, 'name': 'Koupelna', 'area': 5.31}, {'number': 4, 'name': 'Pokoj', 'area': 10.93}, {'number': 5, 'name': 'Lo\u017enice', 'area': 14.32}, {'number': 6, 'name': 'Pokoj', 'area': 12.3}, {'number': 7, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.22}, {'number': 8, 'name': 'Pokoj', 'area': 11.54}], floorArea: 93.67, outdoorSpaces: [{'type': 'Terasa', 'area': 5.41}, {'type': 'Terasa', 'area': 7.95}, {'type': 'Zahrada', 'area': 139.3}], usableArea: 79.62 },
@@ -71,6 +78,10 @@ type SortField = 'number' | 'disposition' | 'size' | 'floor' | 'price'
 type SortDirection = 'asc' | 'desc'
 
 export default function BytyPage() {
+  // State for apartments from Sanity
+  const [apartments, setApartments] = useState(apartmentsFallback)
+  const [loading, setLoading] = useState(true)
+
   const [selectedDisposition, setSelectedDisposition] = useState<string>('all')
   const [selectedFloor, setSelectedFloor] = useState<string>('all')
   const [selectedStatus, setSelectedStatus] = useState<string>('all')
@@ -78,10 +89,70 @@ export default function BytyPage() {
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   
+  // Fetch apartments from Sanity
+  useEffect(() => {
+    async function fetchApartments() {
+      try {
+        const data = await client.fetch(`
+          *[_type == "apartment"] | order(number asc) {
+            _id,
+            number,
+            building,
+            floor,
+            disposition,
+            floorArea,
+            usableArea,
+            price,
+            status,
+            rooms,
+            outdoorSpaces[] {
+              type,
+              area
+            }
+          }
+        `, {}, { cache: 'no-store' })
+        
+        // Transform Sanity data to match original format
+        const transformed = data.map((apt: any, index: number) => ({
+          id: index + 1,
+          number: apt.number,
+          building: apt.building,
+          disposition: apt.disposition,
+          size: apt.floorArea,
+          balcony: getTotalOutdoorArea(apt.outdoorSpaces),
+          floor: apt.floor,
+          price: apt.price,
+          status: apt.status,
+          floorPlanPath: null, // We don't need this for listing
+          rooms: apt.rooms || [],
+          floorArea: apt.floorArea,
+          outdoorSpaces: apt.outdoorSpaces || [],
+          usableArea: apt.usableArea
+        }))
+        
+        setApartments(transformed)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error fetching apartments:', error)
+        setLoading(false)
+      }
+    }
+    
+    fetchApartments()
+  }, [])
+  
   // Calculate min and max prices
   const minPrice = Math.min(...apartments.map(apt => apt.price))
   const maxPrice = Math.max(...apartments.map(apt => apt.price))
   const [priceRangeSlider, setPriceRangeSlider] = useState<number>(maxPrice)
+
+  // Update price range when apartments load
+  useEffect(() => {
+    if (!loading && apartments.length > 0) {
+      const max = Math.max(...apartments.map(apt => apt.price))
+      setPriceRangeSlider(max)
+    }
+  }, [loading, apartments])
 
   // Count available apartments (without price filter for hero section)
   const totalAvailableCount = apartments.filter(apt => apt.status === 'available').length
