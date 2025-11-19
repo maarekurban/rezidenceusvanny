@@ -23,7 +23,8 @@ async function importHomepageComplete() {
       _id: 'homepage-complete-singleton',
       
       // === HERO SECTION ===
-      heroTitle: 'Moderní bydlení\nv srdci UNESCO',
+      heroTitle: 'Moderní bydlení',
+      heroTitleHighlight: 'v srdci UNESCO',
       heroSubtitle: 'Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,\nkde se moderní architektura setkává s bohatou historií',
       heroBadgeText: 'III. Etapa v prodeji',
       heroStats: [
@@ -34,7 +35,9 @@ async function importHomepageComplete() {
       
       // === O PROJEKTU (UNESCO MĚSTO) ===
       aboutBadge: 'MĚSTO PAMÁTKY UNESCO',
-      aboutTitle: 'Nechte se uchvátit\nkrásou Kutné Hory',
+      aboutTitle: 'Nechte se uchvátit',
+      aboutTitleHighlight: 'krásou',
+      aboutTitleLine2: 'Kutné Hory',
       aboutDescription: [
         {
           _key: 'block1',
@@ -99,7 +102,9 @@ async function importHomepageComplete() {
       
       // === KVALITNÍ BYDLENÍ V UNESCO ZÓNĚ ===
       qualityBadge: 'Exkluzivita čtvrti',
-      qualityTitle: 'Kvalitní bydlení v UNESCO zóně',
+      qualityTitle: 'Kvalitní bydlení v',
+      qualityTitleHighlight: 'UNESCO',
+      qualityTitleEnd: 'zóně',
       qualityDescription: 'Hlavním cílem projektu Rezidence u sv. Anny je vytvoření moderního a dostupného domova ve městě, jehož historické centrum je zapsané na seznamu UNESCO. Umístění v klidné části města s dobrou dopravní dostupností do centra vytváří potenciál pro naplnění bytových potřeb i těch nejnáročnějších klientů.',
       distances: [
         { _key: 'dist1', time: '1 min', label: 'Autobusová zastávka' },
@@ -109,6 +114,10 @@ async function importHomepageComplete() {
       ],
       
       // === PROČ SI KOUPIT BYT (SERVICES) ===
+      whyBuyBadge: 'HLAVNÍ VÝHODY PROJEKTU',
+      whyBuyTitle: 'Proč si koupit byt',
+      whyBuyTitleLine2: 'v naší',
+      whyBuyTitleHighlight: 'rezidenci?',
       servicesBadge: 'HLAVNÍ VÝHODY PROJEKTU',
       servicesTitle: 'Proč si koupit byt\nv naší rezidenci?',
       services: [
@@ -175,7 +184,8 @@ async function importHomepageComplete() {
       
       // === FOTOGALERIE ===
       galleryBadge: 'DOKONČENÉ BYTY',
-      galleryTitle: 'Prohlédněte si naši práci',
+      galleryTitle: 'Prohlédněte si',
+      galleryTitleHighlight: 'naši práci',
       galleryDescription: 'Vytvářeli jsme moderní bydlení s důrazem na kvalitu materiálů a detailní zpracování. Podívejte se na dokončené byty z I. a II. etapy.',
       
       // === FAQ ===
