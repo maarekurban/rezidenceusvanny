@@ -74,10 +74,17 @@ export default defineType({
       of: [
         {
           type: 'object',
+          name: 'room',
+          title: 'Místnost',
           fields: [
             {
               name: 'number',
               title: 'Číslo místnosti',
+              type: 'string',
+            },
+            {
+              name: 'name',
+              title: 'Název místnosti',
               type: 'string',
             },
             {
@@ -86,6 +93,19 @@ export default defineType({
               type: 'number',
             },
           ],
+          preview: {
+            select: {
+              number: 'number',
+              name: 'name',
+              area: 'area',
+            },
+            prepare({ number, name, area }) {
+              return {
+                title: `${number}. ${name}`,
+                subtitle: `${area} m²`,
+              }
+            },
+          },
         },
       ],
     }),
@@ -96,6 +116,8 @@ export default defineType({
       of: [
         {
           type: 'object',
+          name: 'outdoorSpace',
+          title: 'Venkovní prostor',
           fields: [
             {
               name: 'type',
@@ -115,6 +137,19 @@ export default defineType({
               type: 'number',
             },
           ],
+          preview: {
+            select: {
+              type: 'type',
+              area: 'area',
+            },
+            prepare({ type, area }) {
+              const typeLabel = type === 'balcony' ? 'Balkon' : type === 'terrace' ? 'Terasa' : 'Zahrada'
+              return {
+                title: typeLabel,
+                subtitle: `${area} m²`,
+              }
+            },
+          },
         },
       ],
     }),

@@ -1,7 +1,10 @@
 const { createClient } = require('@sanity/client')
 const fs = require('fs')
 const path = require('path')
-require('dotenv').config({ path: '.env.local' })
+
+// Načíst env variables
+const envPath = path.resolve(__dirname, '..', '.env.local')
+require('dotenv').config({ path: envPath })
 
 // Sanity client
 const client = createClient({
@@ -86,6 +89,7 @@ async function importAllApartments() {
           _type: 'object',
           _key: `room-${idx}`,
           number: String(room.number || idx + 1),
+          name: String(room.name || ''),
           area: Number(room.area),
         })) : []
 
