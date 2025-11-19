@@ -8,6 +8,7 @@ import { Container } from '@/components/Container';
 import { ParallaxSection } from '@/components/ParallaxSection';
 import { client } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
+import { parseTitle } from '@/lib/parseTitle';
 
 export default function Home() {
   const [pageData, setPageData] = useState<any>(null);
@@ -130,8 +131,12 @@ export default function Home() {
 
           {/* Main Headline - Large & Bold */}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 leading-[1.1] tracking-tight max-w-5xl px-4">
-            {pageData?.heroTitle || "Moderní bydlení"}<br />
-            <span className="text-gradient">{pageData?.heroTitleHighlight || "v srdci UNESCO"}</span>
+            {parseTitle(pageData?.heroTitle) || (
+              <>
+                Moderní bydlení<br />
+                <span className="text-gradient">v srdci UNESCO</span>
+              </>
+            )}
           </h1>
 
           {/* Subtitle - Light Weight */}
@@ -185,10 +190,13 @@ export default function Home() {
                   {pageData?.aboutBadge || "MĚSTO PAMÁTKY UNESCO"}
                 </span>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mt-6 leading-[1.15] tracking-tight">
-                  {pageData?.aboutTitle || "Nechte se uchvátit"}{' '}
-                  <span className="text-gradient">{pageData?.aboutTitleHighlight || "krásou"}</span>
-                  <br />
-                  {pageData?.aboutTitleLine2 || "Kutné Hory"}
+                  {parseTitle(pageData?.aboutTitle) || (
+                    <>
+                      Nechte se uchvátit <span className="text-gradient">krásou</span>
+                      <br />
+                      Kutné Hory
+                    </>
+                  )}
                 </h2>
               </div>
 
@@ -382,7 +390,11 @@ export default function Home() {
               {pageData?.qualityBadge || "Exkluzivita čtvrti"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-              {pageData?.qualityTitle || "Kvalitní bydlení v"} <span className="text-gradient">{pageData?.qualityTitleHighlight || "UNESCO"}</span> {pageData?.qualityTitleEnd || "zóně"}
+              {parseTitle(pageData?.qualityTitle) || (
+                <>
+                  Kvalitní bydlení v <span className="text-gradient">UNESCO</span> zóně
+                </>
+              )}
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light">
               {pageData?.qualityDescription || "Hlavním cílem projektu Rezidence u sv. Anny je vytvoření moderního a dostupného domova ve městě, jehož historické centrum je zapsané na seznamu UNESCO. Umístění v klidné části města s dobrou dopravní dostupností do centra vytváří potenciál pro naplnění bytových potřeb i těch nejnáročnějších klientů."}
@@ -467,7 +479,11 @@ export default function Home() {
               {pageData?.whyBuyBadge || "HLAVNÍ VÝHODY PROJEKTU"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mt-6 leading-[1.15] tracking-tight">
-              {pageData?.whyBuyTitle || "Proč si koupit byt"}<br />{pageData?.whyBuyTitleLine2 || "v naší"} <span className="text-gradient">{pageData?.whyBuyTitleHighlight || "rezidenci?"}</span>
+              {parseTitle(pageData?.whyBuyTitle) || (
+                <>
+                  Proč si koupit byt<br />v naší <span className="text-gradient">rezidenci?</span>
+                </>
+              )}
             </h2>
           </div>
 
@@ -660,7 +676,11 @@ export default function Home() {
                 {pageData?.galleryBadge || "DOKONČENÉ BYTY"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mt-6 leading-[1.15] tracking-tight">
-                {pageData?.galleryTitle || "Prohlédněte si"} <span className="text-gradient">{pageData?.galleryTitleHighlight || "naši práci"}</span>
+                {parseTitle(pageData?.galleryTitle) || (
+                  <>
+                    Prohlédněte si <span className="text-gradient">naši práci</span>
+                  </>
+                )}
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light mt-6 mb-8">
                 {pageData?.galleryDescription || "Vytvářelisme moderní bydlení s důrazem na kvalitu materiálů a detailní zpracování. Podívejte se na dokončené byty z I. a II. etapy."}

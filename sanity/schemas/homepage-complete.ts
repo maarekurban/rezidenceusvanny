@@ -9,6 +9,7 @@ export default defineType({
     defineField({
       name: 'heroTitle',
       title: 'Hero - Hlavní nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'text',
       rows: 2,
       validation: Rule => Rule.required(),
@@ -63,6 +64,7 @@ export default defineType({
     defineField({
       name: 'aboutTitle',
       title: 'O projektu - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'text',
       rows: 2,
     }),
@@ -88,6 +90,7 @@ export default defineType({
     defineField({
       name: 'stagesTitle',
       title: 'Etapy - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'string',
     }),
     defineField({
@@ -143,6 +146,7 @@ export default defineType({
     defineField({
       name: 'qualityTitle',
       title: 'Kvalitní bydlení - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'string',
     }),
     defineField({
@@ -180,18 +184,22 @@ export default defineType({
     }),
     defineField({
       name: 'whyBuyTitle',
-      title: 'Why Buy - Nadpis řádek 1',
-      type: 'string',
+      title: 'Why Buy - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou. Nový řádek udělej pomocí Enter.',
+      type: 'text',
+      rows: 2,
     }),
     defineField({
       name: 'whyBuyTitleLine2',
       title: 'Why Buy - Nadpis řádek 2',
       type: 'string',
+      hidden: true,
     }),
     defineField({
       name: 'whyBuyTitleHighlight',
       title: 'Why Buy - Nadpis - zvýrazněná část',
       type: 'string',
+      hidden: true,
     }),
     defineField({
       name: 'whyBuyBackgroundImage',
@@ -246,6 +254,7 @@ export default defineType({
     defineField({
       name: 'mapTitle',
       title: 'Mapa - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'string',
     }),
     defineField({
@@ -267,6 +276,7 @@ export default defineType({
     defineField({
       name: 'processTitle',
       title: 'Proces - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'string',
     }),
     defineField({
@@ -304,6 +314,7 @@ export default defineType({
     defineField({
       name: 'galleryTitle',
       title: 'Galerie - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'string',
     }),
     defineField({
@@ -334,6 +345,7 @@ export default defineType({
     defineField({
       name: 'faqTitle',
       title: 'FAQ - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'string',
     }),
     defineField({
@@ -370,6 +382,7 @@ export default defineType({
     defineField({
       name: 'contactTitle',
       title: 'Kontakt - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'string',
     }),
     defineField({
@@ -394,6 +407,7 @@ export default defineType({
     defineField({
       name: 'videoTitle',
       title: 'Video - Nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou. Nový řádek udělej pomocí Enter.',
       type: 'text',
       rows: 2,
     }),
