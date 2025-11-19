@@ -32,11 +32,6 @@ export const Footer: React.FC = () => {
             <h4 className="font-bold mb-4">Rychlé odkazy</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/o-projektu" className="text-gray-300 hover:text-gold-primary transition-colors">
-                  O projektu
-                </Link>
-              </li>
-              <li>
                 <Link href="/byty" className="text-gray-300 hover:text-gold-primary transition-colors">
                   Byty
                 </Link>
@@ -44,6 +39,11 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/rodinne-domy" className="text-gray-300 hover:text-gold-primary transition-colors">
                   Rodinné domy
+                </Link>
+              </li>
+              <li>
+                <Link href="/dulezite-informace" className="text-gray-300 hover:text-gold-primary transition-colors">
+                  Důležité informace
                 </Link>
               </li>
               <li>
