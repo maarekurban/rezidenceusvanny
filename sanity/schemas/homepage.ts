@@ -5,134 +5,270 @@ export default defineType({
   title: 'Úvodní stránka',
   type: 'document',
   fields: [
-    defineField({
-      name: 'heroVideo',
-      title: 'Hero video',
-      type: 'file',
-      options: {
-        accept: 'video/*',
-      },
-    }),
+    // Hero Section
     defineField({
       name: 'heroTitle',
-      title: 'Hlavní nadpis',
+      title: 'Hero - Hlavní nadpis',
       type: 'string',
+      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'heroSubtitle',
-      title: 'Podnadpis',
+      title: 'Hero - Podnadpis',
       type: 'text',
+      rows: 3,
     }),
     defineField({
-      name: 'heroStats',
-      title: 'Statistiky v Hero sekci',
-      type: 'object',
-      fields: [
-        {
-          name: 'apartments',
-          title: 'Počet bytů',
-          type: 'number',
-        },
-        {
-          name: 'houses',
-          title: 'Počet rodinných domů',
-          type: 'number',
-        },
-        {
-          name: 'energyClass',
-          title: 'Energetická třída',
-          type: 'string',
-        },
-      ],
+      name: 'heroVideo',
+      title: 'Hero - Video pozadí',
+      type: 'file',
+      options: {
+        accept: 'video/*'
+      },
     }),
     defineField({
-      name: 'aboutSection',
-      title: 'Sekce O projektu',
-      type: 'object',
-      fields: [
-        {
-          name: 'title',
-          title: 'Nadpis',
-          type: 'string',
-        },
-        {
-          name: 'content',
-          title: 'Text',
-          type: 'array',
-          of: [{ type: 'block' }],
-        },
-        {
-          name: 'videoUrl',
-          title: 'YouTube video URL',
-          type: 'url',
-        },
-      ],
+      name: 'heroBackgroundImage',
+      title: 'Hero - Záložní obrázek pozadí',
+      type: 'image',
+      description: 'Zobrazí se pokud video nebude dostupné',
+    }),
+
+    // About Section
+    defineField({
+      name: 'aboutBadge',
+      title: 'O projektu - Badge text',
+      type: 'string',
+      initialValue: 'O projektu',
     }),
     defineField({
-      name: 'benefitsSection',
-      title: 'Sekce Výhody projektu',
-      type: 'object',
-      fields: [
-        {
-          name: 'title',
-          title: 'Nadpis',
-          type: 'string',
-        },
-        {
-          name: 'benefits',
-          title: 'Výhody',
-          type: 'array',
-          of: [
-            {
-              type: 'object',
-              fields: [
-                {
-                  name: 'icon',
-                  title: 'Ikona',
-                  type: 'string',
-                  description: 'SVG kód ikony',
-                },
-                {
-                  name: 'title',
-                  title: 'Název',
-                  type: 'string',
-                },
-                {
-                  name: 'description',
-                  title: 'Popis',
-                  type: 'text',
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      name: 'aboutTitle',
+      title: 'O projektu - Nadpis',
+      type: 'string',
+    }),
+    defineField({
+      name: 'aboutDescription',
+      title: 'O projektu - Popis',
+      type: 'text',
+      rows: 5,
+    }),
+    defineField({
+      name: 'aboutImage',
+      title: 'O projektu - Obrázek',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'aboutStats',
+      title: 'O projektu - Statistiky',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'number', title: 'Číslo', type: 'string' },
+          { name: 'label', title: 'Popisek', type: 'string' },
+        ]
+      }],
+      validation: Rule => Rule.max(3),
+    }),
+
+    // Apartments Section
+    defineField({
+      name: 'apartmentsBadge',
+      title: 'Byty - Badge text',
+      type: 'string',
+      initialValue: 'Byty',
+    }),
+    defineField({
+      name: 'apartmentsTitle',
+      title: 'Byty - Nadpis',
+      type: 'string',
+    }),
+    defineField({
+      name: 'apartmentsDescription',
+      title: 'Byty - Popis',
+      type: 'text',
+      rows: 3,
+    }),
+
+    // Features Section
+    defineField({
+      name: 'featuresBadge',
+      title: 'Výhody - Badge text',
+      type: 'string',
+      initialValue: 'Výhody bydlení',
+    }),
+    defineField({
+      name: 'featuresTitle',
+      title: 'Výhody - Nadpis',
+      type: 'string',
+    }),
+    defineField({
+      name: 'featuresDescription',
+      title: 'Výhody - Popis',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'features',
+      title: 'Výhody - Seznam',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'title', title: 'Nadpis', type: 'string' },
+          { name: 'description', title: 'Popis', type: 'text', rows: 3 },
+          { 
+            name: 'icon', 
+            title: 'Ikona', 
+            type: 'string',
+            options: {
+              list: [
+                { title: 'Checkmark', value: 'check' },
+                { title: 'Star', value: 'star' },
+                { title: 'Location', value: 'location' },
+                { title: 'Home', value: 'home' },
+              ]
+            }
+          },
+        ]
+      }],
+    }),
+
+    // Location Section
+    defineField({
+      name: 'locationBadge',
+      title: 'Lokalita - Badge text',
+      type: 'string',
+      initialValue: 'Lokalita',
+    }),
+    defineField({
+      name: 'locationTitle',
+      title: 'Lokalita - Nadpis',
+      type: 'string',
+    }),
+    defineField({
+      name: 'locationDescription',
+      title: 'Lokalita - Popis',
+      type: 'text',
+      rows: 5,
+    }),
+    defineField({
+      name: 'locationImage',
+      title: 'Lokalita - Obrázek',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'locationFeatures',
+      title: 'Lokalita - Vlastnosti',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'title', title: 'Nadpis', type: 'string' },
+          { name: 'description', title: 'Popis', type: 'text', rows: 2 },
+        ]
+      }],
+    }),
+
+    // Gallery Section
+    defineField({
+      name: 'galleryTitle',
+      title: 'Galerie - Nadpis',
+      type: 'string',
+    }),
+    defineField({
+      name: 'galleryDescription',
+      title: 'Galerie - Popis',
+      type: 'text',
+      rows: 2,
     }),
     defineField({
       name: 'galleryImages',
-      title: 'Galerie obrázků',
+      title: 'Galerie - Obrázky',
       type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-          fields: [
-            {
-              name: 'alt',
-              title: 'Alt text',
-              type: 'string',
-            },
-          ],
+      of: [{ 
+        type: 'image',
+        options: {
+          hotspot: true,
         },
-      ],
+        fields: [
+          {
+            name: 'alt',
+            title: 'Alt text',
+            type: 'string',
+          }
+        ]
+      }],
+    }),
+
+    // Contact Form Section
+    defineField({
+      name: 'contactBadge',
+      title: 'Kontakt - Badge text',
+      type: 'string',
+      initialValue: 'Kontaktujte nás',
+    }),
+    defineField({
+      name: 'contactTitle',
+      title: 'Kontakt - Nadpis',
+      type: 'string',
+    }),
+    defineField({
+      name: 'contactDescription',
+      title: 'Kontakt - Popis',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'contactEmail',
+      title: 'Kontakt - Email',
+      type: 'string',
+    }),
+
+    // Video Section
+    defineField({
+      name: 'videoBadge',
+      title: 'Video - Badge text',
+      type: 'string',
+      initialValue: 'Proč si vybrat tento projekt',
+    }),
+    defineField({
+      name: 'videoTitle',
+      title: 'Video - Nadpis',
+      type: 'string',
+    }),
+    defineField({
+      name: 'videoUrl',
+      title: 'Video - YouTube URL',
+      type: 'url',
+    }),
+    defineField({
+      name: 'videoFeatures',
+      title: 'Video - Vlastnosti',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'title', title: 'Nadpis', type: 'string' },
+          { name: 'description', title: 'Popis', type: 'text', rows: 3 },
+        ]
+      }],
     }),
   ],
   preview: {
     select: {
       title: 'heroTitle',
     },
+    prepare({ title }) {
+      return {
+        title: title || 'Úvodní stránka',
+        subtitle: 'Homepage obsah',
+      }
+    },
   },
 })
-
