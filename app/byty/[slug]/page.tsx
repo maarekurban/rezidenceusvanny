@@ -370,7 +370,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
               <div>
                 <h3 className="text-lg font-bold text-dark mb-4">Přehled ploch</h3>
                 <div className="space-y-2">
-                  {rooms.map((room) => (
+                  {rooms.map((room: any) => (
                     <div key={room.number} className="flex justify-between items-center py-2 border-b border-grey-200">
                       <div className="flex items-center gap-3">
                         <span className="text-sm font-mono text-grey-500">{room.number}</span>
