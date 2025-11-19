@@ -6,7 +6,6 @@ import { Container } from '@/components/Container'
 import { notFound, useRouter } from 'next/navigation'
 import { useState, use, useEffect } from 'react'
 import { client } from '@/sanity/lib/client'
-import { urlFor } from '@/sanity/lib/image'
 
 // Helper function to generate apartment slug
 const generateApartmentSlug = (building: string, number: string): string => {
@@ -490,17 +489,17 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
               </div>
 
               {/* Building Location - Single Image */}
-              {apartment.locationInArea && (
+              {apartment.locationInAreaUrl && (
                 <div>
                   <h3 className="text-base font-bold text-dark mb-3">Umístění v areálu</h3>
                   <a 
-                    href={urlFor(apartment.locationInArea).url()}
+                    href={apartment.locationInAreaUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block relative h-48 bg-white rounded overflow-hidden cursor-pointer group"
                   >
                     <Image
-                      src={urlFor(apartment.locationInArea).url()}
+                      src={apartment.locationInAreaUrl}
                       alt="Umístění v areálu"
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
