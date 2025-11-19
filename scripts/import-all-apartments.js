@@ -19,8 +19,8 @@ const client = createClient({
 const apartmentsFilePath = path.join(__dirname, '..', 'app', 'byty', '[slug]', 'page.tsx')
 const fileContent = fs.readFileSync(apartmentsFilePath, 'utf8')
 
-// Extrakce apartments array
-const match = fileContent.match(/const apartments = \[([\s\S]*?)\n\]/m)
+// Extrakce apartments array (hledáme apartmentsFallback)
+const match = fileContent.match(/const apartmentsFallback = \[([\s\S]*?)\n\]/m)
 if (!match) {
   console.error('❌ Nepodařilo se načíst data bytů z page.tsx')
   process.exit(1)
@@ -97,8 +97,8 @@ async function importAllApartments() {
         const outdoorSpaces = apt.outdoorSpaces && apt.outdoorSpaces.length > 0 ? apt.outdoorSpaces.map((space, idx) => ({
           _type: 'object',
           _key: `outdoor-${idx}`,
-          type: space.type.toLowerCase() === 'balkon' ? 'balcony' : 
-                space.type.toLowerCase() === 'terasa' ? 'terrace' : 'garden',
+          type: space.type.toLowerCase() === 'balkon' ? 'Balkon' : 
+                space.type.toLowerCase() === 'terasa' ? 'Terasa' : 'Zahrada',
           area: Number(space.area),
         })) : []
 

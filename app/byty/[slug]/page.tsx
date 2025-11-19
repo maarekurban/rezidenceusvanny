@@ -490,32 +490,34 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
               </div>
 
               {/* Building Location - Single Image */}
-              <div>
-                <h3 className="text-base font-bold text-dark mb-3">Umístění v areálu</h3>
-                <a 
-                  href="/images/zobrazeni_domu.png" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block relative h-48 bg-white rounded overflow-hidden cursor-pointer group"
-                >
-                  <Image
-                    src="/images/zobrazeni_domu.png"
-                    alt="Umístění v areálu"
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-all duration-300">
-                    <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                      <svg className="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                      </svg>
+              {apartment.locationInArea && (
+                <div>
+                  <h3 className="text-base font-bold text-dark mb-3">Umístění v areálu</h3>
+                  <a 
+                    href={urlForImage(apartment.locationInArea).url()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative h-48 bg-white rounded overflow-hidden cursor-pointer group"
+                  >
+                    <Image
+                      src={urlForImage(apartment.locationInArea).url()}
+                      alt="Umístění v areálu"
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/10 transition-all duration-300">
+                      <div className="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                        <svg className="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                        </svg>
+                      </div>
                     </div>
+                  </a>
+                  <div className="text-center mt-2">
+                    <p className="text-xs text-grey-500">Poloha bytu v areálu rezidence • {apartment.building}</p>
                   </div>
-                </a>
-                <div className="text-center mt-2">
-                  <p className="text-xs text-grey-500">Poloha bytu v areálu rezidence • {apartment.building}</p>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
