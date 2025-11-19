@@ -156,6 +156,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.optional(),
     }),
     defineField({
       name: 'heroImage',
@@ -164,6 +165,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.optional(),
     }),
     defineField({
       name: 'locationInArea',
@@ -172,6 +174,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.optional(),
     }),
   ],
   preview: {

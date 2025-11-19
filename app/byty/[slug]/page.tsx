@@ -75,6 +75,8 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
   const [apartment, setApartment] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(0)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
   const router = useRouter()
 
   // Fetch apartment from Sanity
@@ -174,10 +176,6 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
   // Use real rooms data from Excel or empty array for apartments without room data
   const rooms = apartment.rooms || []
   const pricePerSqm = Math.round(apartment.price / apartment.size)
-  
-  // Form submission state
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitMessage, setSubmitMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
