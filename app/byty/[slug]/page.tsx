@@ -409,7 +409,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                   <div className="flex justify-between">
                     <span className="text-grey-600">Venkovní prostory</span>
                     <span className="font-semibold text-dark">
-                      {formatNumber(apartment.outdoorSpaces.reduce((sum, space) => sum + space.area, 0))} m²
+                      {formatNumber(apartment.outdoorSpaces.reduce((sum: number, space: any) => sum + space.area, 0))} m²
                     </span>
                   </div>
                 )}
@@ -418,7 +418,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                   <span className="font-bold text-gold-primary text-lg">
                     {(() => {
                       const floorArea = apartment.floorArea || apartment.size
-                      const outdoorTotal = apartment.outdoorSpaces?.reduce((sum, space) => sum + space.area, 0) || 0
+                      const outdoorTotal = apartment.outdoorSpaces?.reduce((sum: number, space: any) => sum + space.area, 0) || 0
                       return formatNumber(floorArea + outdoorTotal)
                     })()} m²
                   </span>
