@@ -140,31 +140,31 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 bg-green-600/90 backdrop-blur-md rounded-full border border-green-400/30 mb-6 sm:mb-8 shadow-lg">
             <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-            <span className="text-white text-xs sm:text-sm font-semibold tracking-wide">III. Etapa v prodeji</span>
+            <span className="text-white text-xs sm:text-sm font-semibold tracking-wide">{pageData?.heroBadge || "III. Etapa v prodeji"}</span>
           </div>
 
           {/* Main Headline - Large & Bold */}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 leading-[1.1] tracking-tight max-w-5xl px-4">
-            Moderní bydlení<br />
-            <span className="text-gradient">v srdci UNESCO</span>
+            {pageData?.heroTitle || "Moderní bydlení"}<br />
+            <span className="text-gradient">{pageData?.heroTitleHighlight || "v srdci UNESCO"}</span>
           </h1>
 
           {/* Subtitle - Light Weight */}
           <p className="text-sm sm:text-base md:text-lg text-white/90 font-light max-w-2xl mb-8 sm:mb-10 md:mb-12 leading-relaxed px-6">
-            Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,<br className="hidden md:block" />
-            kde se moderní architektura setkává s bohatou historií
+            {pageData?.heroDescription || "Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,"}<br className="hidden md:block" />
+            {pageData?.heroDescriptionLine2 || "kde se moderní architektura setkává s bohatou historií"}
           </p>
 
           {/* CTA Buttons - Housify Style */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 px-4">
             <Link href="/byty">
               <button className="px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 bg-gold-primary hover:bg-gold-secondary text-white text-sm sm:text-base font-semibold rounded-xl sm:rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-xl w-full sm:w-auto">
-                Nabídka bytů
+                {pageData?.heroButton1Text || "Nabídka bytů"}
               </button>
             </Link>
             <a href="#unesco-zone">
               <button className="px-6 py-3 sm:px-7 sm:py-3.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm sm:text-base font-semibold rounded-xl sm:rounded-2xl border border-white/30 transition-all duration-300 w-full sm:w-auto">
-                O projektu
+                {pageData?.heroButton2Text || "O projektu"}
               </button>
             </a>
           </div>
@@ -172,18 +172,18 @@ export default function Home() {
           {/* Stats Bar - Minimal */}
           <div className="absolute bottom-8 sm:bottom-10 md:bottom-12 left-0 right-0 flex justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-16 px-4">
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">131</div>
-              <div className="text-xs sm:text-sm text-white/70 font-light">Bytů</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{pageData?.stat1Value || "131"}</div>
+              <div className="text-xs sm:text-sm text-white/70 font-light">{pageData?.stat1Label || "Bytů"}</div>
             </div>
             <div className="w-px h-8 sm:h-10 md:h-12 bg-white/20"></div>
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">14</div>
-              <div className="text-xs sm:text-sm text-white/70 font-light">Rodinných domů</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{pageData?.stat2Value || "14"}</div>
+              <div className="text-xs sm:text-sm text-white/70 font-light">{pageData?.stat2Label || "Rodinných domů"}</div>
             </div>
             <div className="w-px h-8 sm:h-10 md:h-12 bg-white/20"></div>
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">B</div>
-              <div className="text-xs sm:text-sm text-white/70 font-light">Energetická třída</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{pageData?.stat3Value || "B"}</div>
+              <div className="text-xs sm:text-sm text-white/70 font-light">{pageData?.stat3Label || "Energetická třída"}</div>
             </div>
           </div>
         </Container>
@@ -197,27 +197,27 @@ export default function Home() {
             <div className="space-y-8">
               <div>
                 <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em]">
-                  MĚSTO PAMÁTKY UNESCO
+                  {pageData?.aboutBadge || "MĚSTO PAMÁTKY UNESCO"}
                 </span>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mt-6 leading-[1.15] tracking-tight">
-                  Nechte se uchvátit{' '}
-                  <span className="text-gradient">krásou</span>
+                  {pageData?.aboutTitle || "Nechte se uchvátit"}{' '}
+                  <span className="text-gradient">{pageData?.aboutTitleHighlight || "krásou"}</span>
                   <br />
-                  Kutné Hory
+                  {pageData?.aboutTitleLine2 || "Kutné Hory"}
                 </h2>
               </div>
 
               <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light">
-                Město zapsané na Seznam světového kulturního dědictví UNESCO ve středověku označované za stříbrnou pokladnici českého království s malebným historickým centrem, vinicemi a celou řadou kaváren, cukráren a restaurací.
+                {pageData?.aboutParagraph1 || "Město zapsané na Seznam světového kulturního dědictví UNESCO ve středověku označované za stříbrnou pokladnici českého království s malebným historickým centrem, vinicemi a celou řadou kaváren, cukráren a restaurací."}
               </p>
 
               <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light">
-                Díky připojení Kutnohorska do integrovaného dopravního systému Prahy se do hlavního města pohodlně dostanete přímo z Kutné Hory v pracovních dnech i o víkendu.
+                {pageData?.aboutParagraph2 || "Díky připojení Kutnohorska do integrovaného dopravního systému Prahy se do hlavního města pohodlně dostanete přímo z Kutné Hory v pracovních dnech i o víkendu."}
               </p>
 
               <Link href="/byty">
                 <button className="inline-flex items-center gap-3 px-6 py-3 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
-                  Prohlédnout byty
+                  {pageData?.aboutButtonText || "Prohlédnout byty"}
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -228,7 +228,7 @@ export default function Home() {
             {/* Right: YouTube Video */}
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300" suppressHydrationWarning>
               <iframe
-                src="https://www.youtube.com/embed/VVlxe2bvtlg?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&loop=1&playlist=VVlxe2bvtlg"
+                src={pageData?.aboutVideoUrl || "https://www.youtube.com/embed/VVlxe2bvtlg?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&loop=1&playlist=VVlxe2bvtlg"}
                 title="Kutná Hora UNESCO"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -255,14 +255,13 @@ export default function Home() {
         <Container className="relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12 lg:mb-16">
             <span className="inline-block px-6 py-2.5 text-[10px] sm:text-xs md:text-sm text-white font-semibold uppercase tracking-[0.2em] bg-white/15 backdrop-blur-md rounded-full border border-white/20">
-              PRŮBĚH REALIZACE
+              {pageData?.stagesBadge || "PRŮBĚH REALIZACE"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mt-6 leading-[1.15] tracking-tight">
-              Tři etapy výstavby
+              {pageData?.stagesTitle || "Tři etapy výstavby"}
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-white/70 leading-[1.8] font-light mt-6">
-              Projekt je realizován ve třech etapách. První dvě jsou dokončeny,
-              třetí etapa je nyní v prodeji.
+              {pageData?.stagesDescription || "Projekt je realizován ve třech etapách. První dvě jsou dokončeny, třetí etapa je nyní v prodeji."}
             </p>
           </div>
 
@@ -395,13 +394,13 @@ export default function Home() {
         <Container>
           <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
             <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em] mb-4 block">
-              Exkluzivita čtvrti
+              {pageData?.qualityBadge || "Exkluzivita čtvrti"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-              Kvalitní bydlení v <span className="text-gradient">UNESCO</span> zóně
+              {pageData?.qualityTitle || "Kvalitní bydlení v"} <span className="text-gradient">{pageData?.qualityTitleHighlight || "UNESCO"}</span> {pageData?.qualityTitleEnd || "zóně"}
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light">
-              Hlavním cílem projektu Rezidence u sv. Anny je vytvoření moderního a dostupného domova ve městě, jehož historické centrum je zapsané na seznamu UNESCO. Umístění v klidné části města s dobrou dopravní dostupností do centra vytváří potenciál pro naplnění bytových potřeb i těch nejnáročnějších klientů.
+              {pageData?.qualityDescription || "Hlavním cílem projektu Rezidence u sv. Anny je vytvoření moderního a dostupného domova ve městě, jehož historické centrum je zapsané na seznamu UNESCO. Umístění v klidné části města s dobrou dopravní dostupností do centra vytváří potenciál pro naplnění bytových potřeb i těch nejnáročnějších klientů."}
             </p>
           </div>
 
@@ -450,32 +449,16 @@ export default function Home() {
 
           {/* Photo Carousel */}
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300">
-              <Image
-                src="/images/DSC02932.jpg"
-                alt="Rezidence U sv. Anny"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
-
-            <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300">
-              <Image
-                src="/images/DSC02745.jpg"
-                alt="Rezidence U sv. Anny"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
-
-            <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300">
-              <Image
-                src="/images/DJI_0548.jpg"
-                alt="Rezidence U sv. Anny"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-            </div>
+            {(pageData?.qualityImages || ["/images/DSC02932.jpg", "/images/DSC02745.jpg", "/images/DJI_0548.jpg", "/images/DSC02819.jpg", "/images/DSC02697.jpg", "/images/DSC02905.jpg"]).slice(0, 6).map((img: any, index: number) => (
+              <div key={index} className="relative h-64 md:h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300">
+                <Image
+                  src={img.asset ? urlFor(img).url() : img}
+                  alt="Rezidence U sv. Anny"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+            ))}
           </div>
         </Container>
       </section>
@@ -496,10 +479,10 @@ export default function Home() {
         <Container className="relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12 lg:mb-16">
             <span className="inline-block px-6 py-2.5 text-[10px] sm:text-xs md:text-sm text-white font-semibold uppercase tracking-[0.2em] bg-white/15 backdrop-blur-md rounded-full border border-white/20">
-              HLAVNÍ VÝHODY PROJEKTU
+              {pageData?.whyBuyBadge || "HLAVNÍ VÝHODY PROJEKTU"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mt-6 leading-[1.15] tracking-tight">
-              Proč si koupit byt<br />v naší <span className="text-gradient">rezidenci?</span>
+              {pageData?.whyBuyTitle || "Proč si koupit byt"}<br />{pageData?.whyBuyTitleLine2 || "v naší"} <span className="text-gradient">{pageData?.whyBuyTitleHighlight || "rezidenci?"}</span>
             </h2>
           </div>
 
@@ -612,13 +595,13 @@ export default function Home() {
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 md:mb-12 lg:mb-16">
             <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em]">
-              JAK TO FUNGUJE
+              {pageData?.purchaseBadge || "JAK TO FUNGUJE"}
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mt-6 leading-[1.15] tracking-tight">
-              Jak probíhá koupě bytu
+              {pageData?.purchaseTitle || "Jak probíhá koupě bytu"}
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light mt-6">
-              Proces koupě bytu rozdělen do jednoduchých kroků
+              {pageData?.purchaseDescription || "Proces koupě bytu rozdělen do jednoduchých kroků"}
             </p>
           </div>
 
@@ -689,14 +672,13 @@ export default function Home() {
             {/* Left: Text */}
             <div>
               <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em]">
-                DOKONČENÉ BYTY
+                {pageData?.galleryBadge || "DOKONČENÉ BYTY"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mt-6 leading-[1.15] tracking-tight">
-                Prohlédněte si <span className="text-gradient">naši práci</span>
+                {pageData?.galleryTitle || "Prohlédněte si"} <span className="text-gradient">{pageData?.galleryTitleHighlight || "naši práci"}</span>
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light mt-6 mb-8">
-                Vytvářelisme moderní bydlení s důrazem na kvalitu materiálů a detailní zpracování.
-                Podívejte se na dokončené byty z I. a II. etapy.
+                {pageData?.galleryDescription || "Vytvářelisme moderní bydlení s důrazem na kvalitu materiálů a detailní zpracování. Podívejte se na dokončené byty z I. a II. etapy."}
               </p>
               <Link href="/byty">
                 <button className="inline-flex items-center gap-3 px-6 py-3 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
@@ -931,19 +913,19 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold uppercase tracking-[0.2em] rounded-full mb-6">
-                Kontaktujte nás
+                {pageData?.contactFormBadge || "Kontaktujte nás"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 leading-[1.15] tracking-tight">
-                Máte zájem o byt ve III. etapě?
+                {pageData?.contactFormTitle || "Máte zájem o byt ve III. etapě?"}
               </h2>
               <p className="text-lg md:text-xl text-white/90 mb-4 leading-relaxed font-light">
-                Vyplňte kontaktní formulář a my se vám ozveme do 24 hodin
+                {pageData?.contactFormDescription || "Vyplňte kontaktní formulář a my se vám ozveme do 24 hodin"}
               </p>
               <div className="flex items-center justify-center gap-2 text-white/90">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="font-medium">info@rezidenceusvanny.cz</span>
+                <span className="font-medium">{pageData?.contactFormEmail || "info@rezidenceusvanny.cz"}</span>
               </div>
             </div>
 
