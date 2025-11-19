@@ -74,8 +74,6 @@ export default defineType({
       of: [
         {
           type: 'object',
-          name: 'room',
-          title: 'Místnost',
           fields: [
             {
               name: 'number',
@@ -116,8 +114,6 @@ export default defineType({
       of: [
         {
           type: 'object',
-          name: 'outdoorSpace',
-          title: 'Venkovní prostor',
           fields: [
             {
               name: 'type',

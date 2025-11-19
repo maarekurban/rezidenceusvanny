@@ -86,7 +86,6 @@ async function importAllApartments() {
 
         // Příprava místností (jen pokud existují)
         const rooms = apt.rooms && apt.rooms.length > 0 ? apt.rooms.map((room, idx) => ({
-          _type: 'object',
           _key: `room-${idx}`,
           number: String(room.number || idx + 1),
           name: String(room.name || ''),
@@ -95,7 +94,6 @@ async function importAllApartments() {
 
         // Příprava venkovních prostorů (jen pokud existují)
         const outdoorSpaces = apt.outdoorSpaces && apt.outdoorSpaces.length > 0 ? apt.outdoorSpaces.map((space, idx) => ({
-          _type: 'object',
           _key: `outdoor-${idx}`,
           type: space.type.toLowerCase() === 'balkon' ? 'balcony' : 
                 space.type.toLowerCase() === 'terasa' ? 'terrace' : 'garden',
