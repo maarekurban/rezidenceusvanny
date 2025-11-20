@@ -38,10 +38,6 @@ export default function DuleziteInformacePage() {
             financingOutro,
             paymentSchedule,
             faqItems,
-            ctaTitle,
-            ctaDescription,
-            ctaPhone,
-            ctaEmail,
             documentsBadge,
             documentsTitle,
             documentsTitleHighlight,
@@ -369,60 +365,6 @@ export default function DuleziteInformacePage() {
                 </div>
               );
             })}
-          </div>
-        </Container>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative py-24 md:py-32">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/DJI_0548.jpg"
-            alt="Areál rezidence"
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/70" />
-        </div>
-
-        <Container className="relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 leading-[1.15] tracking-tight">
-              {pageData?.ctaTitle || "Máte další"} <span className="text-gradient bg-gradient-to-r from-gold-light to-gold-primary bg-clip-text text-transparent">dotazy?</span>
-            </h2>
-            <p className="text-lg md:text-xl text-white/90 mb-10 leading-relaxed">
-              {pageData?.ctaDescription || "Rádi vám odpovíme na všechny vaše otázky a pomůžeme s výběrem vhodného bytu nebo domu."}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/kontakt">
-                <button className="px-8 py-4 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg">
-                  Kontaktovat nás
-                </button>
-              </Link>
-              <Link href="/byty">
-                <button className="px-8 py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-semibold rounded-2xl border border-white/30 transition-all duration-300">
-                  Prohlédnout byty
-                </button>
-              </Link>
-            </div>
-
-            <div className="mt-12 pt-8 border-t border-white/20">
-              <div className="flex flex-col sm:flex-row justify-center gap-8">
-                <a href={`tel:${pageData?.ctaPhone || '+420724218841'}`} className="flex items-center gap-3 text-white hover:text-white/80 transition-colors">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span className="font-semibold">{pageData?.ctaPhone || '+420 724 218 841'}</span>
-                </a>
-                <a href={`mailto:${pageData?.ctaEmail || 'info@rezidenceusvanny.cz'}`} className="flex items-center gap-3 text-white hover:text-white/80 transition-colors">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <span className="font-semibold">{pageData?.ctaEmail || 'info@rezidenceusvanny.cz'}</span>
-                </a>
-              </div>
-            </div>
           </div>
         </Container>
       </section>
