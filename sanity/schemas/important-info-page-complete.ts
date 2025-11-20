@@ -105,15 +105,11 @@ export default defineType({
     }),
     defineField({
       name: 'paymentScheduleTitle',
-      title: 'Platební kalendář - Hlavní nadpis (1. část)',
-      type: 'string',
-      initialValue: 'Splátkový',
-    }),
-    defineField({
-      name: 'paymentScheduleTitleHighlight',
-      title: 'Platební kalendář - Zvýrazněný text',
-      type: 'string',
-      initialValue: 'kalendář',
+      title: 'Platební kalendář - Hlavní nadpis',
+      type: 'text',
+      rows: 2,
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
+      initialValue: 'Splátkový <strong>kalendář</strong>',
     }),
     defineField({
       name: 'paymentScheduleDescription',
@@ -152,15 +148,11 @@ export default defineType({
     }),
     defineField({
       name: 'faqTitle',
-      title: 'FAQ - Hlavní nadpis (1. část)',
-      type: 'string',
-      initialValue: 'Nejčastější',
-    }),
-    defineField({
-      name: 'faqTitleHighlight',
-      title: 'FAQ - Zvýrazněný text',
-      type: 'string',
-      initialValue: 'dotazy',
+      title: 'FAQ - Hlavní nadpis',
+      type: 'text',
+      rows: 2,
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
+      initialValue: 'Nejčastější <strong>dotazy</strong>',
     }),
     defineField({
       name: 'faqDescription',

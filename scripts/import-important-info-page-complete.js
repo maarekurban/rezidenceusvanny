@@ -113,8 +113,7 @@ async function importImportantInfoPage() {
       
       // === PLATEBNÍ KALENDÁŘ ===
       paymentScheduleBadge: 'Flexibilní',
-      paymentScheduleTitle: 'Splátkový',
-      paymentScheduleTitleHighlight: 'kalendář',
+      paymentScheduleTitle: 'Splátkový <strong>kalendář</strong>',
       paymentScheduleDescription: 'Placení kupní ceny bytu probíhá postupně s tím, jak postupuje výstavba projektu. Po podpisu rezervační smlouvy podepisujete smlouvu o smlouvě budoucí kupní.',
       paymentSchedule: [
         {
@@ -157,8 +156,7 @@ async function importImportantInfoPage() {
       
       // === FAQ SECTION ===
       faqBadge: 'Máte otázky?',
-      faqTitle: 'Nejčastější',
-      faqTitleHighlight: 'dotazy',
+      faqTitle: 'Nejčastější <strong>dotazy</strong>',
       faqDescription: 'Ze zkušeností z prvních dvou etap víme, co klienty nejčastěji zajímá. Pokud odpověď na otázku nenajdete, neváhejte kontaktovat náš prodejní tým.',
       faqItems: [
         {

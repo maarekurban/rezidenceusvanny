@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
+import { parseTitle } from '@/lib/parseTitle'
 
 export default function DuleziteInformacePage() {
   // Form submission state
@@ -38,12 +39,10 @@ export default function DuleziteInformacePage() {
             financingOutro,
             paymentScheduleBadge,
             paymentScheduleTitle,
-            paymentScheduleTitleHighlight,
             paymentScheduleDescription,
             paymentSchedule,
             faqBadge,
             faqTitle,
-            faqTitleHighlight,
             faqDescription,
             faqItems,
             documentsBadge,
@@ -213,7 +212,7 @@ export default function DuleziteInformacePage() {
                 {pageData?.paymentScheduleBadge || "Flexibilní"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-                {pageData?.paymentScheduleTitle || "Splátkový"} <span className="text-gradient">{pageData?.paymentScheduleTitleHighlight || "kalendář"}</span>
+                {parseTitle(pageData?.paymentScheduleTitle || "Splátkový <strong>kalendář</strong>")}
               </h2>
               <p className="text-base md:text-lg text-grey-600 leading-relaxed max-w-3xl mx-auto">
                 {pageData?.paymentScheduleDescription || "Placení kupní ceny bytu probíhá postupně s tím, jak postupuje výstavba projektu. Po podpisu rezervační smlouvy podepisujete smlouvu o smlouvě budoucí kupní."}
@@ -261,7 +260,7 @@ export default function DuleziteInformacePage() {
                 {pageData?.faqBadge || "Máte otázky?"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-                {pageData?.faqTitle || "Nejčastější"} <span className="text-gradient">{pageData?.faqTitleHighlight || "dotazy"}</span>
+                {parseTitle(pageData?.faqTitle || "Nejčastější <strong>dotazy</strong>")}
               </h2>
               <p className="text-base md:text-lg text-grey-600 leading-relaxed">
                 {pageData?.faqDescription || "Ze zkušeností z prvních dvou etap víme, co klienty nejčastěji zajímá. Pokud odpověď na otázku nenajdete, neváhejte kontaktovat náš prodejní tým."}
