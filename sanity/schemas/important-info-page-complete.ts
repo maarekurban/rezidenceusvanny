@@ -96,6 +96,75 @@ export default defineType({
       description: 'Poslední odstavec o financování',
     }),
     
+    // === PLATEBNÍ KALENDÁŘ SECTION ===
+    defineField({
+      name: 'paymentSchedule',
+      title: 'Platební kalendář - Splátky',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'step', title: 'Krok', type: 'string', description: 'Např. "Záloha", "1. platba"', validation: Rule => Rule.required() },
+          { name: 'amount', title: 'Částka', type: 'string', description: 'Např. "100 000 Kč", "15%"', validation: Rule => Rule.required() },
+          { name: 'description', title: 'Popis', type: 'text', rows: 2, validation: Rule => Rule.required() },
+        ],
+        preview: {
+          select: {
+            title: 'step',
+            subtitle: 'amount'
+          }
+        }
+      }],
+      description: '6 plateb (Záloha + 5 plateb)',
+    }),
+    
+    // === FAQ SECTION ===
+    defineField({
+      name: 'faqItems',
+      title: 'FAQ - Často kladené otázky',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'question', title: 'Otázka', type: 'string', validation: Rule => Rule.required() },
+          { name: 'answer', title: 'Odpověď', type: 'text', rows: 4, validation: Rule => Rule.required() },
+        ],
+        preview: {
+          select: {
+            title: 'question'
+          }
+        }
+      }],
+      description: '8 nejčastějších dotazů',
+    }),
+    
+    // === CTA SECTION ===
+    defineField({
+      name: 'ctaTitle',
+      title: 'CTA - Hlavní nadpis',
+      type: 'string',
+      initialValue: 'Máte další dotazy?',
+    }),
+    defineField({
+      name: 'ctaDescription',
+      title: 'CTA - Popis',
+      type: 'text',
+      rows: 1,
+      initialValue: 'Rádi vám odpovíme na všechny vaše otázky a pomůžeme s výběrem vhodného bytu nebo domu.',
+    }),
+    defineField({
+      name: 'ctaPhone',
+      title: 'CTA - Telefon',
+      type: 'string',
+      initialValue: '+420 724 218 841',
+    }),
+    defineField({
+      name: 'ctaEmail',
+      title: 'CTA - Email',
+      type: 'string',
+      initialValue: 'info@rezidenceusvanny.cz',
+    }),
+    
     // === DOKUMENTY SECTION ===
     defineField({
       name: 'documentsBadge',
@@ -187,4 +256,5 @@ export default defineType({
     },
   },
 })
+
 

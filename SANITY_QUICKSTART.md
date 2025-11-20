@@ -160,3 +160,4 @@ npm run dev
 
 Pro více informací viz [SANITY_SETUP.md](./SANITY_SETUP.md)
 
+

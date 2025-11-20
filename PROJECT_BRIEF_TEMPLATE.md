@@ -381,3 +381,4 @@ _______________________________________________
 
 **🚀 Díky tomuto briefinhu bude vývoj rychlejší, levnější a bez překvapení!**
 
+

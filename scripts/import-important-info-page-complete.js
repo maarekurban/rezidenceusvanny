@@ -111,6 +111,96 @@ async function importImportantInfoPage() {
       ],
       financingOutro: 'Pokud máte zájem o více informací ohledně financování, neváhejte nás kontaktovat. Rádi vám poskytneme nezávaznou konzultaci a pomůžeme najít nejvhodnější řešení pro váš rozpočet.',
       
+      // === PLATEBNÍ KALENDÁŘ ===
+      paymentSchedule: [
+        {
+          _key: 'payment1',
+          step: 'Záloha',
+          amount: '100 000 Kč',
+          description: 'Rezervační záloha do 10 dnů po podpisu rezervační smlouvy.',
+        },
+        {
+          _key: 'payment2',
+          step: '1. platba',
+          amount: '15%',
+          description: '15 % kupní ceny do 10 dnů od podpisu smlouvy o smlouvě budoucí.',
+        },
+        {
+          _key: 'payment3',
+          step: '2. platba',
+          amount: '30%',
+          description: '30 % kupní ceny po dokončení hrubé stavby.',
+        },
+        {
+          _key: 'payment4',
+          step: '3. platba',
+          amount: '20%',
+          description: '20 % kupní ceny po dokončení hrubých instalací a výplní otvorů mimo prostory interiéru.',
+        },
+        {
+          _key: 'payment5',
+          step: '4. platba',
+          amount: '20%',
+          description: '20 % kupní ceny po dokončení fasády, omítek a podlah bez finální vrstvy (splatnost cca 14 měsíců od zahájení výstavby).',
+        },
+        {
+          _key: 'payment6',
+          step: '5. platba',
+          amount: '15%',
+          description: '15 % kupní ceny po kolaudaci a změně zápisu převáděné jednotky v katastru nemovitostí z rozestavěné na dokončenou.',
+        },
+      ],
+      
+      // === FAQ SECTION ===
+      faqItems: [
+        {
+          _key: 'faq1',
+          question: 'Co dělat v případě zájmu o koupi nemovitosti v projektu?',
+          answer: 'Kontaktním fomulářem, mailem nebo telefonicky nám oznámíte zájem o vybranou nemovitost. Ověříme její dostupnost, sdělíme Vám veškeré důležité informace a v případě přetrvávajícího zájmu připravíme návrhy smluv, které Vám následně zašleme k odsouhlasení do emailu. V případě zájmu není problém domluvit se na úvodní, osobní schůzce přímo v Kutné Hoře, Kolíně, nebo v Praze.',
+        },
+        {
+          _key: 'faq2',
+          question: 'Pomůžete mi s financováním?',
+          answer: 'Financování můžete řešit po vlastní ose nebo ve spolupráci s námi doporučenými hypotečními specialisty. Pokud spolupracujete s nimi, je proces jednodušší a rychlejší. Získáte také zvýhodněné úrokové sazby a odhady zdarma v bankách, kde je projekt schválený.',
+        },
+        {
+          _key: 'faq3',
+          question: 'Jaká je energetická náročnost budov?',
+          answer: 'Novostavby jsou koncipovány jako nízkoenergetické a spadají do energetické třídy B. Díky tomu zaplatíte výrazně méně na platbách za energie. Průkaz energetické náročnosti je ke stažení v sekci Užitečné dokumenty.',
+        },
+        {
+          _key: 'faq4',
+          question: 'Je možné si k bytu koupit více parkovacích míst?',
+          answer: 'Ke každému bytu je zatím možnost zakoupit pouze jedno vyhrazené parkovací stání. Pokud budete mít zájem o více míst, dejte nám vědět a zkusíme vymyslet individuální řešení.',
+        },
+        {
+          _key: 'faq5',
+          question: 'Co znamená styl Shell & core?',
+          answer: 'Shell & core, také známý jako Shell and core je způsob výstavby prostor, kde se prostory ponechají v základní úpravě, které si budoucí majitel zařídí dle svého přání sám či s pomocí architekta. Vychází z anglického shell – plášť, fasáda a core – jádro, u staveb struktura a vertikální komunikace.',
+        },
+        {
+          _key: 'faq6',
+          question: 'Jsou možné klientské změny?',
+          answer: 'Ano. Klientské změny je možné řešit v průběhu výstavby. Při podpisu smlouvy dostanete zásady pro provedení klientských změn.',
+        },
+        {
+          _key: 'faq7',
+          question: 'Jaká je dopravní dostupnost do Prahy?',
+          answer: 'Hned u rezidenční čtvrti se nachází frekventovaná autobusová zastávka, odkud se dostanete na vlakové nádraží. Vlakový přímý spoj jede na Hlavní nádraží v Praze 58 min. Autem se dostanete na kraj Prahy za 51 minut do centra Prahy za cca 1 hodinu a 8 minut, záleží na dopravní situaci. Díky připojení Kutnohorska do integrovaného dopravního systému Prahy se do hlavního města pohodlně dostanete v pracovních dnech i o víkendu.',
+        },
+        {
+          _key: 'faq8',
+          question: 'Kutná hora je na seznamu UNESCO, nebude mě rušit přehnaný turistický ruch?',
+          answer: 'Vzhledem k umístění projektu na kraji města u přírody s dobrou dopravní dostupností do centra určitě nikoliv. Naopak díky turistickému ruchu je velký tlak na poskytování kvalitních služeb, z kterého profitují i místní rezidenti.',
+        },
+      ],
+      
+      // === CTA SECTION ===
+      ctaTitle: 'Máte další dotazy?',
+      ctaDescription: 'Rádi vám odpovíme na všechny vaše otázky a pomůžeme s výběrem vhodného bytu nebo domu.',
+      ctaPhone: '+420 724 218 841',
+      ctaEmail: 'info@rezidenceusvanny.cz',
+      
       // === DOKUMENTY SECTION ===
       documentsBadge: 'Dokumentace',
       documentsTitle: 'Užitečné',
@@ -140,6 +230,9 @@ async function importImportantInfoPage() {
     console.log('\n📝 Importované sekce:')
     console.log('   ✅ Hero (badge, nadpis, popis, obrázek)')
     console.log('   ✅ Financování (badge, nadpis, úvod, 4 karty, závěr)')
+    console.log('   ✅ Platební kalendář (6 plateb: Záloha + 5 splátek)')
+    console.log('   ✅ FAQ (8 otázek a odpovědí)')
+    console.log('   ✅ CTA (nadpis, popis, telefon, email)')
     console.log('   ✅ Dokumenty (badge, nadpis, 5 PDF, obrázek pozadí)')
     console.log('   ✅ Kontakt formulář (badge, nadpis, popis, email)')
     console.log('\n💡 Nyní můžeš editovat všechny texty a dokumenty v Sanity Studio!')
@@ -153,4 +246,5 @@ async function importImportantInfoPage() {
 
 // Spuštění
 importImportantInfoPage()
+
 

@@ -176,3 +176,4 @@ Emaily by měly fungovat! 🚀
 - Resend Dashboard: https://resend.com/emails
 - Vercel Logs: Vercel Dashboard → Projekt → Runtime Logs
 
+

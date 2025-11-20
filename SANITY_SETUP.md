@@ -172,3 +172,4 @@ V Sanity dashboardu:
 - [Next.js + Sanity](https://www.sanity.io/docs/next)
 - [GROQ Query Language](https://www.sanity.io/docs/groq)
 
+

@@ -981,3 +981,4 @@ Pokud jsi dočetl až sem, máš vše, co potřebuješ pro úspěšný projekt!
 *Vytvořeno na základě reálného projektu Rezidence U sv. Anny*
 *Všechny chyby, řešení a best practices ověřeny v praxi*
 
+

@@ -7,3 +7,4 @@ export const client = createClient({
   useCdn: false, // Set to true in production for better performance
 })
 
+

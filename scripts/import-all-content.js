@@ -43,3 +43,4 @@ console.log('\n🎨 Design webu zůstává BEZE ZMĚNY!')
 console.log('   Další krok: Propojení frontendu se Sanity (opatrně)')
 console.log('='.repeat(70))
 
+
