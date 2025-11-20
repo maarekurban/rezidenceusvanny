@@ -36,7 +36,15 @@ export default function DuleziteInformacePage() {
             financingIntro,
             financingCards,
             financingOutro,
+            paymentScheduleBadge,
+            paymentScheduleTitle,
+            paymentScheduleTitleHighlight,
+            paymentScheduleDescription,
             paymentSchedule,
+            faqBadge,
+            faqTitle,
+            faqTitleHighlight,
+            faqDescription,
             faqItems,
             documentsBadge,
             documentsTitle,
@@ -202,13 +210,13 @@ export default function DuleziteInformacePage() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <span className="text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em] mb-4 block">
-                Flexibilní
+                {pageData?.paymentScheduleBadge || "Flexibilní"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-                Splátkový <span className="text-gradient">kalendář</span>
+                {pageData?.paymentScheduleTitle || "Splátkový"} <span className="text-gradient">{pageData?.paymentScheduleTitleHighlight || "kalendář"}</span>
               </h2>
               <p className="text-base md:text-lg text-grey-600 leading-relaxed max-w-3xl mx-auto">
-                Placení kupní ceny bytu probíhá postupně s tím, jak postupuje výstavba projektu. Po podpisu rezervační smlouvy podepisujete smlouvu o smlouvě budoucí kupní.
+                {pageData?.paymentScheduleDescription || "Placení kupní ceny bytu probíhá postupně s tím, jak postupuje výstavba projektu. Po podpisu rezervační smlouvy podepisujete smlouvu o smlouvě budoucí kupní."}
               </p>
             </div>
 
@@ -250,13 +258,13 @@ export default function DuleziteInformacePage() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <span className="text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em] mb-4 block">
-                Máte otázky?
+                {pageData?.faqBadge || "Máte otázky?"}
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-                Nejčastější <span className="text-gradient">dotazy</span>
+                {pageData?.faqTitle || "Nejčastější"} <span className="text-gradient">{pageData?.faqTitleHighlight || "dotazy"}</span>
               </h2>
               <p className="text-base md:text-lg text-grey-600 leading-relaxed">
-                Ze zkušeností z prvních dvou etap víme, co klienty nejčastěji zajímá. Pokud odpověď na otázku nenajdete, neváhejte kontaktovat náš prodejní tým.
+                {pageData?.faqDescription || "Ze zkušeností z prvních dvou etap víme, co klienty nejčastěji zajímá. Pokud odpověď na otázku nenajdete, neváhejte kontaktovat náš prodejní tým."}
               </p>
             </div>
 

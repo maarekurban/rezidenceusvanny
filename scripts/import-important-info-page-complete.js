@@ -112,6 +112,10 @@ async function importImportantInfoPage() {
       financingOutro: 'Pokud máte zájem o více informací ohledně financování, neváhejte nás kontaktovat. Rádi vám poskytneme nezávaznou konzultaci a pomůžeme najít nejvhodnější řešení pro váš rozpočet.',
       
       // === PLATEBNÍ KALENDÁŘ ===
+      paymentScheduleBadge: 'Flexibilní',
+      paymentScheduleTitle: 'Splátkový',
+      paymentScheduleTitleHighlight: 'kalendář',
+      paymentScheduleDescription: 'Placení kupní ceny bytu probíhá postupně s tím, jak postupuje výstavba projektu. Po podpisu rezervační smlouvy podepisujete smlouvu o smlouvě budoucí kupní.',
       paymentSchedule: [
         {
           _key: 'payment1',
@@ -152,6 +156,10 @@ async function importImportantInfoPage() {
       ],
       
       // === FAQ SECTION ===
+      faqBadge: 'Máte otázky?',
+      faqTitle: 'Nejčastější',
+      faqTitleHighlight: 'dotazy',
+      faqDescription: 'Ze zkušeností z prvních dvou etap víme, co klienty nejčastěji zajímá. Pokud odpověď na otázku nenajdete, neváhejte kontaktovat náš prodejní tým.',
       faqItems: [
         {
           _key: 'faq1',
@@ -195,12 +203,6 @@ async function importImportantInfoPage() {
         },
       ],
       
-      // === CTA SECTION ===
-      ctaTitle: 'Máte další dotazy?',
-      ctaDescription: 'Rádi vám odpovíme na všechny vaše otázky a pomůžeme s výběrem vhodného bytu nebo domu.',
-      ctaPhone: '+420 724 218 841',
-      ctaEmail: 'info@rezidenceusvanny.cz',
-      
       // === DOKUMENTY SECTION ===
       documentsBadge: 'Dokumentace',
       documentsTitle: 'Užitečné',
@@ -230,9 +232,8 @@ async function importImportantInfoPage() {
     console.log('\n📝 Importované sekce:')
     console.log('   ✅ Hero (badge, nadpis, popis, obrázek)')
     console.log('   ✅ Financování (badge, nadpis, úvod, 4 karty, závěr)')
-    console.log('   ✅ Platební kalendář (6 plateb: Záloha + 5 splátek)')
-    console.log('   ✅ FAQ (8 otázek a odpovědí)')
-    console.log('   ✅ CTA (nadpis, popis, telefon, email)')
+    console.log('   ✅ Platební kalendář (badge, nadpis, popis, 6 plateb)')
+    console.log('   ✅ FAQ (badge, nadpis, popis, 8 otázek)')
     console.log('   ✅ Dokumenty (badge, nadpis, 5 PDF, obrázek pozadí)')
     console.log('   ✅ Kontakt formulář (badge, nadpis, popis, email)')
     console.log('\n💡 Nyní můžeš editovat všechny texty a dokumenty v Sanity Studio!')

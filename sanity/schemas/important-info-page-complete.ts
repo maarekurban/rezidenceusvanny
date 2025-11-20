@@ -98,6 +98,31 @@ export default defineType({
     
     // === PLATEBNÍ KALENDÁŘ SECTION ===
     defineField({
+      name: 'paymentScheduleBadge',
+      title: 'Platební kalendář - Badge text',
+      type: 'string',
+      initialValue: 'Flexibilní',
+    }),
+    defineField({
+      name: 'paymentScheduleTitle',
+      title: 'Platební kalendář - Hlavní nadpis (1. část)',
+      type: 'string',
+      initialValue: 'Splátkový',
+    }),
+    defineField({
+      name: 'paymentScheduleTitleHighlight',
+      title: 'Platební kalendář - Zvýrazněný text',
+      type: 'string',
+      initialValue: 'kalendář',
+    }),
+    defineField({
+      name: 'paymentScheduleDescription',
+      title: 'Platební kalendář - Popis',
+      type: 'text',
+      rows: 2,
+      initialValue: 'Placení kupní ceny bytu probíhá postupně s tím, jak postupuje výstavba projektu. Po podpisu rezervační smlouvy podepisujete smlouvu o smlouvě budoucí kupní.',
+    }),
+    defineField({
       name: 'paymentSchedule',
       title: 'Platební kalendář - Splátky',
       type: 'array',
@@ -120,8 +145,33 @@ export default defineType({
     
     // === FAQ SECTION ===
     defineField({
+      name: 'faqBadge',
+      title: 'FAQ - Badge text',
+      type: 'string',
+      initialValue: 'Máte otázky?',
+    }),
+    defineField({
+      name: 'faqTitle',
+      title: 'FAQ - Hlavní nadpis (1. část)',
+      type: 'string',
+      initialValue: 'Nejčastější',
+    }),
+    defineField({
+      name: 'faqTitleHighlight',
+      title: 'FAQ - Zvýrazněný text',
+      type: 'string',
+      initialValue: 'dotazy',
+    }),
+    defineField({
+      name: 'faqDescription',
+      title: 'FAQ - Popis',
+      type: 'text',
+      rows: 2,
+      initialValue: 'Ze zkušeností z prvních dvou etap víme, co klienty nejčastěji zajímá. Pokud odpověď na otázku nenajdete, neváhejte kontaktovat náš prodejní tým.',
+    }),
+    defineField({
       name: 'faqItems',
-      title: 'FAQ - Často kladené otázky',
+      title: 'FAQ - Otázky a odpovědi',
       type: 'array',
       of: [{
         type: 'object',
