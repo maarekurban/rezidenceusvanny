@@ -24,8 +24,8 @@ async function importHomepageComplete() {
       
       // === HERO SECTION ===
       heroTitle: 'Moderní bydlení\n<strong>v srdci UNESCO</strong>',
-      heroSubtitle: 'Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,\nkde se moderní architektura setkává s bohatou historií',
-      heroBadgeText: 'III. Etapa v prodeji',
+      heroBadge: 'III. Etapa v prodeji',
+      heroDescription: 'Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,\nkde se moderní architektura setkává s bohatou historií',
       heroStats: [
         { _key: 'stat1', number: '131', label: 'Bytů' },
         { _key: 'stat2', number: '14', label: 'Rodinných domů' },

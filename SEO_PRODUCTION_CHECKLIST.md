@@ -180,3 +180,4 @@ Doporučená velikost: 1200x630 px
 **Po dokončení všech kroků je web připravený pro produkci!** 🎉
 
 
+

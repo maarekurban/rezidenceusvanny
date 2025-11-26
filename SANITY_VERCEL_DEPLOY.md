@@ -163,3 +163,4 @@ export const revalidate = 60 // Revalidovat každých 60 sekund
 **🎉 Po nastavení CORS a Environment Variables bude Studio plně funkční na Vercelu!**
 
 
+

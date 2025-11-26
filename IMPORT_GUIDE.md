@@ -190,3 +190,4 @@ Po úspěšném importu:
 **🎉 Import je připravený! Stačí spustit příkaz a všechno se nahraje automaticky.**
 
 
+

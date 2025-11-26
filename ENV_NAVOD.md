@@ -229,3 +229,4 @@ npm run dev
 **Pokud máš jakékoliv problémy, napiš mi!** 🙂
 
 
+

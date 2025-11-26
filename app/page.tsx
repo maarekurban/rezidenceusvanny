@@ -23,7 +23,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPageData = async () => {
       try {
-        const data = await client.fetch(`*[_type == "homepageComplete"][0]`)
+        const data = await client.fetch(`*[_type == "homepageComplete"][0]`, {}, { cache: 'no-store' })
         setPageData(data)
       } catch (error) {
         console.error('Chyba při načítání dat ze Sanity:', error)
@@ -141,8 +141,17 @@ export default function Home() {
 
           {/* Subtitle - Light Weight */}
           <p className="text-sm sm:text-base md:text-lg text-white/90 font-light max-w-2xl mb-8 sm:mb-10 md:mb-12 leading-relaxed px-6">
-            {pageData?.heroDescription || "Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,"}<br className="hidden md:block" />
-            {pageData?.heroDescriptionLine2 || "kde se moderní architektura setkává s bohatou historií"}
+            {pageData?.heroDescription?.split('\n').map((line: string, i: number) => (
+              <span key={i}>
+                {line}
+                {i < pageData.heroDescription.split('\n').length - 1 && <br />}
+              </span>
+            )) || (
+              <>
+                Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,<br className="hidden md:block" />
+                kde se moderní architektura setkává s bohatou historií
+              </>
+            )}
           </p>
 
           {/* CTA Buttons - Housify Style */}

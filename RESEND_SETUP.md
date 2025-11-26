@@ -177,3 +177,4 @@ Emaily by měly fungovat! 🚀
 - Vercel Logs: Vercel Dashboard → Projekt → Runtime Logs
 
 
+

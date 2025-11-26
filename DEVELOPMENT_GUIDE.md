@@ -982,3 +982,4 @@ Pokud jsi dočetl až sem, máš vše, co potřebuješ pro úspěšný projekt!
 *Všechny chyby, řešení a best practices ověřeny v praxi*
 
 
+

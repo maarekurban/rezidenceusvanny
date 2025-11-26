@@ -40,7 +40,7 @@ export default function KontaktPage() {
             asset->
           },
           ctaBackgroundImage
-        }`)
+        }`, {}, { cache: 'no-store' })
         setPageData(data)
       } catch (error) {
         console.error('Chyba při načítání dat ze Sanity:', error)

@@ -4,179 +4,71 @@ export default defineType({
   name: 'homepageComplete',
   title: 'Homepage - Úvodní stránka',
   type: 'document',
-  
-  // 🎨 PREVIEW - Náhled v seznamu dokumentů
-  preview: {
-    select: {
-      title: 'heroTitle',
-      media: 'heroImage'
-    },
-    prepare({ title, media }) {
-      return {
-        title: title || 'Homepage (bez nadpisu)',
-        subtitle: '🏠 Úvodní stránka webu',
-        media: media || undefined
-      }
-    }
-  },
-  
-  // 📑 FIELDSETS - Organizace polí do sekcí
-  fieldsets: [
-    {
-      name: 'hero',
-      title: '🎬 Hero Section',
-      description: 'Úvodní obrazovka s velkým videem nebo obrázkem na pozadí',
-      options: { 
-        collapsible: true,   // Lze sbalit
-        collapsed: false     // Defaultně rozbalené
-      }
-    },
-    {
-      name: 'about',
-      title: '📖 O Projektu',
-      description: 'UNESCO sekce',
-      options: { collapsible: true, collapsed: true }
-    },
-    // Další sekce zůstávají zatím beze změny...
-  ],
-  
   fields: [
-    // ========================================
-    // 🎬 HERO SECTION - BEST PRACTICES
-    // ========================================
-    defineField({
-      name: 'heroBadge',
-      title: 'Badge text',
-      type: 'string',
-      fieldset: 'hero',
-      initialValue: 'III. Etapa v prodeji',
-      placeholder: 'III. Etapa v prodeji',
-      description: '💚 Malý text v zelené bublině s červenou tečkou (vlevo nahoře)',
-      validation: Rule => Rule.max(50).warning('Doporučeno max 50 znaků')
-    }),
-    
+    // === HERO SECTION ===
     defineField({
       name: 'heroTitle',
-      title: 'Hlavní nadpis',
+      title: 'Hero - Hlavní nadpis',
+      description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'text',
       rows: 2,
-      fieldset: 'hero',
-      description: '✨ Použij <strong>text</strong> pro zvýraznění zlatou barvou. Použij \\n pro nový řádek.',
-      placeholder: 'Moderní bydlení\\n<strong>v srdci UNESCO</strong>',
-      validation: Rule => Rule.required()
-        .max(100)
-        .error('Nadpis je povinný a nesmí být delší než 100 znaků')
+      validation: Rule => Rule.required(),
     }),
-    
+    defineField({
+      name: 'heroBadge',
+      title: 'Hero - Badge text',
+      type: 'string',
+      initialValue: 'III. Etapa v prodeji',
+    }),
     defineField({
       name: 'heroDescription',
-      title: 'Popis pod nadpisem',
+      title: 'Hero - Popis',
       type: 'text',
       rows: 3,
-      fieldset: 'hero',
-      description: '📝 Krátký popis. Použij \\n pro nový řádek (automaticky se vytvoří <br> na webu)',
-      placeholder: 'Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,\\nkde se moderní architektura setkává s bohatou historií',
-      validation: Rule => Rule.max(300).warning('Doporučeno max 300 znaků pro lepší UX')
+      description: 'Víceřádkový popis pod hlavním nadpisem',
     }),
-    
     defineField({
       name: 'heroImage',
-      title: 'Background obrázek',
+      title: 'Hero - Background obrázek',
       type: 'image',
-      fieldset: 'hero',
-      description: '🖼️ Background obrázek místo videa. Doporučená velikost: 1920x1080px (Full HD)',
+      description: 'Pokud není vyplněno, použije se video',
       options: {
-        hotspot: true,  // Umožňuje vybrat důležitou část pro crop
-        metadata: ['lqip', 'palette']  // Low Quality Image Placeholder pro rychlé načtení
+        hotspot: true,
       },
-      // Alt text pro SEO a accessibility
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alt text',
-          description: '♿ Popis obrázku pro nevidomé a SEO (povinný)',
-          placeholder: 'Moderní rezidence v Kutné Hoře',
-          validation: Rule => Rule.custom((alt, context) => {
-            const parent = context.parent as any
-            // Alt je povinný pouze pokud je obrázek nahrán
-            if (parent?.asset && !alt) {
-              return 'Alt text je povinný pro SEO a accessibility'
-            }
-            return true
-          })
-        }
-      ]
     }),
-    
     defineField({
       name: 'heroVideo',
-      title: 'Background video (MP4)',
+      title: 'Hero - Video pozadí (MP4)',
       type: 'file',
-      fieldset: 'hero',
-      description: '🎥 Video na pozadí (zobrazí se pouze pokud není vyplněn heroImage). Max 50MB, doporučeno 10-20MB.',
       options: {
         accept: 'video/mp4'
-      }
+      },
     }),
-    
     defineField({
       name: 'heroStats',
-      title: 'Statistiky (3 položky)',
+      title: 'Hero - Statistiky',
       type: 'array',
-      fieldset: 'hero',
-      description: '📊 3 čísla s popisky zobrazené pod popisem (např. "131 Bytů")',
       of: [{
         type: 'object',
-        name: 'stat',
-        title: 'Statistika',
         fields: [
-          { 
-            name: 'number', 
-            title: 'Číslo', 
-            type: 'string',
-            placeholder: '131',
-            description: 'Číslo nebo písmeno (např. "131", "14", "B")',
-            validation: Rule => Rule.required().max(10)
-          },
-          { 
-            name: 'label', 
-            title: 'Popisek', 
-            type: 'string',
-            placeholder: 'Bytů',
-            description: 'Text pod číslem (např. "Bytů", "Rodinných domů")',
-            validation: Rule => Rule.required().max(30)
-          },
+          { name: 'number', title: 'Číslo', type: 'string', validation: Rule => Rule.required() },
+          { name: 'label', title: 'Popisek', type: 'string', validation: Rule => Rule.required() },
         ],
         preview: {
           select: {
-            number: 'number',
-            label: 'label'
-          },
-          prepare({ number, label }) {
-            return {
-              title: `${number || '?'}`,
-              subtitle: label || 'Bez popisku',
-              media: undefined
-            }
+            title: 'number',
+            subtitle: 'label'
           }
         }
       }],
-      validation: Rule => Rule.required()
-        .min(3)
-        .max(3)
-        .error('Je potřeba přesně 3 statistiky')
+      validation: Rule => Rule.max(3),
     }),
-
     
-    // ========================================
-    // 📖 O PROJEKTU (UNESCO) - Zatím beze změny
-    // ========================================
+    // === O PROJEKTU (UNESCO MĚSTO) ===
     defineField({
       name: 'aboutBadge',
       title: 'O projektu - Badge text',
       type: 'string',
-      fieldset: 'about',
       initialValue: 'MĚSTO PAMÁTKY UNESCO',
     }),
     defineField({
@@ -185,7 +77,6 @@ export default defineType({
       description: 'Použij <strong>text</strong> pro zvýraznění zlatou barvou',
       type: 'text',
       rows: 2,
-      fieldset: 'about',
     }),
     defineField({
       name: 'aboutDescription',
