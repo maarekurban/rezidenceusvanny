@@ -2,38 +2,34 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/Button';
 import { Container } from '@/components/Container';
 import { ParallaxSection } from '@/components/ParallaxSection';
-import { client } from '@/sanity/lib/client';
-import { urlFor } from '@/sanity/lib/image';
-import { parseTitle } from '@/lib/parseTitle';
+
+// Dummy parseTitle - Sanity odstraněno
+const parseTitle = (title: string | null | undefined) => {
+  if (!title) return null;
+  // Nahrazujeme <strong> tagy a \n
+  const parts = title.split(/(<strong>.*?<\/strong>)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('<strong>')) {
+      const text = part.replace(/<\/?strong>/g, '');
+      return <span key={i} className="text-gradient">{text.split('\n').map((line, j) => <span key={j}>{line}{j < text.split('\n').length - 1 && <br />}</span>)}</span>;
+    }
+    return part.split('\n').map((line, j) => <span key={`${i}-${j}`}>{line}{j < part.split('\n').length - 1 && <br />}</span>);
+  });
+};
 
 export default function Home() {
-  const [pageData, setPageData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  // Sanity odstraněno - používáme hardcoded data (fallbacky níže)
+  const pageData: any = null;
   
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   // Form submission state
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
-
-  useEffect(() => {
-    const fetchPageData = async () => {
-      try {
-        const data = await client.fetch(`*[_type == "homepageComplete"][0]`, {}, { cache: 'no-store' })
-        setPageData(data)
-      } catch (error) {
-        console.error('Chyba při načítání dat ze Sanity:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPageData()
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -246,7 +242,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src={pageData?.stagesBackgroundImage ? urlFor(pageData.stagesBackgroundImage).url() : "/images/DSC02932.jpg"}
+            src="/images/DSC02932.jpg"
             alt="Rezidence pozadí"
             fill
             className="object-cover"
@@ -458,7 +454,7 @@ export default function Home() {
             {(pageData?.qualityImages || ["/images/DSC02932.jpg", "/images/DSC02745.jpg", "/images/DJI_0548.jpg", "/images/DSC02819.jpg", "/images/DSC02697.jpg", "/images/DSC02905.jpg"]).slice(0, 6).map((img: any, index: number) => (
               <div key={index} className="relative h-64 md:h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300">
                 <Image
-                  src={img.asset ? urlFor(img).url() : img}
+                  src={img}
                   alt="Rezidence U sv. Anny"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -474,7 +470,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
-            src={pageData?.whyBuyBackgroundImage ? urlFor(pageData.whyBuyBackgroundImage).url() : "/images/zobrazeni_domu.png"}
+            src="/images/zobrazeni_domu.png"
             alt="Rezidence pozadí"
             fill
             className="object-cover"

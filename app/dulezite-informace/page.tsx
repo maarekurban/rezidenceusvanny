@@ -1,80 +1,33 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { client } from '@/sanity/lib/client'
-import { urlFor } from '@/sanity/lib/image'
-import { parseTitle } from '@/lib/parseTitle'
+
+// Dummy parseTitle - Sanity odstraněno
+const parseTitle = (title: string | null | undefined) => {
+  if (!title) return null;
+  const parts = title.split(/(<strong>.*?<\/strong>)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('<strong>')) {
+      const text = part.replace(/<\/?strong>/g, '');
+      return <span key={i} className="text-gradient">{text.split('\n').map((line, j) => <span key={j}>{line}{j < text.split('\n').length - 1 && <br />}</span>)}</span>;
+    }
+    return part.split('\n').map((line, j) => <span key={`${i}-${j}`}>{line}{j < part.split('\n').length - 1 && <br />}</span>);
+  });
+};
 
 export default function DuleziteInformacePage() {
+  // Sanity odstraněno - používáme hardcoded data (fallbacky níže)
+  const pageData: any = null
+  
   // Form submission state
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
   
-  // State for page content from Sanity
-  const [pageData, setPageData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
-  
   // FAQ open/close state
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
-  
-  // Fetch page content from Sanity
-  useEffect(() => {
-    async function fetchPageContent() {
-      try {
-        const data = await client.fetch(`
-          *[_type == "importantInfoPageComplete" && _id == "important-info-page-complete-singleton"][0] {
-            heroBadge,
-            heroTitle,
-            heroTitleHighlight,
-            heroDescription,
-            heroImage,
-            financingBadge,
-            financingTitle,
-            financingTitleHighlight,
-            financingIntro,
-            financingCards,
-            financingOutro,
-            paymentScheduleBadge,
-            paymentScheduleTitle,
-            paymentScheduleDescription,
-            paymentSchedule,
-            faqBadge,
-            faqTitle,
-            faqDescription,
-            faqItems,
-            documentsBadge,
-            documentsTitle,
-            documentsTitleHighlight,
-            documentsDescription,
-            documentsBackgroundImage,
-            documents[] {
-              title,
-              file {
-                asset-> {
-                  url
-                }
-              }
-            },
-            contactBadge,
-            contactTitle,
-            contactDescription,
-            contactEmail
-          }
-        `, {}, { cache: 'no-store' })
-        
-        setPageData(data)
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching page content:', error)
-        setLoading(false)
-      }
-    }
-    
-    fetchPageContent()
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -124,7 +77,7 @@ export default function DuleziteInformacePage() {
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src={pageData?.heroImage ? urlFor(pageData.heroImage).url() : "/images/DSC02841.jpg"}
+            src="/images/DSC02841.jpg"
             alt="Důležité informace"
             fill
             className="object-cover"
@@ -319,7 +272,7 @@ export default function DuleziteInformacePage() {
       <section className="py-16 md:py-24 relative bg-dark">
         <div className="absolute inset-0 z-0">
           <Image
-            src={pageData?.documentsBackgroundImage ? urlFor(pageData.documentsBackgroundImage).url() : "/images/BD-1-16_vizualizace-01-min.jpg"}
+            src="/images/BD-1-16_vizualizace-01-min.jpg"
             alt="Pozadí"
             fill
             className="object-cover"

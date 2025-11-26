@@ -4,8 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { notFound, useRouter } from 'next/navigation'
-import { useState, use, useEffect } from 'react'
-import { client } from '@/sanity/lib/client'
+import { useState, use } from 'react'
 
 // Helper function to generate apartment slug
 const generateApartmentSlug = (building: string, number: string): string => {
@@ -76,95 +75,22 @@ const apartmentsFallback = [
 
 export default function ApartmentDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params)
-  const [apartment, setApartment] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+  
+  // Sanity odstraněno - používáme hardcoded data (fallbacky)
+  const apartment = apartmentsFallback.find(apt => 
+    generateApartmentSlug(apt.building, apt.number) === resolvedParams.slug
+  )
+  const loading = false
+  
   const [selectedImage, setSelectedImage] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
   const router = useRouter()
 
-  // Fetch apartment from Sanity
-  useEffect(() => {
-    async function fetchApartment() {
-      try {
-        // Parse slug to get building and number
-        const parts = resolvedParams.slug.split('-')
-        const buildingSlug = `${parts[0]}-${parts[1]}`.toUpperCase() // bd-b1 -> BD-B1
-        const number = `${parts[2]}.${parts[3]}` // 1-02 -> 1.02
-        
-        const data = await client.fetch(`
-          *[_type == "apartment" && building == $building && number == $number][0] {
-            _id,
-            number,
-            building,
-            floor,
-            disposition,
-            floorArea,
-            usableArea,
-            price,
-            status,
-            rooms[] {
-              number,
-              name,
-              area
-            },
-            outdoorSpaces[] {
-              type,
-              area
-            },
-            "floorPlanUrl": floorPlan.asset->url,
-            "heroImageUrl": heroImage.asset->url,
-            "locationInAreaUrl": locationInArea.asset->url
-          }
-        `, { building: buildingSlug, number }, { cache: 'no-store' })
-        
-        if (!data) {
-          notFound()
-        }
-        
-        // Transform to match original format
-        const transformed = {
-          id: data._id,
-          number: data.number,
-          building: data.building,
-          disposition: data.disposition,
-          size: data.floorArea,
-          floor: data.floor,
-          price: data.price,
-          status: data.status,
-          floorPlanPath: data.floorPlanUrl,
-          rooms: data.rooms || [],
-          floorArea: data.floorArea,
-          outdoorSpaces: data.outdoorSpaces || [],
-          usableArea: data.usableArea,
-          heroImageUrl: data.heroImageUrl,
-          locationInAreaUrl: data.locationInAreaUrl
-        }
-        
-        setApartment(transformed)
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching apartment:', error)
-        // Fallback to hardcoded data
-        const fallbackApt = apartmentsFallback.find(apt => 
-          generateApartmentSlug(apt.building, apt.number) === resolvedParams.slug
-        )
-        if (fallbackApt) {
-          setApartment(fallbackApt)
-        }
-        setLoading(false)
-      }
-    }
-    
-    fetchApartment()
-  }, [resolvedParams.slug])
-
   // Redirect to homepage if apartment is sold
-  useEffect(() => {
-    if (apartment && apartment.status === 'sold') {
-      router.push('/')
-    }
-  }, [apartment, router])
+  if (apartment && apartment.status === 'sold') {
+    router.push('/')
+  }
 
   if (loading || !apartment) {
     return (
@@ -489,17 +415,17 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
               </div>
 
               {/* Building Location - Single Image */}
-              {apartment.locationInAreaUrl && (
+              {(apartment as any)?.locationInAreaUrl && (
                 <div>
                   <h3 className="text-base font-bold text-dark mb-3">Umístění v areálu</h3>
                   <a 
-                    href={apartment.locationInAreaUrl}
+                    href={(apartment as any).locationInAreaUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block relative h-48 bg-white rounded overflow-hidden cursor-pointer group"
                   >
                     <Image
-                      src={apartment.locationInAreaUrl}
+                      src={(apartment as any).locationInAreaUrl}
                       alt="Umístění v areálu"
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"

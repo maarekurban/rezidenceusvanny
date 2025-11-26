@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { IframeDetector } from "@/components/IframeDetector";
 
 export const metadata: Metadata = {
   title: {
@@ -64,17 +63,9 @@ export default function RootLayout({
   return (
     <html lang="cs">
       <body className="antialiased">
-        {/* Detekce iframe pro Sanity Preview */}
-        <IframeDetector />
-        
-        {/* Header se skryje v iframe preview */}
-        <div className="sanity-preview-hide">
-          <Header />
-        </div>
+        <Header />
         {children}
-        <div className="sanity-preview-hide">
-          <Footer />
-        </div>
+        <Footer />
       </body>
     </html>
   );

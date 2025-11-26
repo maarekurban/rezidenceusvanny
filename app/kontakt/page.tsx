@@ -3,13 +3,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { useState, useEffect } from 'react'
-import { client } from '@/sanity/lib/client'
-import { urlFor } from '@/sanity/lib/image'
+import { useState } from 'react'
 
 export default function KontaktPage() {
-  const [pageData, setPageData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+  // Sanity odstraněno - používáme hardcoded data (fallbacky níže)
+  const pageData: any = null
   
   const [formData, setFormData] = useState({
     name: '',
@@ -21,36 +19,6 @@ export default function KontaktPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
-
-  useEffect(() => {
-    const fetchPageData = async () => {
-      try {
-        const data = await client.fetch(`*[_type == "contactPageComplete"][0]{
-          ...,
-          heroImage,
-          agent1Image,
-          agent2Image,
-          formBackgroundImage,
-          quickInfoCards[]{
-            ...,
-            icon
-          },
-          instagramPosts[]{
-            ...,
-            asset->
-          },
-          ctaBackgroundImage
-        }`, {}, { cache: 'no-store' })
-        setPageData(data)
-      } catch (error) {
-        console.error('Chyba při načítání dat ze Sanity:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPageData()
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -105,7 +73,7 @@ export default function KontaktPage() {
       <section className="relative min-h-[65vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src={pageData?.heroImage ? urlFor(pageData.heroImage).url() : "/images/DJI_0526.jpg"}
+            src="/images/DJI_0526.jpg"
             alt="Kontakt"
             fill
             className="object-cover"
@@ -401,7 +369,7 @@ export default function KontaktPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src={pageData?.quickInfoBackgroundImage ? urlFor(pageData.quickInfoBackgroundImage).url() : "/images/DSC02913.jpg"}
+            src="/images/DSC02913.jpg"
             alt="Rezidence"
             fill
             className="object-cover"

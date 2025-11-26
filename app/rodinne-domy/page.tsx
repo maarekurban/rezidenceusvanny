@@ -3,9 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { useState, useEffect } from 'react'
-import { client } from '@/sanity/lib/client'
-import { urlFor } from '@/sanity/lib/image'
+import { useState } from 'react'
 
 // Mock data for family houses
 const houses = [
@@ -96,59 +94,8 @@ const houses = [
 ]
 
 export default function RodinneDomyPage() {
-  // State for page content from Sanity
-  const [pageData, setPageData] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
-  
-  // Fetch page content from Sanity
-  useEffect(() => {
-    async function fetchPageContent() {
-      try {
-        const data = await client.fetch(`
-          *[_type == "familyHousesPageComplete" && _id == "family-houses-page-complete-singleton"][0] {
-            heroBadge,
-            heroTitle,
-            heroTitleHighlight,
-            heroDescription,
-            heroImage,
-            statHousesCount,
-            statHousesLabel,
-            statDispositions,
-            statDispositionsLabel,
-            statArea,
-            statAreaLabel,
-            statPlot,
-            statPlotLabel,
-            soldOutTitle,
-            soldOutDescription1,
-            soldOutDescription2,
-            soldOutButtonText,
-            soldOutButtonLink,
-            galleryBadge,
-            galleryTitle,
-            galleryTitleHighlight,
-            galleryDescription,
-            galleryImages,
-            ctaBadge,
-            ctaTitle,
-            ctaTitleHighlight,
-            ctaDescription,
-            ctaImage,
-            ctaButtonText,
-            ctaButtonLink
-          }
-        `, {}, { cache: 'no-store' })
-        
-        setPageData(data)
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching page content:', error)
-        setLoading(false)
-      }
-    }
-    
-    fetchPageContent()
-  }, [])
+  // Sanity odstraněno - používáme hardcoded data (fallbacky níže)
+  const pageData: any = null
   
   return (
     <main className="min-h-screen bg-white">
@@ -156,7 +103,7 @@ export default function RodinneDomyPage() {
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src={pageData?.heroImage ? urlFor(pageData.heroImage).url() : "/images/RD-A_vizualizace-zahrada-trava-min.jpg"}
+            src="/images/RD-A_vizualizace-zahrada-trava-min.jpg"
             alt="Rodinné domy"
             fill
             className="object-cover"
@@ -266,7 +213,7 @@ export default function RodinneDomyPage() {
                 {/* Image */}
                 <div className={`relative ${index === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'}`}>
                   <Image
-                    src={item.asset ? urlFor(item).url() : (item.image || houses[index]?.image || '/images/placeholder.jpg')}
+                    src={houses[index]?.image || '/images/placeholder.jpg'}
                     alt={`Rodinný dům ${index + 1}`}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -285,7 +232,7 @@ export default function RodinneDomyPage() {
             {/* Left: Image */}
             <div className="relative h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-lg">
               <Image
-                src={pageData?.ctaImage ? urlFor(pageData.ctaImage).url() : "/images/DSC02913.jpg"}
+                src="/images/DSC02913.jpg"
                 alt="Byty III. etapy"
                 fill
                 className="object-cover"

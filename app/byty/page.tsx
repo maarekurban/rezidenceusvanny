@@ -3,9 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container } from '@/components/Container'
-import { useState, useEffect } from 'react'
-import { client } from '@/sanity/lib/client'
-import { urlFor } from '@/sanity/lib/image'
+import { useState } from 'react'
 
 // Helper function to generate apartment slug
 const generateApartmentSlug = (building: string, number: string): string => {
@@ -85,12 +83,10 @@ type SortDirection = 'asc' | 'desc'
 
 export default function BytyPage() {
   // State for apartments from Sanity
-  const [apartments, setApartments] = useState(apartmentsFallback)
-  const [loading, setLoading] = useState(true)
-  
-  // State for page content from Sanity
-  const [pageData, setPageData] = useState<any>(null)
-  const [pageLoading, setPageLoading] = useState(true)
+  // Sanity odstraněno - používáme hardcoded data (fallbacky)
+  const apartments = apartmentsFallback
+  const loading = false
+  const pageData: any = null
 
   const [selectedDisposition, setSelectedDisposition] = useState<string>('all')
   const [selectedFloor, setSelectedFloor] = useState<string>('all')
@@ -99,102 +95,10 @@ export default function BytyPage() {
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   
-  // Fetch apartments from Sanity
-  useEffect(() => {
-    async function fetchApartments() {
-      try {
-        const data = await client.fetch(`
-          *[_type == "apartment"] | order(number asc) {
-            _id,
-            number,
-            building,
-            floor,
-            disposition,
-            floorArea,
-            usableArea,
-            price,
-            status,
-            rooms,
-            outdoorSpaces[] {
-              type,
-              area
-            }
-          }
-        `, {}, { cache: 'no-store' })
-        
-        // Transform Sanity data to match original format
-        const transformed = data.map((apt: any, index: number) => ({
-          id: index + 1,
-          number: apt.number,
-          building: apt.building,
-          disposition: apt.disposition,
-          size: apt.floorArea,
-          balcony: getTotalOutdoorArea(apt.outdoorSpaces),
-          floor: apt.floor,
-          price: apt.price,
-          status: apt.status,
-          floorPlanPath: null, // We don't need this for listing
-          rooms: apt.rooms || [],
-          floorArea: apt.floorArea,
-          outdoorSpaces: apt.outdoorSpaces || [],
-          usableArea: apt.usableArea
-        }))
-        
-        setApartments(transformed)
-        setLoading(false)
-      } catch (error) {
-        console.error('Error fetching apartments:', error)
-        setLoading(false)
-      }
-    }
-    
-    fetchApartments()
-  }, [])
-  
-  // Fetch page content from Sanity
-  useEffect(() => {
-    async function fetchPageContent() {
-      try {
-        const data = await client.fetch(`
-          *[_type == "apartmentsPageComplete" && _id == "apartments-page-complete-singleton"][0] {
-            heroBadge,
-            heroTitle,
-            heroTitleHighlight,
-            heroDescription,
-            heroImage,
-            statDispositions,
-            statDispositionsLabel,
-            statArea,
-            statAreaLabel,
-            statEnergyClass,
-            statEnergyClassLabel,
-            filterLabel
-          }
-        `, {}, { cache: 'no-store' })
-        
-        setPageData(data)
-        setPageLoading(false)
-      } catch (error) {
-        console.error('Error fetching page content:', error)
-        setPageLoading(false)
-      }
-    }
-    
-    fetchPageContent()
-  }, [])
-  
   // Calculate min and max prices
   const minPrice = Math.min(...apartments.map(apt => apt.price))
   const maxPrice = Math.max(...apartments.map(apt => apt.price))
   const [priceRangeSlider, setPriceRangeSlider] = useState<number>(maxPrice)
-
-  // Update price range when apartments load
-  useEffect(() => {
-    if (!loading && apartments.length > 0) {
-      const max = Math.max(...apartments.map(apt => apt.price))
-      setPriceRangeSlider(max)
-    }
-  }, [loading, apartments])
 
   // Count available apartments (without price filter for hero section)
   const totalAvailableCount = apartments.filter(apt => apt.status === 'available').length
@@ -273,7 +177,7 @@ export default function BytyPage() {
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src={pageData?.heroImage ? urlFor(pageData.heroImage).url() : "/images/DSC02841.jpg"}
+            src="/images/DSC02841.jpg"
             alt="Byty III. etapy"
             fill
             className="object-cover"
