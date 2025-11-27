@@ -91,5 +91,5 @@ export default async function ApartmentDetailPage({ params }: { params: Promise<
     status: currentStatus
   }
 
-  return <ApartmentDetailClient apartment={apartmentWithStatus} />
+  return <ApartmentDetailClient apartment={apartmentWithStatus} allApartments={apartmentsFallback} />
 }

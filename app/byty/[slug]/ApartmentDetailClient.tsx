@@ -37,9 +37,10 @@ type Apartment = {
 
 interface ApartmentDetailClientProps {
   apartment: Apartment
+  allApartments: Apartment[]
 }
 
-export default function ApartmentDetailClient({ apartment }: ApartmentDetailClientProps) {
+export default function ApartmentDetailClient({ apartment, allApartments }: ApartmentDetailClientProps) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
@@ -489,9 +490,9 @@ export default function ApartmentDetailClient({ apartment }: ApartmentDetailClie
             Podobné <span className="text-gradient">byty</span>
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
-            {apartmentsFallback
-              .filter(apt => 
-                apt.id !== apartment.id && 
+            {allApartments
+              .filter(apt =>
+                apt.id !== apartment.id &&
                 apt.disposition === apartment.disposition &&
                 apt.status === 'available'
               )
