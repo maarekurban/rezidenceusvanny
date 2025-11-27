@@ -9,8 +9,25 @@ const generateApartmentSlug = (building: string, number: string): string => {
   return `${buildingSlug}-${numberSlug}`
 }
 
+type Apartment = {
+  id: number
+  number: string
+  building: string
+  disposition: string
+  size: number
+  balcony: number
+  floor: number
+  price: number
+  status: 'available' | 'sold' | 'reserved'
+  floorPlanPath: string | null
+  rooms: any[]
+  floorArea: number
+  outdoorSpaces: any[]
+  usableArea: number
+}
+
 // Fallback apartments data
-const apartmentsFallback = [
+const apartmentsFallback: Apartment[] = [
   { id: 1, number: '1.01', building: 'BD-B1', disposition: '2+kk', size: 47.1, balcony: 39.08, floor: 1, price: 4544640, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 40.04 },
   { id: 2, number: '1.02', building: 'BD-B1', disposition: '2+kk', size: 55.55, balcony: 112.12, floor: 1, price: 5558060, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 1.02.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 5.27}, {'number': 2, 'name': 'Toaleta', 'area': 1.51}, {'number': 3, 'name': 'Koupelna', 'area': 2.96}, {'number': 4, 'name': 'Obývací pokoj + KK', 'area': 30.14}, {'number': 5, 'name': 'Ložnice', 'area': 12.56}], floorArea: 52.44, outdoorSpaces: [{'type': 'Terasa', 'area': 7.95}, {'type': 'Zahrada', 'area': 112.12}], usableArea: 44.57 },
   { id: 3, number: '1.03', building: 'BD-B1', disposition: '5+kk', size: 101.61, balcony: 139.3, floor: 1, price: 9766020, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 1.03.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.42}, {'number': 2, 'name': 'Toaleta', 'area': 1.63}, {'number': 3, 'name': 'Koupelna', 'area': 5.31}, {'number': 4, 'name': 'Pokoj', 'area': 10.93}, {'number': 5, 'name': 'Ložnice', 'area': 14.32}, {'number': 6, 'name': 'Pokoj', 'area': 12.3}, {'number': 7, 'name': 'Obývací pokoj + KK', 'area': 24.22}, {'number': 8, 'name': 'Pokoj', 'area': 11.54}], floorArea: 93.67, outdoorSpaces: [{'type': 'Terasa', 'area': 5.41}, {'type': 'Terasa', 'area': 7.95}, {'type': 'Zahrada', 'area': 139.3}], usableArea: 79.62 },
