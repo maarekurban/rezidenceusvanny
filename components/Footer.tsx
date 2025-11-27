@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
               Moderní bydlení v historickém městě Kutná Hora
             </p>
             <p className="text-sm text-gray-400">
-              131 bytů | 14 rodinných domů
+              134 bytů | 14 rodinných domů
             </p>
           </div>
 

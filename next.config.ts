@@ -1,15 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        pathname: '/images/**',
-      },
-    ],
-  },
+  // Images configuration can be added here when needed
 };
 
 export default nextConfig;

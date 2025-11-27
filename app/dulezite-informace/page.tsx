@@ -36,15 +36,14 @@ export default function DuleziteInformacePage() {
 
     const form = e.currentTarget
     const formData = new FormData(form)
+    const interest = formData.get('interest') as string
     const data = {
       page: 'Důležité informace',
       name: formData.get('name'),
       phone: formData.get('phone'),
       email: formData.get('email'),
-      message: formData.get('message'),
+      message: `${interest ? `Zájem: ${interest}\n\n` : ''}${formData.get('message')}`,
     }
-
-    console.log('📤 Odesílám data:', data)
 
     try {
       const response = await fetch('/api/contact', {
@@ -53,20 +52,17 @@ export default function DuleziteInformacePage() {
         body: JSON.stringify(data),
       })
 
-      console.log('📥 Response status:', response.status)
       const result = await response.json()
-      console.log('📥 Response data:', result)
 
       if (response.ok) {
-        setSubmitMessage('✅ Děkujeme! Vaše zpráva byla úspěšně odeslána.')
-        form.reset()
+        // Přesměrování na děkovnou stránku
+        window.location.href = '/dekujeme'
       } else {
         setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
+        setIsSubmitting(false)
       }
     } catch (error) {
-      console.error('❌ Chyba:', error)
       setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -77,7 +73,7 @@ export default function DuleziteInformacePage() {
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src="/images/DSC02841.jpg"
+            src="/images/DSC02745.jpg"
             alt="Důležité informace"
             fill
             className="object-cover"
@@ -176,11 +172,11 @@ export default function DuleziteInformacePage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {(pageData?.paymentSchedule || [
                 { step: 'Záloha', amount: '100 000 Kč', description: 'Rezervační záloha do 10 dnů po podpisu rezervační smlouvy.' },
-                { step: '1. platba', amount: '15%', description: '15 % kupní ceny do 10 dnů od podpisu smlouvy o smlouvě budoucí.' },
-                { step: '2. platba', amount: '30%', description: '30 % kupní ceny po dokončení hrubé stavby.' },
-                { step: '3. platba', amount: '20%', description: '20 % kupní ceny po dokončení hrubých instalací a výplní otvorů mimo prostory interiéru.' },
-                { step: '4. platba', amount: '20%', description: '20 % kupní ceny po dokončení fasády, omítek a podlah bez finální vrstvy (splatnost cca 14 měsíců od zahájení výstavby).' },
-                { step: '5. platba', amount: '15%', description: '15 % kupní ceny po kolaudaci a změně zápisu převáděné jednotky v katastru nemovitostí z rozestavěné na dokončenou.' }
+                { step: '1. PLATBA', amount: '15%', description: '15 % kupní ceny zaplatí Budoucí kupující do 10 dnů od podpisu této smlouvy.' },
+                { step: '2. PLATBA', amount: '30%', description: '30 % kupní ceny zaplatí Budoucí kupující po dokončení hrubé stavby a zápis rozestavěných jednotek do katastru nemovitostí.' },
+                { step: '3. PLATBA', amount: '20%', description: '20 % kupní ceny zaplatí Budoucí kupující po dokončení pojistné hydroizolace střechy výplní otvorů bytového domu mimo prostory interiéru.' },
+                { step: '4. PLATBA', amount: '20%', description: '20 % kupní ceny zaplatí Budoucí kupující po dokončení hrubých instalací rozvodů elektro a vytápění, hrubých omítek a hrubých podlah.' },
+                { step: '5. PLATBA', amount: '15%', description: '15 % kupní ceny zaplatí Budoucí kupující po kolaudaci bytového domu a změně zápisu převáděné bytové jednotky v katastru nemovitostí z rozestavěné na dokončenou.' }
               ]).map((payment: any, index: number) => (
                 <div
                   key={index}
@@ -226,7 +222,6 @@ export default function DuleziteInformacePage() {
                 { question: 'Pomůžete mi s financováním?', answer: 'Financování můžete řešit po vlastní ose nebo ve spolupráci s námi doporučenými hypotečními specialisty. Pokud spolupracujete s nimi, je proces jednodušší a rychlejší. Získáte také zvýhodněné úrokové sazby a odhady zdarma v bankách, kde je projekt schválený.' },
                 { question: 'Jaká je energetická náročnost budov?', answer: 'Novostavby jsou koncipovány jako nízkoenergetické a spadají do energetické třídy B. Díky tomu zaplatíte výrazně méně na platbách za energie. Průkaz energetické náročnosti je ke stažení v sekci Užitečné dokumenty.' },
                 { question: 'Je možné si k bytu koupit více parkovacích míst?', answer: 'Ke každému bytu je zatím možnost zakoupit pouze jedno vyhrazené parkovací stání. Pokud budete mít zájem o více míst, dejte nám vědět a zkusíme vymyslet individuální řešení.' },
-                { question: 'Co znamená styl Shell & core?', answer: 'Shell & core, také známý jako Shell and core je způsob výstavby prostor, kde se prostory ponechají v základní úpravě, které si budoucí majitel zařídí dle svého přání sám či s pomocí architekta. Vychází z anglického shell – plášť, fasáda a core – jádro, u staveb struktura a vertikální komunikace.' },
                 { question: 'Jsou možné klientské změny?', answer: 'Ano. Klientské změny je možné řešit v průběhu výstavby. Při podpisu smlouvy dostanete zásady pro provedení klientských změn.' },
                 { question: 'Jaká je dopravní dostupnost do Prahy?', answer: 'Hned u rezidenční čtvrti se nachází frekventovaná autobusová zastávka, odkud se dostanete na vlakové nádraží. Vlakový přímý spoj jede na Hlavní nádraží v Praze 58 min. Autem se dostanete na kraj Prahy za 51 minut do centra Prahy za cca 1 hodinu a 8 minut, záleží na dopravní situaci. Díky připojení Kutnohorska do integrovaného dopravního systému Prahy se do hlavního města pohodlně dostanete v pracovních dnech i o víkendu.' },
                 { question: 'Kutná hora je na seznamu UNESCO, nebude mě rušit přehnaný turistický ruch?', answer: 'Vzhledem k umístění projektu na kraji města u přírody s dobrou dopravní dostupností do centra určitě nikoliv. Naopak díky turistickému ruchu je velký tlak na poskytování kvalitních služeb, z kterého profitují i místní rezidenti.' }
@@ -294,7 +289,13 @@ export default function DuleziteInformacePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {(pageData?.documents || []).map((doc: any, index: number) => {
+            {(pageData?.documents || [
+              { title: 'Průkaz energetické náročnosti BD-A1', file: { asset: { url: '/dokumentace/PENB_A1.pdf' } } },
+              { title: 'Průkaz energetické náročnosti BD-A2', file: { asset: { url: '/dokumentace/PENB_A2.pdf' } } },
+              { title: 'Průkaz energetické náročnosti BD-B1', file: { asset: { url: '/dokumentace/PENB_B1.pdf' } } },
+              { title: 'Standard provedení a vybavení - III. etapa', file: { asset: { url: '/dokumentace/Standard provedení a vybavení - III. etapa.pdf' } } },
+              { title: 'Zásady pro provádění klientských změn', file: { asset: { url: '/dokumentace/Zásady pro provádění klientských změn.pdf' } } }
+            ]).map((doc: any, index: number) => {
               const icons = [
                 "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
                 "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
@@ -388,6 +389,23 @@ export default function DuleziteInformacePage() {
                   className="w-full px-4 py-3 rounded-xl bg-white/90 border border-white/30 focus:border-white focus:ring-2 focus:ring-white/50 outline-none transition-all"
                   placeholder="jan.novak@email.cz"
                 />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="interest" className="block text-white font-semibold mb-2">Mám zájem o: *</label>
+                <select
+                  id="interest"
+                  name="interest"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border border-white/30 focus:border-white focus:ring-2 focus:ring-white/50 outline-none transition-all"
+                >
+                  <option value="">Vyberte jednu z možností</option>
+                  <option value="Byt 1+kk">Byt 1+kk</option>
+                  <option value="Byt 2+kk">Byt 2+kk</option>
+                  <option value="Byt 3+kk">Byt 3+kk</option>
+                  <option value="Byt 4+kk">Byt 4+kk</option>
+                  <option value="Byt 5+kk">Byt 5+kk</option>
+                </select>
               </div>
 
               <div className="mb-6">

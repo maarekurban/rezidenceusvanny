@@ -33,8 +33,6 @@ export default function KontaktPage() {
       message: `${formData.interest ? `Zájem: ${formData.interest}\n\n` : ''}${formData.message}`,
     }
 
-    console.log('📤 Odesílám data:', data)
-
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -42,27 +40,17 @@ export default function KontaktPage() {
         body: JSON.stringify(data),
       })
 
-      console.log('📥 Response status:', response.status)
       const result = await response.json()
-      console.log('📥 Response data:', result)
 
       if (response.ok) {
-        setSubmitMessage('✅ Děkujeme! Vaše zpráva byla úspěšně odeslána.')
-        setFormData({
-          name: '',
-          interest: '',
-          email: '',
-          phone: '',
-          message: '',
-          gdpr: false,
-        })
+        // Přesměrování na děkovnou stránku
+        window.location.href = '/dekujeme'
       } else {
         setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
+        setIsSubmitting(false)
       }
     } catch (error) {
-      console.error('❌ Chyba:', error)
       setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -73,7 +61,7 @@ export default function KontaktPage() {
       <section className="relative min-h-[65vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src="/images/DJI_0526.jpg"
+            src="/images/DSC02913.jpg"
             alt="Kontakt"
             fill
             className="object-cover"
@@ -140,10 +128,14 @@ export default function KontaktPage() {
               {/* Agent 1 */}
               <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300">
                 <div className="flex items-start gap-6">
-                  <div className="w-20 h-20 bg-gold-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg className="w-10 h-10 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                  <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                    <Image
+                      src="/images/terka.png"
+                      alt="Terezie Příhodová"
+                      width={80}
+                      height={80}
+                      className="object-cover w-full h-full"
+                    />
                   </div>
                   
                   <div className="flex-1">
@@ -198,10 +190,14 @@ export default function KontaktPage() {
               {/* Agent 2 */}
               <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300">
                 <div className="flex items-start gap-6">
-                  <div className="w-20 h-20 bg-gold-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg className="w-10 h-10 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+                  <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+                    <Image
+                      src="/images/honza.jpg"
+                      alt="Ing. Jan Křivánek"
+                      width={80}
+                      height={80}
+                      className="object-cover w-full h-full"
+                    />
                   </div>
                   
                   <div className="flex-1">
@@ -275,8 +271,11 @@ export default function KontaktPage() {
                       className="w-full px-4 py-3 bg-light-grey border border-grey-300 rounded-xl text-dark focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent transition-all"
                     >
                       <option value="">Vyberte jednu z možností</option>
-                      <option value="byt">Rezervaci bytu</option>
-                      <option value="dum">Rezervaci domu</option>
+                      <option value="Byt 1+kk">Byt 1+kk</option>
+                      <option value="Byt 2+kk">Byt 2+kk</option>
+                      <option value="Byt 3+kk">Byt 3+kk</option>
+                      <option value="Byt 4+kk">Byt 4+kk</option>
+                      <option value="Byt 5+kk">Byt 5+kk</option>
                     </select>
                   </div>
 
@@ -469,13 +468,13 @@ export default function KontaktPage() {
 
       {/* Map Section */}
       <section className="h-[500px] md:h-[600px] bg-grey-200">
-        <iframe 
-          src={pageData?.googleMapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2567.4516369657385!2d15.247726677480854!3d49.946629871500406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470c41bcb45d5ccf%3A0x6414c40edc19dc61!2zUmV6aWRlbsSNbsOtIMSNdHZyxaUgVSBzdi4gQW5ueQ!5e0!3m2!1scs!2scz!4v1762443431743!5m2!1scs!2scz"} 
-          width="100%" 
-          height="100%" 
-          style={{ border: 0 }} 
-          allowFullScreen 
-          loading="lazy" 
+        <iframe
+          src={pageData?.googleMapEmbedUrl || "https://www.google.com/maps?q=49.946629871500406,15.247726677480854&hl=cs&z=15&output=embed"}
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title="Mapa umístění Rezidence U sv. Anny"
         />

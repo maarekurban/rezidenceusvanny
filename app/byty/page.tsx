@@ -36,7 +36,7 @@ const apartmentsFallback = [
   { id: 9, number: '2.06', building: 'BD-B1', disposition: '2+kk', size: 49.52, balcony: 8.08, floor: 2, price: 4555840, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 42.09 },
   { id: 10, number: '3.01', building: 'BD-B1', disposition: '2+kk', size: 51.75, balcony: 6.71, floor: 3, price: 4864500, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.99 },
   { id: 11, number: '3.02', building: 'BD-B1', disposition: '1+kk', size: 33.32, balcony: 4.45, floor: 3, price: 3245360, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 28.32 },
-  { id: 12, number: '3.03', building: 'BD-B1', disposition: '3+kk', size: 69.0, balcony: 7.95, floor: 3, price: 6486000, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 58.65 },
+  { id: 12, number: '3.03', building: 'BD-B1', disposition: '3+kk', size: 69.0, balcony: 7.95, floor: 3, price: 6486000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 58.65 },
   { id: 13, number: '3.04', building: 'BD-B1', disposition: '3+kk', size: 70.06, balcony: 7.95, floor: 3, price: 6585640, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 3.04.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 4.97}, {'number': 2, 'name': 'Toaleta', 'area': 1.23}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.15}, {'number': 4, 'name': 'Chodba', 'area': 3.13}, {'number': 5, 'name': 'Koupelna + WC', 'area': 4.73}, {'number': 6, 'name': 'Komora', 'area': 2.01}, {'number': 7, 'name': 'Pokoj', 'area': 10.51}, {'number': 8, 'name': 'Lo\u017enice', 'area': 12.72}], floorArea: 63.45, outdoorSpaces: [{'type': 'Balkon', 'area': 7.95}], usableArea: 53.93 },
   { id: 14, number: '3.05', building: 'BD-B1', disposition: '1+kk', size: 29.83, balcony: 4.45, floor: 3, price: 3350000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 25.36 },
   { id: 15, number: '3.06', building: 'BD-B1', disposition: '2+kk', size: 49.52, balcony: 6.71, floor: 3, price: 4654880, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 42.09 },
@@ -49,7 +49,7 @@ const apartmentsFallback = [
   { id: 22, number: '1.22', building: 'BD-A1', disposition: '1+kk', size: 33.1, balcony: 26.44, floor: 1, price: 3323120, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 28.14 },
   { id: 23, number: '1.21', building: 'BD-A1', disposition: '1+kk', size: 32.95, balcony: 17.86, floor: 1, price: 3282680, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 28.01 },
   { id: 24, number: '2.09', building: 'BD-A1', disposition: '2+kk', size: 50.75, balcony: 6.55, floor: 2, price: 4669000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
-  { id: 25, number: '2.10', building: 'BD-A1', disposition: '2+kk', size: 57.75, balcony: 8.72, floor: 2, price: 5428500, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 49.09 },
+  { id: 25, number: '2.10', building: 'BD-A1', disposition: '2+kk', size: 57.75, balcony: 8.72, floor: 2, price: 5428500, status: 'available', floorPlanPath: '/pudorysy/A1/BD_A1 2.10.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Obývací pokoj + KK', 'area': 24.40}, {'number': 4, 'name': 'Ložnice', 'area': 12.22}, {'number': 5, 'name': 'Šatna', 'area': 3.49}], floorArea: 53.77, outdoorSpaces: [{'type': 'Balkon', 'area': 8.72}], usableArea: 49.09 },
   { id: 26, number: '2.11', building: 'BD-A1', disposition: '4+kk', size: 87.84, balcony: 8.1, floor: 2, price: 7905600, status: 'available', floorPlanPath: '/pudorysy/A1/BD_A1 2.11.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.64}, {'number': 2, 'name': 'Pokoj', 'area': 11.32}, {'number': 3, 'name': 'Pokoj', 'area': 13.32}, {'number': 4, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 23.75}, {'number': 5, 'name': 'Lo\u017enice', 'area': 14.87}, {'number': 6, 'name': 'Toaleta', 'area': 1.31}, {'number': 7, 'name': 'Koupelna', 'area': 3.4}], floorArea: 81.61, outdoorSpaces: [{'type': 'Balkon', 'area': 6.03}, {'type': 'Balkon', 'area': 8.1}], usableArea: 69.37 },
   { id: 27, number: '2.12', building: 'BD-A1', disposition: '2+kk', size: 54.29, balcony: 5.66, floor: 2, price: 4994680, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 46.15 },
   { id: 28, number: '3.09', building: 'BD-A1', disposition: '2+kk', size: 50.75, balcony: 6.55, floor: 3, price: 4669000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
@@ -66,15 +66,15 @@ const apartmentsFallback = [
   { id: 39, number: '1.05', building: 'BD-A2', disposition: '4+kk', size: 80.64, balcony: 110.3, floor: 1, price: 7749780, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 1.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 3.61}, {'number': 2, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 26.27}, {'number': 3, 'name': 'Chodba', 'area': 5.41}, {'number': 4, 'name': 'Pokoj', 'area': 10.92}, {'number': 5, 'name': 'Pokoj', 'area': 8.49}, {'number': 6, 'name': 'Lo\u017enice', 'area': 12.9}, {'number': 7, 'name': 'Koupelna', 'area': 6.13}, {'number': 8, 'name': 'Toaleta', 'area': 1.38}], floorArea: 75.11, outdoorSpaces: [{'type': 'Zahrada', 'area': 110.3}, {'type': 'Terasa', 'area': 13.75}], usableArea: 63.84 },
   { id: 40, number: '2.03', building: 'BD-A2', disposition: '2+kk', size: 54.37, balcony: 5.66, floor: 2, price: 5002040, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 46.21 },
   { id: 41, number: '2.04', building: 'BD-A2', disposition: '4+kk', size: 87.47, balcony: 6.12, floor: 2, price: 7872300, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 2.04.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.64}, {'number': 2, 'name': 'Koupelna', 'area': 3.4}, {'number': 3, 'name': 'Toaleta', 'area': 1.56}, {'number': 4, 'name': 'Lo\u017enice', 'area': 14.87}, {'number': 5, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 23.49}, {'number': 6, 'name': 'Pokoj', 'area': 13.32}, {'number': 7, 'name': 'Pokoj', 'area': 11.7}], floorArea: 81.98, outdoorSpaces: [{'type': 'Balkon', 'area': 8.39}, {'type': 'Balkon', 'area': 6.12}], usableArea: 69.68 },
-  { id: 42, number: '2.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 2, price: 5428500, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 49.09 },
+  { id: 42, number: '2.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 2, price: 5428500, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 2.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Obývací pokoj + KK', 'area': 24.40}, {'number': 4, 'name': 'Ložnice', 'area': 12.61}, {'number': 5, 'name': 'Šatna', 'area': 3.49}], floorArea: 54.16, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 49.09 },
   { id: 43, number: '2.06', building: 'BD-A2', disposition: '2+kk', size: 50.75, balcony: 6.51, floor: 2, price: 4669000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
   { id: 44, number: '3.03', building: 'BD-A2', disposition: '3+kk', size: 71.77, balcony: 4.45, floor: 3, price: 6746380, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 3.03.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 9.55}, {'number': 2, 'name': 'Lo\u017enice', 'area': 12.94}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.16}, {'number': 4, 'name': '\u0160atna', 'area': 2.12}, {'number': 5, 'name': 'Pokoj', 'area': 10.55}, {'number': 6, 'name': 'Koupelna', 'area': 5.49}, {'number': 7, 'name': 'Toaleta', 'area': 1.35}], floorArea: 66.16, outdoorSpaces: [{'type': 'Balkon', 'area': 4.45}], usableArea: 56.24 },
   { id: 45, number: '3.04', building: 'BD-A2', disposition: '3+kk', size: 71.48, balcony: 7.62, floor: 3, price: 6572080, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 60.76 },
-  { id: 46, number: '3.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 3, price: 5544000, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 3.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.4}, {'number': 4, 'name': 'Lo\u017enice', 'area': 12.6}, {'number': 5, 'name': '\u0160atna', 'area': 3.49}], floorArea: 54.15, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 46.03 },
+  { id: 46, number: '3.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 3, price: 5544000, status: 'sold', floorPlanPath: '/pudorysy/A2/BD_A2 3.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.4}, {'number': 4, 'name': 'Lo\u017enice', 'area': 12.6}, {'number': 5, 'name': '\u0160atna', 'area': 3.49}], floorArea: 54.15, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 46.03 },
   { id: 47, number: '3.06', building: 'BD-A2', disposition: '2+kk', size: 50.75, balcony: 6.5, floor: 3, price: 4770500, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
   { id: 48, number: '4.03', building: 'BD-A2', disposition: '2+kk', size: 54.37, balcony: 5.66, floor: 4, price: 5219520, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 4.03.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 6.22}, {'number': 2, 'name': 'Lo\u017enice', 'area': 12.05}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 26.66}, {'number': 4, 'name': 'Koupelna + WC', 'area': 6.3}], floorArea: 51.24, outdoorSpaces: [{'type': 'Balkon', 'area': 5.66}], usableArea: 43.55 },
   { id: 49, number: '4.04', building: 'BD-A2', disposition: '4+kk', size: 87.47, balcony: 6.12, floor: 4, price: 8047240, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 4.04.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.64}, {'number': 2, 'name': 'Koupelna', 'area': 3.4}, {'number': 3, 'name': 'Toaleta', 'area': 1.56}, {'number': 4, 'name': 'Lo\u017enice', 'area': 14.88}, {'number': 5, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 23.49}, {'number': 6, 'name': 'Pokoj', 'area': 13.32}, {'number': 7, 'name': 'Pokoj', 'area': 11.7}], floorArea: 81.99, outdoorSpaces: [{'type': 'Balkon', 'area': 8.39}, {'type': 'Balkon', 'area': 6.12}], usableArea: 69.69 },
-  { id: 50, number: '4.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 4, price: 5659500, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 49.09 },
+  { id: 50, number: '4.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 4, price: 5659500, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 4.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Obývací pokoj + KK', 'area': 24.40}, {'number': 4, 'name': 'Ložnice', 'area': 12.60}, {'number': 5, 'name': 'Šatna', 'area': 3.49}], floorArea: 54.15, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 49.09 },
   { id: 51, number: '4.06', building: 'BD-A2', disposition: '2+kk', size: 50.75, balcony: 6.55, floor: 4, price: 4872000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 }
 ]
 
@@ -94,6 +94,8 @@ export default function BytyPage() {
   const [sortField, setSortField] = useState<SortField>('number')
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [currentGalleryShowroom, setCurrentGalleryShowroom] = useState<string[]>([])
+  const [currentIndexShowroom, setCurrentIndexShowroom] = useState<number>(0)
   
   // Calculate min and max prices
   const minPrice = Math.min(...apartments.map(apt => apt.price))
@@ -163,7 +165,7 @@ export default function BytyPage() {
       case 'sold':
         return (
           <span className="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 text-xs font-semibold rounded-lg">
-            Prodán
+            Prodáno
           </span>
         )
       default:
@@ -177,7 +179,7 @@ export default function BytyPage() {
       <section className="relative min-h-[60vh] flex items-center bg-grey-100">
         <div className="absolute inset-0">
           <Image
-            src="/images/DSC02841.jpg"
+            src="/images/DSC02932.jpg"
             alt="Byty III. etapy"
             fill
             className="object-cover"
@@ -286,7 +288,7 @@ export default function BytyPage() {
               <option value="all">Všechny stavy</option>
               <option value="available">Volný</option>
               <option value="reserved">Rezervován</option>
-              <option value="sold">Prodán</option>
+              <option value="sold">Prodáno</option>
             </select>
 
             {/* Price Range Filter */}
@@ -563,18 +565,24 @@ export default function BytyPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { src: '/images/DSC02841.jpg', title: 'Obývací pokoj s kuchyní' },
-              { src: '/images/DSC02745.jpg', title: 'Moderní interiér' },
-              { src: '/images/DSC02913.jpg', title: 'Detail kuchyně' },
-              { src: '/images/DSC02870.jpg', title: 'Koupelna' },
-              { src: '/images/DSC02756.jpg', title: 'Obývací prostor' },
-              { src: '/images/DSC02819.jpg', title: 'Jídelní část' },
-            ].map((image, index) => (
-              <div
-                key={index}
-                onClick={() => setSelectedImage(image.src)}
-                className="relative h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+            {(() => {
+              const showroomImages = [
+                { src: '/images/DSC02727.jpg', title: 'Obývací pokoj s kuchyní' },
+                { src: '/images/DSC02745.jpg', title: 'Moderní interiér' },
+                { src: '/images/DSC02913.jpg', title: 'Detail kuchyně' },
+                { src: '/images/DSC02870.jpg', title: 'Koupelna' },
+                { src: '/images/DSC02756.jpg', title: 'Obývací prostor' },
+                { src: '/images/DSC02819.jpg', title: 'Jídelní část' },
+              ];
+              return showroomImages.map((image, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setSelectedImage(image.src);
+                    setCurrentGalleryShowroom(showroomImages.map(img => img.src));
+                    setCurrentIndexShowroom(index);
+                  }}
+                  className="relative h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 <Image
                   src={image.src}
@@ -587,11 +595,9 @@ export default function BytyPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                   </svg>
                 </div>
-                <div className="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h4 className="text-xl font-bold">{image.title}</h4>
-                </div>
               </div>
-            ))}
+              ))
+            })()}
           </div>
         </Container>
       </section>
@@ -662,7 +668,7 @@ export default function BytyPage() {
 
       {/* Image Modal */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
           onClick={() => setSelectedImage(null)}
         >
@@ -674,7 +680,44 @@ export default function BytyPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          
+
+          {/* Navigation Buttons */}
+          {currentGalleryShowroom.length > 0 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const newIndex = currentIndexShowroom === 0 ? currentGalleryShowroom.length - 1 : currentIndexShowroom - 1;
+                  setCurrentIndexShowroom(newIndex);
+                  setSelectedImage(currentGalleryShowroom[newIndex]);
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 z-10"
+              >
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const newIndex = currentIndexShowroom === currentGalleryShowroom.length - 1 ? 0 : currentIndexShowroom + 1;
+                  setCurrentIndexShowroom(newIndex);
+                  setSelectedImage(currentGalleryShowroom[newIndex]);
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 z-10"
+              >
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              {/* Image Counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-medium z-10">
+                {currentIndexShowroom + 1} / {currentGalleryShowroom.length}
+              </div>
+            </>
+          )}
+
           <div className="relative w-full max-w-6xl h-[80vh]" onClick={(e) => e.stopPropagation()}>
             <Image
               src={selectedImage}

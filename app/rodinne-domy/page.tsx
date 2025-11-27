@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Container } from '@/components/Container'
 import { useState } from 'react'
 
-// Mock data for family houses
+// Mock data for family houses - pouze 3 fotky pro galerii
 const houses = [
   {
     id: 1,
@@ -17,7 +17,6 @@ const houses = [
     image: '/images/RD-A_vizualizace-zahrada-trava-min.jpg',
     images: [
       '/images/RD-A_vizualizace-zahrada-trava-min.jpg',
-      '/images/vizualizace-RD-interier2.jpg',
     ],
     features: ['Garáž', 'Terasa', 'Zahrada'],
   },
@@ -31,7 +30,6 @@ const houses = [
     image: '/images/KH_vizualizace_BD_04-min.jpg',
     images: [
       '/images/KH_vizualizace_BD_04-min.jpg',
-      '/images/DSC02697.jpg',
     ],
     features: ['Garáž', 'Zahrada', 'Sklep'],
   },
@@ -45,51 +43,8 @@ const houses = [
     image: '/images/vizualizace_RD-C_01-min.jpg',
     images: [
       '/images/vizualizace_RD-C_01-min.jpg',
-      '/images/vizualizace-RD-interier2.jpg',
     ],
     features: ['Garáž', 'Terasa', 'Zahrada', 'Pracovna'],
-  },
-  {
-    id: 4,
-    name: 'Rodinný dům D',
-    type: 'D',
-    size: 141,
-    plot: 495,
-    rooms: '4+kk',
-    image: '/images/BD-1-16_vizualizace-01-min.jpg',
-    images: [
-      '/images/BD-1-16_vizualizace-01-min.jpg',
-      '/images/DSC02720.jpg',
-    ],
-    features: ['Garáž', 'Zahrada'],
-  },
-  {
-    id: 5,
-    name: 'Rodinný dům E',
-    type: 'E',
-    size: 148,
-    plot: 540,
-    rooms: '4+kk',
-    image: '/images/DSC02841.jpg',
-    images: [
-      '/images/DSC02841.jpg',
-      '/images/DSC02913.jpg',
-    ],
-    features: ['Garáž', 'Terasa', 'Zahrada'],
-  },
-  {
-    id: 6,
-    name: 'Rodinný dům F',
-    type: 'F',
-    size: 156,
-    plot: 600,
-    rooms: '5+kk',
-    image: '/images/DSC02745.jpg',
-    images: [
-      '/images/DSC02745.jpg',
-      '/images/DSC02870.jpg',
-    ],
-    features: ['Garáž', 'Terasa', 'Zahrada', 'Sklep'],
   },
 ]
 
@@ -125,7 +80,7 @@ export default function RodinneDomyPage() {
           </h1>
 
           <p className="text-lg md:text-xl text-white/90 font-light mb-8 leading-relaxed">
-            {pageData?.heroDescription || "14 moderních rodinných domů s pozemky až 613 m². Všechny domy jsou vyprodány a obývány spokojenými majiteli."}
+            {pageData?.heroDescription || "14 moderních rodinných domů s pozemky až 613 m². Všechny domy jsou vyprodány."}
           </p>
 
           {/* Quick Stats */}
@@ -169,9 +124,6 @@ export default function RodinneDomyPage() {
                 <h2 className="text-2xl md:text-3xl font-bold text-dark mb-3">
                   {pageData?.soldOutTitle || "Všechny rodinné domy jsou vyprodány"}
                 </h2>
-                <p className="text-lg text-grey-700 leading-relaxed mb-4">
-                  {pageData?.soldOutDescription1 || "Děkujeme za zájem! Rodinné domy z I. etapy jsou všechny prodány a obývány spokojenými majiteli."}
-                </p>
                 <p className="text-lg font-semibold text-dark mb-6">
                   {pageData?.soldOutDescription2 || "✨ Aktuálně jsou k dispozici byty z III. etapy"}
                 </p>
@@ -196,9 +148,6 @@ export default function RodinneDomyPage() {
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
               {pageData?.galleryTitle || "Galerie"} <span className="text-gradient">{pageData?.galleryTitleHighlight || "rodinných domů"}</span>
             </h2>
-            <p className="text-lg text-grey-600 font-light leading-relaxed">
-              {pageData?.galleryDescription || "Prohlédněte si naši realizaci moderních rodinných domů s individuálním designem a kvalitním provedením."}
-            </p>
           </div>
 
           {/* Masonry Grid */}

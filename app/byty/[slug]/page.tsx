@@ -31,7 +31,7 @@ const apartmentsFallback = [
   { id: 9, number: '2.06', building: 'BD-B1', disposition: '2+kk', size: 49.52, balcony: 8.08, floor: 2, price: 4555840, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 42.09 },
   { id: 10, number: '3.01', building: 'BD-B1', disposition: '2+kk', size: 51.75, balcony: 6.71, floor: 3, price: 4864500, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.99 },
   { id: 11, number: '3.02', building: 'BD-B1', disposition: '1+kk', size: 33.32, balcony: 4.45, floor: 3, price: 3245360, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 28.32 },
-  { id: 12, number: '3.03', building: 'BD-B1', disposition: '3+kk', size: 69.0, balcony: 7.95, floor: 3, price: 6486000, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 58.65 },
+  { id: 12, number: '3.03', building: 'BD-B1', disposition: '3+kk', size: 69.0, balcony: 7.95, floor: 3, price: 6486000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 58.65 },
   { id: 13, number: '3.04', building: 'BD-B1', disposition: '3+kk', size: 70.06, balcony: 7.95, floor: 3, price: 6585640, status: 'available', floorPlanPath: '/pudorysy/B1/BD_B1 3.04.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 4.97}, {'number': 2, 'name': 'Toaleta', 'area': 1.23}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.15}, {'number': 4, 'name': 'Chodba', 'area': 3.13}, {'number': 5, 'name': 'Koupelna + WC', 'area': 4.73}, {'number': 6, 'name': 'Komora', 'area': 2.01}, {'number': 7, 'name': 'Pokoj', 'area': 10.51}, {'number': 8, 'name': 'Lo\u017enice', 'area': 12.72}], floorArea: 63.45, outdoorSpaces: [{'type': 'Balkon', 'area': 7.95}], usableArea: 53.93 },
   { id: 14, number: '3.05', building: 'BD-B1', disposition: '1+kk', size: 29.83, balcony: 4.45, floor: 3, price: 3350000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 25.36 },
   { id: 15, number: '3.06', building: 'BD-B1', disposition: '2+kk', size: 49.52, balcony: 6.71, floor: 3, price: 4654880, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 42.09 },
@@ -44,7 +44,7 @@ const apartmentsFallback = [
   { id: 22, number: '1.22', building: 'BD-A1', disposition: '1+kk', size: 33.1, balcony: 26.44, floor: 1, price: 3323120, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 28.14 },
   { id: 23, number: '1.21', building: 'BD-A1', disposition: '1+kk', size: 32.95, balcony: 17.86, floor: 1, price: 3282680, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 28.01 },
   { id: 24, number: '2.09', building: 'BD-A1', disposition: '2+kk', size: 50.75, balcony: 6.55, floor: 2, price: 4669000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
-  { id: 25, number: '2.10', building: 'BD-A1', disposition: '2+kk', size: 57.75, balcony: 8.72, floor: 2, price: 5428500, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 49.09 },
+  { id: 25, number: '2.10', building: 'BD-A1', disposition: '2+kk', size: 57.75, balcony: 8.72, floor: 2, price: 5428500, status: 'available', floorPlanPath: '/pudorysy/A1/BD_A1 2.10.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Obývací pokoj + KK', 'area': 24.40}, {'number': 4, 'name': 'Ložnice', 'area': 12.22}, {'number': 5, 'name': 'Šatna', 'area': 3.49}], floorArea: 53.77, outdoorSpaces: [{'type': 'Balkon', 'area': 8.72}], usableArea: 49.09 },
   { id: 26, number: '2.11', building: 'BD-A1', disposition: '4+kk', size: 87.84, balcony: 8.1, floor: 2, price: 7905600, status: 'available', floorPlanPath: '/pudorysy/A1/BD_A1 2.11.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.64}, {'number': 2, 'name': 'Pokoj', 'area': 11.32}, {'number': 3, 'name': 'Pokoj', 'area': 13.32}, {'number': 4, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 23.75}, {'number': 5, 'name': 'Lo\u017enice', 'area': 14.87}, {'number': 6, 'name': 'Toaleta', 'area': 1.31}, {'number': 7, 'name': 'Koupelna', 'area': 3.4}], floorArea: 81.61, outdoorSpaces: [{'type': 'Balkon', 'area': 6.03}, {'type': 'Balkon', 'area': 8.1}], usableArea: 69.37 },
   { id: 27, number: '2.12', building: 'BD-A1', disposition: '2+kk', size: 54.29, balcony: 5.66, floor: 2, price: 4994680, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 46.15 },
   { id: 28, number: '3.09', building: 'BD-A1', disposition: '2+kk', size: 50.75, balcony: 6.55, floor: 3, price: 4669000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
@@ -61,15 +61,15 @@ const apartmentsFallback = [
   { id: 39, number: '1.05', building: 'BD-A2', disposition: '4+kk', size: 80.64, balcony: 110.3, floor: 1, price: 7749780, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 1.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 3.61}, {'number': 2, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 26.27}, {'number': 3, 'name': 'Chodba', 'area': 5.41}, {'number': 4, 'name': 'Pokoj', 'area': 10.92}, {'number': 5, 'name': 'Pokoj', 'area': 8.49}, {'number': 6, 'name': 'Lo\u017enice', 'area': 12.9}, {'number': 7, 'name': 'Koupelna', 'area': 6.13}, {'number': 8, 'name': 'Toaleta', 'area': 1.38}], floorArea: 75.11, outdoorSpaces: [{'type': 'Zahrada', 'area': 110.3}, {'type': 'Terasa', 'area': 13.75}], usableArea: 63.84 },
   { id: 40, number: '2.03', building: 'BD-A2', disposition: '2+kk', size: 54.37, balcony: 5.66, floor: 2, price: 5002040, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 46.21 },
   { id: 41, number: '2.04', building: 'BD-A2', disposition: '4+kk', size: 87.47, balcony: 6.12, floor: 2, price: 7872300, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 2.04.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.64}, {'number': 2, 'name': 'Koupelna', 'area': 3.4}, {'number': 3, 'name': 'Toaleta', 'area': 1.56}, {'number': 4, 'name': 'Lo\u017enice', 'area': 14.87}, {'number': 5, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 23.49}, {'number': 6, 'name': 'Pokoj', 'area': 13.32}, {'number': 7, 'name': 'Pokoj', 'area': 11.7}], floorArea: 81.98, outdoorSpaces: [{'type': 'Balkon', 'area': 8.39}, {'type': 'Balkon', 'area': 6.12}], usableArea: 69.68 },
-  { id: 42, number: '2.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 2, price: 5428500, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 49.09 },
+  { id: 42, number: '2.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 2, price: 5428500, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 2.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Obývací pokoj + KK', 'area': 24.40}, {'number': 4, 'name': 'Ložnice', 'area': 12.61}, {'number': 5, 'name': 'Šatna', 'area': 3.49}], floorArea: 54.16, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 49.09 },
   { id: 43, number: '2.06', building: 'BD-A2', disposition: '2+kk', size: 50.75, balcony: 6.51, floor: 2, price: 4669000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
   { id: 44, number: '3.03', building: 'BD-A2', disposition: '3+kk', size: 71.77, balcony: 4.45, floor: 3, price: 6746380, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 3.03.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 9.55}, {'number': 2, 'name': 'Lo\u017enice', 'area': 12.94}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.16}, {'number': 4, 'name': '\u0160atna', 'area': 2.12}, {'number': 5, 'name': 'Pokoj', 'area': 10.55}, {'number': 6, 'name': 'Koupelna', 'area': 5.49}, {'number': 7, 'name': 'Toaleta', 'area': 1.35}], floorArea: 66.16, outdoorSpaces: [{'type': 'Balkon', 'area': 4.45}], usableArea: 56.24 },
   { id: 45, number: '3.04', building: 'BD-A2', disposition: '3+kk', size: 71.48, balcony: 7.62, floor: 3, price: 6572080, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 60.76 },
-  { id: 46, number: '3.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 3, price: 5544000, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 3.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.4}, {'number': 4, 'name': 'Lo\u017enice', 'area': 12.6}, {'number': 5, 'name': '\u0160atna', 'area': 3.49}], floorArea: 54.15, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 46.03 },
+  { id: 46, number: '3.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 3, price: 5544000, status: 'sold', floorPlanPath: '/pudorysy/A2/BD_A2 3.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 24.4}, {'number': 4, 'name': 'Lo\u017enice', 'area': 12.6}, {'number': 5, 'name': '\u0160atna', 'area': 3.49}], floorArea: 54.15, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 46.03 },
   { id: 47, number: '3.06', building: 'BD-A2', disposition: '2+kk', size: 50.75, balcony: 6.5, floor: 3, price: 4770500, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 },
   { id: 48, number: '4.03', building: 'BD-A2', disposition: '2+kk', size: 54.37, balcony: 5.66, floor: 4, price: 5219520, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 4.03.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 6.22}, {'number': 2, 'name': 'Lo\u017enice', 'area': 12.05}, {'number': 3, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 26.66}, {'number': 4, 'name': 'Koupelna + WC', 'area': 6.3}], floorArea: 51.24, outdoorSpaces: [{'type': 'Balkon', 'area': 5.66}], usableArea: 43.55 },
   { id: 49, number: '4.04', building: 'BD-A2', disposition: '4+kk', size: 87.47, balcony: 6.12, floor: 4, price: 8047240, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 4.04.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 13.64}, {'number': 2, 'name': 'Koupelna', 'area': 3.4}, {'number': 3, 'name': 'Toaleta', 'area': 1.56}, {'number': 4, 'name': 'Lo\u017enice', 'area': 14.88}, {'number': 5, 'name': 'Ob\u00fdvac\u00ed pokoj + KK', 'area': 23.49}, {'number': 6, 'name': 'Pokoj', 'area': 13.32}, {'number': 7, 'name': 'Pokoj', 'area': 11.7}], floorArea: 81.99, outdoorSpaces: [{'type': 'Balkon', 'area': 8.39}, {'type': 'Balkon', 'area': 6.12}], usableArea: 69.69 },
-  { id: 50, number: '4.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 4, price: 5659500, status: 'available', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 49.09 },
+  { id: 50, number: '4.05', building: 'BD-A2', disposition: '2+kk', size: 57.75, balcony: 9.01, floor: 4, price: 5659500, status: 'available', floorPlanPath: '/pudorysy/A2/BD_A2 4.05.jpg', rooms: [{'number': 1, 'name': 'Chodba', 'area': 8.18}, {'number': 2, 'name': 'Koupelna + WC', 'area': 5.48}, {'number': 3, 'name': 'Obývací pokoj + KK', 'area': 24.40}, {'number': 4, 'name': 'Ložnice', 'area': 12.60}, {'number': 5, 'name': 'Šatna', 'area': 3.49}], floorArea: 54.15, outdoorSpaces: [{'type': 'Balkon', 'area': 9.01}], usableArea: 49.09 },
   { id: 51, number: '4.06', building: 'BD-A2', disposition: '2+kk', size: 50.75, balcony: 6.55, floor: 4, price: 4872000, status: 'sold', floorPlanPath: null, rooms: [], floorArea: 0, outdoorSpaces: [], usableArea: 43.14 }
 ]
 
@@ -105,6 +105,12 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
 
   // Use real rooms data from Excel or empty array for apartments without room data
   const rooms = apartment.rooms || []
+
+  // Výpočet celkové plochy (podlahová plocha + venkovní prostory)
+  const floorArea = apartment.floorArea || apartment.size
+  const outdoorTotal = apartment.outdoorSpaces?.reduce((sum: number, space: any) => sum + space.area, 0) || 0
+  const totalArea = floorArea + outdoorTotal
+
   const pricePerSqm = Math.round(apartment.price / apartment.size)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -114,16 +120,21 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
 
     const form = e.currentTarget
     const formData = new FormData(form)
+
+    // Sestavení dat pro odeslání - s explicitní konverzí na string
+    const apartmentInfo = `${apartment.building} ${apartment.number}`
+    const messageText = formData.get('message')?.toString() || ''
+
     const data = {
       page: 'Detail bytu',
-      apartment: `${apartment.building} ${apartment.number}`,
-      name: formData.get('name'),
-      phone: formData.get('phone'),
-      email: formData.get('email'),
-      message: formData.get('message'),
+      apartment: apartmentInfo,
+      name: formData.get('name')?.toString() || '',
+      phone: formData.get('phone')?.toString() || '',
+      email: formData.get('email')?.toString() || '',
+      message: messageText,
     }
 
-    console.log('📤 Odesílám data:', data)
+    console.log('Submitting form data:', data)
 
     try {
       const response = await fetch('/api/contact', {
@@ -132,20 +143,24 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
         body: JSON.stringify(data),
       })
 
-      console.log('📥 Response status:', response.status)
-      const result = await response.json()
-      console.log('📥 Response data:', result)
+      if (!response.ok) {
+        const errorData = await response.json()
+        console.error('Server error:', errorData)
+        throw new Error(errorData.message || 'Network response was not ok')
+      }
 
-      if (response.ok) {
-        setSubmitMessage('✅ Děkujeme! Vaše poptávka byla úspěšně odeslána.')
-        form.reset()
+      const result = await response.json()
+
+      if (result.success) {
+        // Přesměrování na děkovnou stránku
+        window.location.href = '/dekujeme'
       } else {
         setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
+        setIsSubmitting(false)
       }
     } catch (error) {
-      console.error('❌ Chyba:', error)
+      console.error('Error submitting form:', error)
       setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -167,7 +182,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
       case 'sold':
         return (
           <span className="inline-flex items-center px-4 py-2 bg-red-50 text-red-700 text-sm font-semibold rounded-xl">
-            ● Prodán
+            ● Prodáno
           </span>
         )
       default:
@@ -177,12 +192,19 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
 
   // Mock gallery images
   const galleryImages = [
-    '/images/DSC02841.jpg',
+    '/images/DSC02697.jpg',
+    '/images/DSC02713.jpg',
+    '/images/DSC02720.jpg',
+    '/images/DSC02727.jpg',
     '/images/DSC02745.jpg',
-    '/images/DSC02913.jpg',
-    '/images/DSC02870.jpg',
     '/images/DSC02756.jpg',
+    '/images/DSC02793.jpg',
     '/images/DSC02819.jpg',
+    '/images/DSC02841.jpg',
+    '/images/DSC02870.jpg',
+    '/images/DSC02905.jpg',
+    '/images/DSC02913.jpg',
+    '/images/DSC02932.jpg',
   ]
 
   return (
@@ -240,7 +262,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
             </div>
 
             <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gold-primary mb-1">{formatNumber(apartment.size)}</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gold-primary mb-1">{formatNumber(totalArea)}</div>
               <div className="text-xs text-grey-600 font-medium">m² plocha</div>
             </div>
 
@@ -272,7 +294,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                 </div>
                 <div>
                   <div className="text-sm text-grey-600 mb-1">Celková plocha</div>
-                  <div className="text-lg font-bold text-dark">{formatNumber(apartment.size)} m²</div>
+                  <div className="text-lg font-bold text-dark">{formatNumber(totalArea)} m²</div>
                 </div>
                 <div>
                   <div className="text-sm text-grey-600 mb-1">Dostupnost</div>
@@ -329,24 +351,20 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-grey-600">Podlahová plocha</span>
-                  <span className="font-semibold text-dark">{formatNumber(apartment.floorArea || apartment.size)} m²</span>
+                  <span className="font-semibold text-dark">{formatNumber(floorArea)} m²</span>
                 </div>
                 {apartment.outdoorSpaces && apartment.outdoorSpaces.length > 0 && (
                   <div className="flex justify-between">
                     <span className="text-grey-600">Venkovní prostory</span>
                     <span className="font-semibold text-dark">
-                      {formatNumber(apartment.outdoorSpaces.reduce((sum: number, space: any) => sum + space.area, 0))} m²
+                      {formatNumber(outdoorTotal)} m²
                     </span>
                   </div>
                 )}
                 <div className="flex justify-between pt-2 border-t border-grey-300">
                   <span className="font-semibold text-dark">Celková plocha</span>
                   <span className="font-bold text-gold-primary text-lg">
-                    {(() => {
-                      const floorArea = apartment.floorArea || apartment.size
-                      const outdoorTotal = apartment.outdoorSpaces?.reduce((sum: number, space: any) => sum + space.area, 0) || 0
-                      return formatNumber(floorArea + outdoorTotal)
-                    })()} m²
+                    {formatNumber(totalArea)} m²
                   </span>
                 </div>
               </div>
@@ -374,11 +392,6 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                   Stáhnout kartu bytu
                 </button>
               </a>
-              <Link href="/dulezite-informace" className="block">
-                <button className="w-full px-6 py-3 border-2 border-grey-300 text-dark hover:border-gold-primary hover:text-gold-primary font-semibold rounded-xl transition-all duration-300">
-                  Standardy
-                </button>
-              </Link>
             </div>
           </div>
 
@@ -452,7 +465,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
       <section className="py-16 md:py-24 bg-white">
         <Container>
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-8">
-            Fotogalerie <span className="text-gradient">interiérů</span>
+            Fotogalerie
           </h2>
 
           {/* Main Image */}
@@ -594,7 +607,7 @@ export default function ApartmentDetailPage({ params }: { params: Promise<{ slug
                 Kontaktujte nás
               </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 leading-[1.15] tracking-tight">
-                Máte zájem o byt {apartment.number}?
+                Máte zájem o byt {apartment.number} ({apartment.building})?
               </h2>
               <p className="text-lg md:text-xl text-white/90 mb-4 leading-relaxed font-light">
                 Vyplňte kontaktní formulář a my se vám ozveme do 24 hodin

@@ -24,8 +24,9 @@ const parseTitle = (title: string | null | undefined) => {
 export default function Home() {
   // Sanity odstraněno - používáme hardcoded data (fallbacky níže)
   const pageData: any = null;
-  
+
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentGallery, setCurrentGallery] = useState<string[]>([]);
 
   // Form submission state
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -38,15 +39,14 @@ export default function Home() {
 
     const form = e.currentTarget
     const formData = new FormData(form)
+    const interest = formData.get('interest') as string
     const data = {
       page: 'Homepage',
       name: formData.get('name'),
       phone: formData.get('phone'),
       email: formData.get('email'),
-      message: formData.get('message'),
+      message: `${interest ? `Zájem: ${interest}\n\n` : ''}${formData.get('message')}`,
     }
-
-    console.log('📤 Odesílám data:', data)
 
     try {
       const response = await fetch('/api/contact', {
@@ -55,20 +55,17 @@ export default function Home() {
         body: JSON.stringify(data),
       })
 
-      console.log('📥 Response status:', response.status)
       const result = await response.json()
-      console.log('📥 Response data:', result)
 
       if (response.ok) {
-        setSubmitMessage('✅ Děkujeme! Vaše zpráva byla úspěšně odeslána.')
-        form.reset()
+        // Přesměrování na děkovnou stránku
+        window.location.href = '/dekujeme'
       } else {
         setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
+        setIsSubmitting(false)
       }
     } catch (error) {
-      console.error('❌ Chyba:', error)
       setSubmitMessage('❌ Chyba při odesílání. Zkuste to prosím později.')
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -77,13 +74,18 @@ export default function Home() {
   // Carousel images
   const carouselImages = [
     '/images/DSC02697.jpg',
-    '/images/DSC02913.jpg',
-    '/images/DSC02932.jpg',
+    '/images/DSC02713.jpg',
+    '/images/DSC02720.jpg',
+    '/images/DSC02727.jpg',
     '/images/DSC02745.jpg',
+    '/images/DSC02756.jpg',
+    '/images/DSC02793.jpg',
     '/images/DSC02819.jpg',
-    '/images/DJI_0548.jpg',
+    '/images/DSC02841.jpg',
+    '/images/DSC02870.jpg',
     '/images/DSC02905.jpg',
-    '/images/DSC02720.jpg'
+    '/images/DSC02913.jpg',
+    '/images/DSC02932.jpg'
   ];
 
   const nextSlide = () => {
@@ -96,6 +98,33 @@ export default function Home() {
 
   const prevSlide = () => {
     setCarouselIndex((prev) => (prev > 0 ? prev - 1 : prev));
+  };
+
+  // Lightbox navigation functions
+  const openLightbox = (imageSrc: string, gallery: string[]) => {
+    setSelectedImage(imageSrc);
+    setCurrentGallery(gallery);
+  };
+
+  const closeLightbox = () => {
+    setSelectedImage(null);
+    setCurrentGallery([]);
+  };
+
+  const nextImage = () => {
+    if (selectedImage && currentGallery.length > 0) {
+      const currentIndex = currentGallery.indexOf(selectedImage);
+      const nextIndex = (currentIndex + 1) % currentGallery.length;
+      setSelectedImage(currentGallery[nextIndex]);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedImage && currentGallery.length > 0) {
+      const currentIndex = currentGallery.indexOf(selectedImage);
+      const prevIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+      setSelectedImage(currentGallery[prevIndex]);
+    }
   };
 
   return (
@@ -144,8 +173,7 @@ export default function Home() {
               </span>
             )) || (
               <>
-                Objevte 131 bytů a 14 rodinných domů v historické Kutné Hoře,<br className="hidden md:block" />
-                kde se moderní architektura setkává s bohatou historií
+                Objevte 134 bytů a 14 rodinných domů v historické Kutné Hoře, kde se moderní architektura setkává s bohatou historií.
               </>
             )}
           </p>
@@ -226,7 +254,7 @@ export default function Home() {
             {/* Right: YouTube Video */}
             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300" suppressHydrationWarning>
               <iframe
-                src={pageData?.aboutVideoUrl || "https://www.youtube.com/embed/VVlxe2bvtlg?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&loop=1&playlist=VVlxe2bvtlg"}
+                src={pageData?.aboutVideoUrl || "https://www.youtube.com/embed/ZH94jUlFb00?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&loop=1&playlist=ZH94jUlFb00"}
                 title="Kutná Hora UNESCO"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -290,7 +318,7 @@ export default function Home() {
                   <svg className="w-5 h-5 text-gold-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
-                  Kolaudováno 2023
+                  Kolaudace Q4/2023
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-gold-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -301,20 +329,20 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Etapa II - In Progress */}
+            {/* Etapa II - Completed */}
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 hover:bg-white/20 transition-all duration-300 hover:-translate-y-2">
               <div className="flex items-center justify-between mb-6">
                 <span className="text-xs font-bold text-white/70 uppercase tracking-[0.15em]">
                   Etapa II
                 </span>
-                <span className="px-3 py-1.5 bg-orange-500/20 text-orange-300 text-xs font-semibold rounded-lg border border-orange-500/30">
-                  Dokončování
+                <span className="px-3 py-1.5 bg-red-500/20 text-red-300 text-xs font-semibold rounded-lg border border-red-500/30">
+                  Prodáno
                 </span>
               </div>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gold-primary mb-3">36</div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">Bytů</h3>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gold-primary mb-3">32 + 14</div>
+              <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">Bytů a rodinných domů</h3>
               <p className="text-white/60 mb-6 leading-[1.7] font-light text-sm">
-                Druhá etapa je vyprodána, probíhá finalizace a předání bytů.
+                Druhá etapa zahrnuje 32 bytů a 14 rodinných domů, vše je vyprodáno.
               </p>
               <ul className="space-y-3 text-sm text-white/70">
                 <li className="flex items-center gap-2">
@@ -327,13 +355,13 @@ export default function Home() {
                   <svg className="w-5 h-5 text-gold-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
-                  Kolaudace Q4 2025
+                  Kolaudace Q3/2025
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-gold-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
-                  Všechny byty prodány
+                  Všechny byty a RD prodány
                 </li>
               </ul>
             </div>
@@ -387,84 +415,110 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Kvalitní bydlení v UNESCO zóně */}
-      <section id="unesco-zone" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-light-grey">
+      {/* Více fotografií - White Section */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-white">
         <Container>
-          <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-            <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em] mb-4 block">
-              {pageData?.qualityBadge || "Exkluzivita čtvrti"}
-            </span>
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
-              {parseTitle(pageData?.qualityTitle) || (
-                <>
-                  Kvalitní bydlení v <span className="text-gradient">UNESCO</span> zóně
-                </>
-              )}
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light">
-              {pageData?.qualityDescription || "Hlavním cílem projektu Rezidence u sv. Anny je vytvoření moderního a dostupného domova ve městě, jehož historické centrum je zapsané na seznamu UNESCO. Umístění v klidné části města s dobrou dopravní dostupností do centra vytváří potenciál pro naplnění bytových potřeb i těch nejnáročnějších klientů."}
-            </p>
-          </div>
-
-          {/* Vzdálenosti - Distance Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                </svg>
-              </div>
-              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">1 min</div>
-              <div className="text-grey-600 font-medium">Autobusová zastávka</div>
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 items-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+            {/* Left: Text */}
+            <div>
+              <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em]">
+                {pageData?.galleryBadge || "DOKONČENÉ BYTY"}
+              </span>
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mt-6 leading-[1.15] tracking-tight">
+                {parseTitle(pageData?.galleryTitle) || (
+                  <>
+                    Prohlédněte si <span className="text-gradient">dokončené byty</span>
+                  </>
+                )}
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light mt-6 mb-8">
+                {pageData?.galleryDescription || "Vytvořili jsme moderní bydlení s důrazem na kvalitu materiálů a detailní zpracování. Podívejte se na dokončené byty z I. a II. etapy."}
+              </p>
+              <Link href="/byty">
+                <button className="inline-flex items-center gap-3 px-6 py-3 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
+                  Zobrazit byty ve III. etapě
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </button>
+              </Link>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+            {/* Right: Large Image - Clickable */}
+            <div
+              onClick={() => openLightbox('/images/DSC02819.jpg', ['/images/DSC02819.jpg', ...carouselImages])}
+              className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
+            >
+              <Image
+                src="/images/DSC02819.jpg"
+                alt="Interiér bytu"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-300">
+                <svg className="w-16 h-16 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                 </svg>
               </div>
-              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">4 min</div>
-              <div className="text-grey-600 font-medium">Venkovní sportoviště</div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-                </svg>
-              </div>
-              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">6 min</div>
-              <div className="text-grey-600 font-medium">Škola</div>
-            </div>
-
-            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-                </svg>
-              </div>
-              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">12 min</div>
-              <div className="text-grey-600 font-medium">Historické centrum</div>
             </div>
           </div>
 
-          {/* Photo Carousel */}
-          <div className="grid md:grid-cols-3 gap-6">
-            {(pageData?.qualityImages || ["/images/DSC02932.jpg", "/images/DSC02745.jpg", "/images/DJI_0548.jpg", "/images/DSC02819.jpg", "/images/DSC02697.jpg", "/images/DSC02905.jpg"]).slice(0, 6).map((img: any, index: number) => (
-              <div key={index} className="relative h-64 md:h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300">
-                <Image
-                  src={img}
-                  alt="Rezidence U sv. Anny"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+          {/* Carousel Section - 3 photos side by side */}
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div 
+                className="flex gap-6 transition-transform duration-500 ease-in-out"
+                style={{ 
+                  transform: `translateX(calc(-${carouselIndex * 33.333}% - ${carouselIndex * 24}px))` 
+                }}
+              >
+                {carouselImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)] relative h-80 md:h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                    onClick={() => openLightbox(image, ['/images/DSC02819.jpg', ...carouselImages])}
+                  >
+                    <Image
+                      src={image}
+                      alt={`Galerie obrázek ${index + 1}`}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-300">
+                      <svg className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                      </svg>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Navigation Arrows */}
+            {carouselIndex > 0 && (
+              <button
+                onClick={prevSlide}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-10"
+              >
+                <svg className="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            )}
+            
+            {carouselIndex < carouselImages.length - 3 && (
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-10"
+              >
+                <svg className="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            )}
           </div>
         </Container>
       </section>
-
       {/* Services/Benefits - Dark Section */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 relative bg-dark">
         {/* Background Image with Overlay */}
@@ -501,15 +555,9 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 leading-tight">Moderní dispozice</h3>
-              <p className="text-white/70 leading-[1.7] font-light text-sm mb-4">
+              <p className="text-white/70 leading-[1.7] font-light text-sm">
                 Pečlivě navržené dispozice bytů s důrazem na funkčnost a maximální využití prostoru
               </p>
-              <Link href="/byty" className="inline-flex items-center text-gold-primary font-semibold text-sm hover:gap-2 transition-all">
-                Zobrazit byty
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </Link>
             </div>
 
             {/* Service 2 */}
@@ -520,15 +568,9 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 leading-tight">Úsporné bydlení</h3>
-              <p className="text-white/70 leading-[1.7] font-light text-sm mb-4">
+              <p className="text-white/70 leading-[1.7] font-light text-sm">
                 Energetická třída B zajišťuje nízké náklady na vytápění a provoz vašeho bytu
               </p>
-              <Link href="/o-projektu" className="inline-flex items-center text-gold-primary font-semibold text-sm hover:gap-2 transition-all">
-                Více informací
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </Link>
             </div>
 
             {/* Service 3 */}
@@ -539,27 +581,22 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 leading-tight">Kvalitní materiály</h3>
-              <p className="text-white/70 leading-[1.7] font-light text-sm mb-4">
+              <p className="text-white/70 leading-[1.7] font-light text-sm">
                 Používáme pouze prověřené materiály od renomovaných dodavatelů s dlouhou životností
               </p>
-              <Link href="/o-projektu" className="inline-flex items-center text-gold-primary font-semibold text-sm hover:gap-2 transition-all">
-                Více informací
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </Link>
             </div>
 
             {/* Service 4 */}
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 hover:bg-white/20 hover:-translate-y-2 transition-all duration-300 group">
               <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mb-4 sm:mb-5 md:mb-6 rounded-xl bg-gold-primary flex items-center justify-center shadow-lg">
                 <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 leading-tight">Kompletní vybavení</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 leading-tight">Výjimečná lokalita</h3>
               <p className="text-white/70 leading-[1.7] font-light text-sm mb-4">
-                Parkovací stání, sklepy a možnost individuálních úprav podle vašich představ
+                Projekt se nachází na jižním svahu, hned u lesa. Současně máte historické centrum i veškerou občanskou vybavenost na dosah.
               </p>
               <Link href="/byty" className="inline-flex items-center text-gold-primary font-semibold text-sm hover:gap-2 transition-all">
                 Zobrazit byty
@@ -671,107 +708,92 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Více fotografií - White Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-white">
+      {/* Kvalitní bydlení v UNESCO zóně */}
+      <section id="unesco-zone" className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-light-grey">
         <Container>
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 items-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-            {/* Left: Text */}
-            <div>
-              <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em]">
-                {pageData?.galleryBadge || "DOKONČENÉ BYTY"}
-              </span>
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mt-6 leading-[1.15] tracking-tight">
-                {parseTitle(pageData?.galleryTitle) || (
-                  <>
-                    Prohlédněte si <span className="text-gradient">naši práci</span>
-                  </>
-                )}
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light mt-6 mb-8">
-                {pageData?.galleryDescription || "Vytvářelisme moderní bydlení s důrazem na kvalitu materiálů a detailní zpracování. Podívejte se na dokončené byty z I. a II. etapy."}
-              </p>
-              <Link href="/byty">
-                <button className="inline-flex items-center gap-3 px-6 py-3 bg-gold-primary hover:bg-gold-secondary text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
-                  Zobrazit všechny byty
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </button>
-              </Link>
-            </div>
+          <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+            <span className="text-[10px] sm:text-xs md:text-sm text-gold-primary font-semibold uppercase tracking-[0.2em] mb-4 block">
+              {pageData?.qualityBadge || "Exkluzivita čtvrti"}
+            </span>
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-dark mb-6 leading-[1.15] tracking-tight">
+              {parseTitle(pageData?.qualityTitle) || (
+                <>
+                  Kvalitní bydlení v <span className="text-gradient">UNESCO</span> zóně
+                </>
+              )}
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-grey-600 leading-[1.8] font-light">
+              {pageData?.qualityDescription || "Hlavním cílem projektu Rezidence u sv. Anny je vytvoření moderního a dostupného domova ve městě, jehož historické centrum je zapsané na seznamu UNESCO. Umístění v klidné části města s dobrou dopravní dostupností do centra vytváří potenciál pro naplnění bytových potřeb i těch nejnáročnějších klientů."}
+            </p>
+          </div>
 
-            {/* Right: Large Image - Clickable */}
-            <div 
-              onClick={() => setSelectedImage('/images/DSC02819.jpg')}
-              className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
-            >
-              <Image
-                src="/images/DSC02819.jpg"
-                alt="Interiér bytu"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-300">
-                <svg className="w-16 h-16 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+          {/* Vzdálenosti - Distance Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
                 </svg>
               </div>
+              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">1 min</div>
+              <div className="text-grey-600 font-medium">Autobusová zastávka</div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                </svg>
+              </div>
+              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">4 min</div>
+              <div className="text-grey-600 font-medium">Venkovní sportoviště</div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
+                </svg>
+              </div>
+              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">6 min</div>
+              <div className="text-grey-600 font-medium">Škola</div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold-primary/10 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                </svg>
+              </div>
+              <div className="text-3xl sm:text-4xl font-bold text-gold-primary mb-2">12 min</div>
+              <div className="text-grey-600 font-medium">Historické centrum</div>
             </div>
           </div>
 
-          {/* Carousel Section - 3 photos side by side */}
-          <div className="relative">
-            <div className="overflow-hidden">
-              <div 
-                className="flex gap-6 transition-transform duration-500 ease-in-out"
-                style={{ 
-                  transform: `translateX(calc(-${carouselIndex * 33.333}% - ${carouselIndex * 24}px))` 
-                }}
-              >
-                {carouselImages.map((image, index) => (
-                  <div 
-                    key={index}
-                    className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)] relative h-80 md:h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
-                    onClick={() => setSelectedImage(image)}
-                  >
-                    <Image
-                      src={image}
-                      alt={`Galerie obrázek ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-300">
-                      <svg className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-                      </svg>
-                    </div>
+          {/* Photo Carousel */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {(() => {
+              const qualityImages = pageData?.qualityImages || ["/images/DSC02932.jpg", "/images/DSC02745.jpg", "/images/DJI_0548.jpg", "/images/DSC02819.jpg", "/images/DSC02697.jpg", "/images/DSC02905.jpg"];
+              return qualityImages.slice(0, 6).map((img: any, index: number) => (
+                <div
+                  key={index}
+                  onClick={() => openLightbox(img, qualityImages)}
+                  className="relative h-64 md:h-80 rounded-2xl overflow-hidden group shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+                >
+                  <Image
+                    src={img}
+                    alt="Rezidence U sv. Anny"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-all duration-300">
+                    <svg className="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
+                    </svg>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Navigation Arrows */}
-            {carouselIndex > 0 && (
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-10"
-              >
-                <svg className="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-            )}
-            
-            {carouselIndex < carouselImages.length - 3 && (
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 z-10"
-              >
-                <svg className="w-6 h-6 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            )}
+                </div>
+              ));
+            })()}
           </div>
         </Container>
       </section>
@@ -908,8 +930,7 @@ export default function Home() {
                   </svg>
                 </summary>
                 <p className="mt-4 text-grey-600 leading-[1.7] font-light text-sm">
-                  Parkovací stání a sklep jsou součástí ceny bytu. Lze dokoupit i další stání
-                  v podzemních garážích.
+                  V ceně bytu je pouze sklepní kóje. Parkovací stání je možné k bytu přikoupit za cenu 290.000,- Kč vč. DPH.
                 </p>
               </details>
             </div>
@@ -976,6 +997,23 @@ export default function Home() {
                   className="w-full px-4 py-3 rounded-xl bg-white/90 border border-white/30 focus:border-white focus:ring-2 focus:ring-white/50 outline-none transition-all"
                   placeholder="jan.novak@email.cz"
                 />
+              </div>
+
+              <div className="mb-6">
+                <label htmlFor="interest" className="block text-white font-semibold mb-2">Mám zájem o: *</label>
+                <select
+                  id="interest"
+                  name="interest"
+                  required
+                  className="w-full px-4 py-3 rounded-xl bg-white/90 border border-white/30 focus:border-white focus:ring-2 focus:ring-white/50 outline-none transition-all"
+                >
+                  <option value="">Vyberte jednu z možností</option>
+                  <option value="Byt 1+kk">Byt 1+kk</option>
+                  <option value="Byt 2+kk">Byt 2+kk</option>
+                  <option value="Byt 3+kk">Byt 3+kk</option>
+                  <option value="Byt 4+kk">Byt 4+kk</option>
+                  <option value="Byt 5+kk">Byt 5+kk</option>
+                </select>
               </div>
 
               <div className="mb-6">
@@ -1055,8 +1093,8 @@ export default function Home() {
 
             <div className="flex items-center justify-center p-6 bg-grey-50 rounded-xl">
               <Image
-                src="/images/partneri/Logo-Komfort.png"
-                alt="Komfort"
+                src="/images/partneri/Group 1.png"
+                alt="Partner"
                 width={150}
                 height={80}
                 className="w-full h-auto"
@@ -1065,8 +1103,8 @@ export default function Home() {
 
             <div className="flex items-center justify-center p-6 bg-grey-50 rounded-xl">
               <Image
-                src="/images/partneri/Logo-pyramida.png"
-                alt="Pyramida"
+                src="/images/partneri/Group 2.png"
+                alt="Partner"
                 width={150}
                 height={80}
                 className="w-full h-auto"
@@ -1095,21 +1133,59 @@ export default function Home() {
           </div>
         </Container>
       </section>
-      {/* Image Modal */}
+      {/* Image Modal with Navigation */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-          onClick={() => setSelectedImage(null)}
+          onClick={closeLightbox}
         >
+          {/* Close Button */}
           <button
-            onClick={() => setSelectedImage(null)}
+            onClick={closeLightbox}
             className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 z-10"
           >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
-          
+
+          {/* Previous Button */}
+          {currentGallery.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 z-10"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          )}
+
+          {/* Next Button */}
+          {currentGallery.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-300 z-10"
+            >
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
+
+          {/* Image Counter */}
+          {currentGallery.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-semibold">
+              {currentGallery.indexOf(selectedImage) + 1} / {currentGallery.length}
+            </div>
+          )}
+
           <div className="relative w-full max-w-6xl h-[80vh]" onClick={(e) => e.stopPropagation()}>
             <Image
               src={selectedImage}
