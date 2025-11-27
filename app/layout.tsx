@@ -2,14 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { CookieConsent } from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: {
     default: "Rezidence U sv. Anny | Moderní bydlení v Kutné Hoře",
     template: "%s | Rezidence U sv. Anny",
   },
-  description: "131 bytů a 14 rodinných domů v Kutné Hoře - městě UNESCO. Nízkoenergetické budovy třídy B s kvalitními materiály. III. etapa nyní v prodeji.",
-  keywords: ["rezidence kutná hora", "byty kutná hora", "rodinné domy kutná hora", "byty unesco", "nové byty kutná hora", "nízkoenergetické byty", "byty prodej kutná hora"],
+  description: "134 bytů v Kutné Hoře - městě UNESCO. Nízkoenergetické budovy třídy B s kvalitními materiály. Moderní bydlení v centru historické Kutné Hory.",
+  keywords: ["rezidence kutná hora", "byty kutná hora", "nové byty kutná hora", "byty unesco", "nízkoenergetické byty", "byty prodej kutná hora", "moderní bydlení kutná hora", "rezidence u sv anny"],
   authors: [{ name: "ANOMIA Real Estate" }],
   creator: "ANOMIA Real Estate",
   publisher: "Rezidence U sv. Anny",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     url: 'https://rezidenceusvanny.cz',
     siteName: 'Rezidence U sv. Anny',
     title: 'Rezidence U sv. Anny | Moderní bydlení v Kutné Hoře',
-    description: '131 bytů a 14 rodinných domů v Kutné Hoře - městě UNESCO. Nízkoenergetické budovy třídy B.',
+    description: '134 bytů v Kutné Hoře - městě UNESCO. Nízkoenergetické budovy třídy B s kvalitními materiály.',
     images: [
       {
         url: '/images/DSC02932.jpg',
@@ -36,16 +37,19 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Rezidence U sv. Anny | Moderní bydlení v Kutné Hoře',
-    description: '131 bytů a 14 rodinných domů v Kutné Hoře - městě UNESCO.',
+    description: '134 bytů v Kutné Hoře - městě UNESCO. Nízkoenergetické budovy třídy B.',
     images: ['/images/DSC02932.jpg'],
   },
   robots: {
-    index: false,
-    follow: false,
-    nocache: true,
+    index: true,
+    follow: true,
+    nocache: false,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
   verification: {
@@ -62,10 +66,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="cs">
+      <head>
+        <link rel="icon" href="/images/favicon.png" />
+      </head>
       <body className="antialiased">
         <Header />
         {children}
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

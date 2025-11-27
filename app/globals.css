@@ -268,3 +268,19 @@ body {
   background-size: 200% 100%;
   animation: gradient-shift 8s ease infinite;
 }
+
+/* Cookie banner animation */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}

@@ -1,7 +1,55 @@
 import { NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
+import { google } from 'googleapis'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Inicializace Google Sheets API
+async function appendToSheet(data: any) {
+  try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      },
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    })
+
+    const sheets = google.sheets({ version: 'v4', auth })
+    const spreadsheetId = process.env.GOOGLE_SPREADSHEET_ID
+
+    // Formátování dat pro Google Sheet
+    const timestamp = new Date().toLocaleString('cs-CZ', {
+      timeZone: 'Europe/Prague',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+
+    const row = [
+      timestamp,
+      data.page || 'Web',
+      data.apartment || '-',
+      data.name,
+      data.phone,
+      data.email,
+      data.message || '-'
+    ]
+
+    // Přidání řádku do sheetu
+    await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range: 'A:G', // Sloupce A až G
+      valueInputOption: 'RAW',
+      requestBody: {
+        values: [row],
+      },
+    })
+  } catch (error) {
+    console.error('Error appending to Google Sheet:', error)
+    // Pokračujeme i když Google Sheets selže - důležitější je odeslat email
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -14,6 +62,17 @@ export async function POST(request: Request) {
         { status: 400 }
       )
     }
+
+    // Konfigurace SMTP transportu (Siteground)
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT || '465'),
+      secure: true, // true pro port 465, false pro jiné porty
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    })
 
     // Statický předmět emailu - bez dynamického obsahu kvůli spam filtrům
     const emailSubject = data.apartment
@@ -33,19 +92,17 @@ ${data.message && data.message.trim() !== '' ? `\nZprava:\n${data.message}\n` : 
 Tento e-mail byl odeslan z kontaktniho formulare na rezidenceusvanny.cz
 Pro odpoved pouzijte Reply (odpoved pujde primo klientovi).`
 
-    // Odeslání textového emailu do firmy přes Resend
-    const result = await resend.emails.send({
-      from: 'Rezidence U sv. Anny <delivered@resend.dev>',
-      to: ['info@rezidenceusvanny.cz'],
-      replyTo: data.email,
-      subject: emailSubject,
-      text: emailText,
-    })
-
-    // Kontrola, zda byl email úspěšně odeslán
-    if (!result.data) {
-      throw new Error('Failed to send email')
-    }
+    // Paralelní odeslání emailu a zápis do Google Sheets
+    await Promise.all([
+      transporter.sendMail({
+        from: `"Rezidence U sv. Anny" <${process.env.SMTP_FROM}>`,
+        to: 'info@rezidenceusvanny.cz',
+        replyTo: data.email,
+        subject: emailSubject,
+        text: emailText,
+      }),
+      appendToSheet(data)
+    ])
 
     return NextResponse.json({
       success: true,
