@@ -4,6 +4,10 @@ import { Container } from '@/components/Container'
 import { getAllApartmentStatuses } from '@/lib/getApartmentsWithStatus'
 import BytyPageClient from './BytyPageClient'
 
+// Force dynamic rendering - disable static caching
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 // Helper function to generate apartment slug
 const generateApartmentSlug = (building: string, number: string): string => {
   const buildingSlug = building.toLowerCase() // bd-b1, bd-a1, bd-a2
