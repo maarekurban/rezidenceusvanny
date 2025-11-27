@@ -195,7 +195,7 @@ export default function Home() {
           {/* Stats Bar - Minimal */}
           <div className="absolute bottom-8 sm:bottom-10 md:bottom-12 left-0 right-0 flex justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-16 px-4">
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{pageData?.stat1Value || "131"}</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{pageData?.stat1Value || "134"}</div>
               <div className="text-xs sm:text-sm text-white/70 font-light">{pageData?.stat1Label || "Bytů"}</div>
             </div>
             <div className="w-px h-8 sm:h-10 md:h-12 bg-white/20"></div>
