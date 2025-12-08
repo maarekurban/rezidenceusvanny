@@ -1083,8 +1083,8 @@ export default function Home() {
 
             <div className="flex items-center justify-center p-6 bg-grey-50 rounded-xl">
               <Image
-                src="/images/partneri/Logo-hypotecni-banka.png"
-                alt="Hypoteční banka"
+                src="/images/partneri/csob_hypotecni.jpg"
+                alt="ČSOB Hypoteční banka"
                 width={150}
                 height={80}
                 className="w-full h-auto"
