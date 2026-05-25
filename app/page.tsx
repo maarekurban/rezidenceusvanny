@@ -366,7 +366,7 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Etapa III - Featured/Active */}
+            {/* Etapa III - Sold */}
             <div className="bg-gradient-to-br from-gold-primary to-gold-secondary rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 relative overflow-hidden">
               {/* Subtle decoration */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-bl-full" />
@@ -375,17 +375,16 @@ export default function Home() {
                 <span className="text-xs font-bold text-white/90 uppercase tracking-[0.15em]">
                   Etapa III
                 </span>
-                <span className="px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold rounded-lg flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                  V prodeji
+                <span className="px-3 py-1.5 bg-red-500/20 text-red-300 text-xs font-semibold rounded-lg border border-red-500/30">
+                  Prodáno
                 </span>
               </div>
               <div className="text-5xl font-bold text-white mb-3">51</div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">Bytů k dispozici</h3>
+              <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">Bytů</h3>
               <p className="text-white/90 mb-6 leading-[1.7] font-light text-sm">
-                Třetí etapa je nyní v předprodeji. Zajistěte si výhodné ceny!
+                Třetí etapa zahrnuje 51 bytů. Vše je vyprodáno.
               </p>
-              <ul className="space-y-3 text-sm text-white/90 mb-8">
+              <ul className="space-y-3 text-sm text-white/90">
                 <li className="flex items-center gap-2">
                   <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -402,14 +401,9 @@ export default function Home() {
                   <svg className="w-5 h-5 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
-                  Předprodejové ceny
+                  Všechny byty prodány.
                 </li>
               </ul>
-              <Link href="/byty">
-                <button className="w-full px-6 py-3 bg-white hover:bg-white/90 text-gold-primary font-semibold rounded-xl transition-all duration-300 hover:scale-105">
-                  Zobrazit byty →
-                </button>
-              </Link>
             </div>
           </div>
         </Container>
