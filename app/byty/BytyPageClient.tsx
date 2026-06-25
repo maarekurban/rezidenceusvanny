@@ -413,7 +413,7 @@ export default function BytyPageClient({ apartments }: BytyPageClientProps) {
                           </td>
                           <td className="px-6 py-4">
                             <div className="text-base font-bold text-dark whitespace-nowrap">
-                              {apt.price.toLocaleString('cs-CZ')} Kč
+                              {apt.status === 'sold' ? '—' : `${apt.price.toLocaleString('cs-CZ')} Kč`}
                             </div>
                           </td>
                           <td className="px-6 py-4">
@@ -468,12 +468,14 @@ export default function BytyPageClient({ apartments }: BytyPageClientProps) {
                       </div>
                     </div>
 
-                    <div className="mb-4">
-                      <div className="text-xs text-grey-600 mb-1">Cena</div>
-                      <div className="text-xl font-bold text-dark">
-                        {apt.price.toLocaleString('cs-CZ')} Kč
+                    {apt.status !== 'sold' && (
+                      <div className="mb-4">
+                        <div className="text-xs text-grey-600 mb-1">Cena</div>
+                        <div className="text-xl font-bold text-dark">
+                          {apt.price.toLocaleString('cs-CZ')} Kč
+                        </div>
                       </div>
-                    </div>
+                    )}
 
                     {apt.status !== 'sold' && (
                       <Link href={`/byty/${generateApartmentSlug(apt.building, apt.number)}`}>
